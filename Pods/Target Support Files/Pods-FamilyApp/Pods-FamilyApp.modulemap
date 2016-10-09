@@ -1,0 +1,6 @@
+framework module Pods_FamilyApp {
+  umbrella header "Pods-FamilyApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
