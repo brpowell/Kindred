@@ -18,9 +18,9 @@ class LoginViewController: InputViewController {
         super.viewDidLoad()
         
         // Firebase Auth Listener
-        FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil {
-                self.performSegueWithIdentifier("loginHomeSegue", sender: nil)
+                self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
             }
         }
     }
@@ -30,12 +30,12 @@ class LoginViewController: InputViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onLoginButton(sender: AnyObject) {
+    @IBAction func onLoginButton(_ sender: AnyObject) {
         let email = emailTextField.text!
         let pass = passwordTextField.text!
         
         if email != "" && pass != "" {
-            FIRAuth.auth()?.signInWithEmail(email, password: pass, completion: { (user, error) in
+            FIRAuth.auth()?.signIn(withEmail: email, password: pass, completion: { (user, error) in
 
             })
         }
@@ -44,9 +44,9 @@ class LoginViewController: InputViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "registerSegue",
-            let destination = segue.destinationViewController as? RegisterViewController {
+            let destination = segue.destination as? RegisterViewController {
             destination.email = emailTextField.text!
             destination.password = passwordTextField.text!
         }

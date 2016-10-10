@@ -25,7 +25,7 @@ struct User {
         self.birthday = birthday
     }
     
-    func toAnyObject() -> AnyObject {
+    func toAnyObject() -> [String: String] {
         return [
             "email": email,
             "firstName": firstName,

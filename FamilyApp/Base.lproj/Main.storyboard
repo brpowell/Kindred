@@ -81,7 +81,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="OUi-Ns-LzY" id="2jy-G0-llM"/>
                         <outlet property="passwordTextField" destination="AoY-EO-FkZ" id="Jhn-HP-BY4"/>
-                        <segue destination="UZI-l1-a6E" kind="show" identifier="loginHomeSegue" id="Pvn-9o-ACA"/>
+                        <segue destination="SX1-gX-jdo" kind="show" identifier="loginHomeSegue" id="4jI-j3-2Ab"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -91,7 +91,7 @@
         <!--Register View Controller-->
         <scene sceneID="MsW-nd-TEx">
             <objects>
-                <viewController id="LNi-2f-cUL" customClass="RegisterViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="registerHomeSegue" id="LNi-2f-cUL" customClass="RegisterViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bjk-a4-rNB"/>
                         <viewControllerLayoutGuide type="bottom" id="Lr5-0x-AeM"/>
@@ -160,17 +160,60 @@
                         <outlet property="birthdayTextField" destination="g2l-lZ-k7Z" id="ugS-jE-0Th"/>
                         <outlet property="firstTextField" destination="bQB-Fj-ieu" id="dyb-EB-F3H"/>
                         <outlet property="lastTextField" destination="cwC-pq-IuU" id="3bb-vl-iA6"/>
-                        <segue destination="UZI-l1-a6E" kind="show" identifier="registerHomeSegue" id="xF0-Q8-3AM"/>
+                        <segue destination="SX1-gX-jdo" kind="show" id="aDB-xd-Yiy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQE-cA-YC7" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="882" y="401"/>
         </scene>
+        <!--Left View Controller-->
+        <scene sceneID="Y3f-tt-3ir">
+            <objects>
+                <viewController storyboardIdentifier="Left" id="XZo-gU-LAC" customClass="LeftViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uya-H3-qJ2"/>
+                        <viewControllerLayoutGuide type="bottom" id="ByV-VU-UM2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wvi-ui-1YQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stuff coming to the drawer soon!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AC-Hy-TY7">
+                                <frame key="frameInset" minX="8" minY="155" width="240" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="vNx-tI-HCs">
+                                <frame key="frameInset" minX="64" minY="28" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zx9-eJ-RkT" userLabel="signOutButton">
+                                <frame key="frameInset" minX="98" minY="235" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="onSignOut:" destination="UZI-l1-a6E" eventType="touchUpInside" id="3bP-qu-GFq"/>
+                                    <action selector="onSignOut:" destination="XZo-gU-LAC" eventType="touchUpInside" id="iDf-22-bw3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="signOutSegue" id="9SJ-di-h9I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cPY-gH-bBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-762" y="646"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="U6E-9z-NW2">
             <objects>
-                <viewController id="UZI-l1-a6E" customClass="HomeViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Main" id="UZI-l1-a6E" customClass="HomeViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yig-eD-8GH"/>
                         <viewControllerLayoutGuide type="bottom" id="o4e-Z1-UJ1"/>
@@ -179,32 +222,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;Welcome&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJw-ZV-OOF" userLabel="welcomeLabel">
-                                <frame key="frameInset" minX="16" minY="134" width="343" height="63"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;Welcome&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJw-ZV-OOF" userLabel="welcomeLabel">
+                                <frame key="frameInset" minX="16" minY="134" width="343" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfD-UK-anQ" userLabel="signOutButton">
-                                <frame key="frameInset" minX="157" minY="275" width="60" height="30"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N6m-BC-NsE">
+                                <frame key="frameInset" width="375" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Sign Out"/>
-                                <connections>
-                                    <action selector="onSignOut:" destination="UZI-l1-a6E" eventType="touchUpInside" id="H23-Cf-66e"/>
-                                </connections>
-                            </button>
+                                <subviews>
+                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkn-Ej-bQY">
+                                        <frame key="frameInset" minY="19" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="barTintColor" red="0.72156862749999995" green="0.91372549020000005" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <textAttributes key="titleTextAttributes">
+                                            <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </textAttributes>
+                                        <items>
+                                            <navigationItem title="Home Feed" id="f9O-Ds-NVa">
+                                                <barButtonItem key="leftBarButtonItem" systemItem="rewind" id="G9Q-hL-nvz" userLabel="drawerButton">
+                                                    <color key="tintColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="onOpenDrawer:" destination="UZI-l1-a6E" id="7dY-IH-WNu"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                                <barButtonItem key="rightBarButtonItem" systemItem="organize" id="NTa-E1-kKR" userLabel="settingsButton">
+                                                    <color key="tintColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
+                                </subviews>
+                                <color key="backgroundColor" red="0.72156862749999995" green="0.91372549020000005" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.3983751237" green="0.73574954270000004" blue="0.011936523019999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.71764705880000002" green="0.3921568627" blue="0.1058823529" alpha="0.0" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="welcomeLabel" destination="aJw-ZV-OOF" id="qeQ-b0-hWu"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="signOutSegue" id="ydJ-Fo-UYQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zyE-T2-Ym0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1717.5999999999999" y="29.23538230884558"/>
+            <point key="canvasLocation" x="1815" y="-277"/>
+        </scene>
+        <!--Container View Controller-->
+        <scene sceneID="okv-6v-dkO">
+            <objects>
+                <viewController id="SX1-gX-jdo" customClass="ContainerViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="o3C-aW-Ah3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Iim-zh-3nj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LkC-dk-49o">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fmw-ry-Dje" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="881" y="-276"/>
         </scene>
     </scenes>
     <resources>
@@ -214,6 +294,6 @@
         <image name="logo" width="159" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Pvn-9o-ACA"/>
+        <segue reference="aDB-xd-Yiy"/>
     </inferredMetricsTieBreakers>
 </document>

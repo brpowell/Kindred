@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         // Firebase Auth Listener
-        FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil {
                 guard let user = user else { return }
                 self.welcomeLabel.text = "Welcome " + user.email!
@@ -27,6 +27,12 @@ class HomeViewController: UIViewController {
                 // No user is signed in.
             }
         }
+        
+        
+    }
+    
+    @IBAction func onOpenDrawer(_ sender: AnyObject) {
+        self.slideMenuController()?.openLeft()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,9 +40,10 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onSignOut(sender: AnyObject) {
+    
+    @IBAction func onSignOut(_ sender: AnyObject) {
         try! FIRAuth.auth()!.signOut()
-        self.performSegueWithIdentifier("signOutSegue", sender: sender)
+        self.performSegue(withIdentifier: "signOutSegue", sender: sender)
     }
 
 
