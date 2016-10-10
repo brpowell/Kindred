@@ -22,13 +22,12 @@ class HomeViewController: UIViewController {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil {
                 guard let user = user else { return }
-                self.welcomeLabel.text = "Welcome " + user.email!
+                let first = user.displayName?.components(separatedBy: " ")[0]
+                self.welcomeLabel.text = "Welcome " + first!
             } else {
                 // No user is signed in.
             }
         }
-        
-        
     }
     
     @IBAction func onOpenDrawer(_ sender: AnyObject) {

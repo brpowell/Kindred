@@ -11,10 +11,15 @@ import Firebase
 
 class LeftViewController: UIViewController {
 
+    @IBOutlet weak var userLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        // Firebase Auth Listener
+        let user = FIRAuth.auth()?.currentUser
+        userLabel.text = user?.displayName
+
     }
 
     override func didReceiveMemoryWarning() {

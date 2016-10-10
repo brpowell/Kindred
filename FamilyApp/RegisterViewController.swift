@@ -27,10 +27,23 @@ class RegisterViewController: InputViewController {
         // Firebase Auth Listener
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil {
-                let user = User(authData: user!, firstName: self.firstTextField.text!, lastName: self.lastTextField.text!, birthday: self.birthdayTextField.text!)
-                let userRef = self.ref.child(user.uid)
-                userRef.setValue(user.toAnyObject())
-                print("SET USER DATA")
+                let first = self.firstTextField.text!
+                let last = self.lastTextField.text!
+                let u = User(authData: user!, firstName: first, lastName: last, birthday: self.birthdayTextField.text!)
+                
+                let userRef = self.ref.child(u.uid)
+                userRef.setValue(u.toAnyObject())
+                
+                let changeRequest = user?.profileChangeRequest()
+                changeRequest?.displayName = first + " " + last
+                changeRequest?.commitChanges { error in
+                    if let error = error {
+                        // An error happened.
+                    } else {
+                        // Profile updated.
+                    }
+                }
+                
                 self.performSegue(withIdentifier: "registerHomeSegue", sender: nil)
             } else {
                 // No user is signed in.
