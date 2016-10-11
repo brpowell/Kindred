@@ -9,7 +9,9 @@
 import UIKit
 import Firebase
 
-class HomeViewController: UIViewController {
+let cellId = "cellId"
+
+class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var welcomeLabel: UILabel!
     
@@ -18,19 +20,29 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Firebase Auth Listener
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if user != nil {
-                guard let user = user else { return }
-                let first = user.displayName?.components(separatedBy: " ")[0]
-                self.welcomeLabel.text = "Welcome " + first!
-            } else {
-                // No user is signed in.
-            }
-        }
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 60)
     }
     
     @IBAction func onOpenDrawer(_ sender: AnyObject) {
+        self.slideMenuController()?.openLeft()
+    }
+    
+    
+    @IBAction func onMenuButton(_ sender: AnyObject) {
         self.slideMenuController()?.openLeft()
     }
 
@@ -38,12 +50,45 @@ class HomeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    @IBAction func onSignOut(_ sender: AnyObject) {
-        try! FIRAuth.auth()!.signOut()
-        self.performSegue(withIdentifier: "signOutSegue", sender: sender)
+
+
+}
+
+class FeedCell: UICollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupViews()
     }
-
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError()
+    }
+    
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sample Name"
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = UIColor.green
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    func setupViews() {
+        backgroundColor = UIColor.white
+        
+        addSubview(nameLabel)
+        addSubview(profileImageView)
+        
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0(44)]-8-[v1]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": profileImageView, "v1": nameLabel]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0(44)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": profileImageView]))
+    }
 }

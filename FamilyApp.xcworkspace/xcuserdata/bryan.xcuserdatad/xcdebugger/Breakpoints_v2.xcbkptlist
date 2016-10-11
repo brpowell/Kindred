@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FamilyApp/LoginViewController.swift"
-            timestampString = "497762824.629215"
+            filePath = "FamilyApp/RegisterViewController.swift"
+            timestampString = "497769110.250301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "onRegisterDone(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

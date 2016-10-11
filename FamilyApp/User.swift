@@ -17,6 +17,8 @@ struct User {
     let lastName: String
     let birthday: String
     
+    static var activeUser: String?
+    
     init(authData: FIRUser, firstName: String, lastName: String, birthday: String) {
         uid = authData.uid
         email = authData.email!
@@ -32,6 +34,10 @@ struct User {
             "lastName": lastName,
             "birthday": birthday
         ]
+    }
+    
+    func setActivate() {
+        User.activeUser = self.uid
     }
     
 }

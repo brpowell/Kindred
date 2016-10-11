@@ -180,7 +180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="First Last" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AC-Hy-TY7" userLabel="userLabel">
-                                <frame key="frameInset" minX="8" minY="155" width="240" height="72"/>
+                                <frame key="frameInset" minX="12" minY="155" width="240" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -190,12 +190,51 @@
                                 <frame key="frameInset" minX="64" minY="28" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zx9-eJ-RkT" userLabel="signOutButton">
-                                <frame key="frameInset" minX="86" minY="235" width="84" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFa-9p-x0X" userLabel="signOutButton">
+                                <frame key="frameInset" minX="12" minY="218" width="232" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Sign Out"/>
+                                <state key="normal" title="Feed"/>
+                                <connections>
+                                    <action selector="onSignOut:" destination="UZI-l1-a6E" eventType="touchUpInside" id="XfR-XE-MET"/>
+                                    <action selector="onSignOut:" destination="XZo-gU-LAC" eventType="touchUpInside" id="ghl-fQ-ubZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2B-Zf-rie" userLabel="signOutButton">
+                                <frame key="frameInset" minX="12" minY="256" width="232" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Family"/>
+                                <connections>
+                                    <action selector="onSignOut:" destination="UZI-l1-a6E" eventType="touchUpInside" id="9bb-to-GK0"/>
+                                    <action selector="onSignOut:" destination="XZo-gU-LAC" eventType="touchUpInside" id="Y2b-oe-BjB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYP-rg-FQX" userLabel="signOutButton">
+                                <frame key="frameInset" minX="12" minY="294" width="232" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Groups"/>
+                                <connections>
+                                    <action selector="onSignOut:" destination="UZI-l1-a6E" eventType="touchUpInside" id="4DD-Iv-bUP"/>
+                                    <action selector="onSignOut:" destination="XZo-gU-LAC" eventType="touchUpInside" id="bnd-lz-PXD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zx9-eJ-RkT" userLabel="signOutButton">
+                                <frame key="frameInset" minX="12" minY="332" width="232" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Sign Out">
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="onSignOut:" destination="UZI-l1-a6E" eventType="touchUpInside" id="3bP-qu-GFq"/>
                                     <action selector="onSignOut:" destination="XZo-gU-LAC" eventType="touchUpInside" id="iDf-22-bw3"/>
@@ -213,10 +252,10 @@
             </objects>
             <point key="canvasLocation" x="-756" y="331.48425787106447"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Family Feed-->
         <scene sceneID="U6E-9z-NW2">
             <objects>
-                <viewController storyboardIdentifier="Main" id="UZI-l1-a6E" customClass="HomeViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="UZI-l1-a6E" customClass="HomeViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yig-eD-8GH"/>
                         <viewControllerLayoutGuide type="bottom" id="o4e-Z1-UJ1"/>
@@ -225,51 +264,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;Welcome&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJw-ZV-OOF" userLabel="welcomeLabel">
-                                <frame key="frameInset" minX="16" minY="134" width="343" height="109"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="M3s-eM-EWI">
+                                <frame key="frameInset" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N6m-BC-NsE">
-                                <frame key="frameInset" width="375" height="63"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkn-Ej-bQY">
-                                        <frame key="frameInset" minY="19" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="barTintColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                        <textAttributes key="titleTextAttributes">
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </textAttributes>
-                                        <items>
-                                            <navigationItem title="Home Feed" id="f9O-Ds-NVa">
-                                                <barButtonItem key="leftBarButtonItem" systemItem="rewind" id="G9Q-hL-nvz" userLabel="drawerButton">
-                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="onOpenDrawer:" destination="UZI-l1-a6E" id="7dY-IH-WNu"/>
-                                                    </connections>
-                                                </barButtonItem>
-                                                <barButtonItem key="rightBarButtonItem" systemItem="organize" id="NTa-E1-kKR" userLabel="settingsButton">
-                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </barButtonItem>
-                                            </navigationItem>
-                                        </items>
-                                    </navigationBar>
-                                </subviews>
-                                <color key="backgroundColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="D6O-MI-1AG">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="JQi-0z-67D">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.71764705880000002" green="0.3921568627" blue="0.1058823529" alpha="0.0" colorSpace="calibratedRGB"/>
                     </view>
-                    <connections>
-                        <outlet property="welcomeLabel" destination="aJw-ZV-OOF" id="qeQ-b0-hWu"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Family Feed" id="mlu-5x-Lf9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zyE-T2-Ym0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1815" y="-277"/>
+            <point key="canvasLocation" x="3692" y="-277.51124437781112"/>
+        </scene>
+        <!--Family Feed-->
+        <scene sceneID="k4U-Ow-m5e">
+            <objects>
+                <collectionViewController id="Ba8-Jd-81b" customClass="HomeViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="VvS-2A-wTl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mIs-53-1em">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2lI-KL-mBo">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Ba8-Jd-81b" id="QA4-M7-xBD"/>
+                            <outlet property="delegate" destination="Ba8-Jd-81b" id="Pgh-PY-YR5"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Family Feed" id="oiF-O4-xpK">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="MenuIcon" id="g0z-4v-Wcn" userLabel="menuButton">
+                            <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="0.0"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onMenuButton:" destination="Ba8-Jd-81b" id="523-hb-ESn"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="kul-mU-OCR">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j9W-Qf-uSw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2900" y="-278.41079460269867"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="okv-6v-dkO">
@@ -289,14 +358,37 @@
             </objects>
             <point key="canvasLocation" x="881" y="-276"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ht3-Ls-JDc">
+            <objects>
+                <navigationController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" id="nxT-VA-Z7b" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8Pf-vb-L87">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ba8-Jd-81b" kind="relationship" relationship="rootViewController" id="eIU-oP-fth"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s9j-6I-msb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1960.8" y="-278.41079460269867"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Birthday Cake Filled-50" width="50" height="50"/>
+        <image name="MenuIcon" width="22" height="22"/>
         <image name="Message Filled-50" width="50" height="50"/>
         <image name="Password Filled-50" width="50" height="50"/>
         <image name="logo" width="159" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aDB-xd-Yiy"/>
+        <segue reference="4jI-j3-2Ab"/>
     </inferredMetricsTieBreakers>
 </document>

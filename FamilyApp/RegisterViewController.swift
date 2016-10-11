@@ -40,11 +40,10 @@ class RegisterViewController: InputViewController {
                     if let error = error {
                         // An error happened.
                     } else {
-                        // Profile updated.
+                        // Profile updated
+                        self.performSegue(withIdentifier: "registerHomeSegue", sender: nil)
                     }
                 }
-                
-                self.performSegue(withIdentifier: "registerHomeSegue", sender: nil)
             } else {
                 // No user is signed in.
             }

@@ -14,15 +14,24 @@ class LoginViewController: InputViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    static var listener: Bool = false
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Firebase Auth Listener
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if user != nil {
-                self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
+//        if LoginViewController.listener == false {
+            // Firebase Auth Listener
+            FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+                
+                if user != nil {
+                    print(user?.email)
+                    self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
+                }
             }
-        }
+//            LoginViewController.listener = true
+//        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,7 +45,8 @@ class LoginViewController: InputViewController {
         
         if email != "" && pass != "" {
             FIRAuth.auth()?.signIn(withEmail: email, password: pass, completion: { (user, error) in
-
+//                print(user?.displayName)
+                User.activeUser = user?.email
             })
         }
         else {
