@@ -13,13 +13,31 @@ class LeftViewController: UIViewController {
 
     @IBOutlet weak var userLabel: UILabel!
     
+    // View controllers handled by the drawer
+    var familyViewController: UIViewController!
+    var groupsViewController: UIViewController!
+    var feedViewController: UIViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        // Firebase Auth Listener
+
         let user = FIRAuth.auth()?.currentUser
         userLabel.text = user?.displayName
-
+        
+        // Initialize Feed Controller
+        let feedViewController = self.storyboard?.instantiateViewController(withIdentifier: "Feed")
+        self.feedViewController = UINavigationController(rootViewController: feedViewController!)
+        
+        // Initialize Family Controller
+        let familyViewController = self.storyboard?.instantiateViewController(withIdentifier: "Family")
+        self.familyViewController = UINavigationController(rootViewController: familyViewController!)
+        
+        // Initialize Groups Controller
+        let groupsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Groups")
+        self.groupsViewController = UINavigationController(rootViewController: groupsViewController!)
+        
+        self.slideMenuController()?.changeMainViewController(self.feedViewController, close: true)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,15 +49,17 @@ class LeftViewController: UIViewController {
         try! FIRAuth.auth()!.signOut()
         self.performSegue(withIdentifier: "signOutSegue", sender: sender)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func onFeedButton(_ sender: AnyObject) {
+        self.slideMenuController()?.changeMainViewController(self.feedViewController, close: true)
     }
-    */
+    
+    @IBAction func onFamilyButton(_ sender: AnyObject) {
+        self.slideMenuController()?.changeMainViewController(self.familyViewController, close: true)
+    }
+    
+    @IBAction func onGroupsButton(_ sender: AnyObject) {
+        self.slideMenuController()?.changeMainViewController(self.groupsViewController, close: true)
+    }
 
 }

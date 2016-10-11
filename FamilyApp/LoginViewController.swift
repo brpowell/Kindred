@@ -20,18 +20,12 @@ class LoginViewController: InputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if LoginViewController.listener == false {
-            // Firebase Auth Listener
-            FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-                
-                if user != nil {
-                    print(user?.email)
-                    self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
-                }
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if user != nil {
+                print(user?.email)
+                self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
             }
-//            LoginViewController.listener = true
-//        }
-
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,12 +39,11 @@ class LoginViewController: InputViewController {
         
         if email != "" && pass != "" {
             FIRAuth.auth()?.signIn(withEmail: email, password: pass, completion: { (user, error) in
-//                print(user?.displayName)
                 User.activeUser = user?.email
             })
         }
         else {
-            // Alert popup invalid email or password
+            // Alert invalid email or password
         }
     }
     
