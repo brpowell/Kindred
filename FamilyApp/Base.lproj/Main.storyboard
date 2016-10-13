@@ -186,6 +186,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzl-VS-RJP">
+                                <frame key="frameInset" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.71764705880000002" green="0.3921568627" blue="0.1058823529" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <tabBarItem systemItem="contacts" id="lgN-BC-lQG"/>
+                                    <tabBarItem title="Tree" image="treeIcon" id="t4H-pU-T97"/>
+                                    <tabBarItem title="Suggestions" image="suggestIcon" id="w1i-aP-gfE"/>
+                                </items>
+                                <color key="tintColor" red="0.71764705880000002" green="0.3921568627" blue="0.1058823529" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="selectedImageTintColor" red="0.71764705880000002" green="0.3921568627" blue="0.1058823529" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -458,6 +476,8 @@
         <image name="Message Filled-50" width="50" height="50"/>
         <image name="Password Filled-50" width="50" height="50"/>
         <image name="logo" width="159" height="159"/>
+        <image name="suggestIcon" width="28" height="28"/>
+        <image name="treeIcon" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aDB-xd-Yiy"/>

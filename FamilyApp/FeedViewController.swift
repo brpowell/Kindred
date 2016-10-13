@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
 let cellId = "cellId"
 
@@ -22,19 +23,17 @@ class Post {
         self.key = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
         
-        self.name = snapshotValue["author"] as! String
-        self.body = snapshotValue["body"] as! String
-        self.timestamp = snapshotValue["timestamp"] as! TimeInterval
+        self.name = snapshotValue["author"] as? String
+        self.body = snapshotValue["body"] as? String
+        self.timestamp = snapshotValue["timestamp"] as? TimeInterval
     }
 }
 
-class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, NVActivityIndicatorViewable, SlideMenuControllerDelegate {
 
     @IBOutlet weak var welcomeLabel: UILabel!
     
     let postsRef = FIRDatabase.database().reference(withPath: "posts")
-    
-    var user: User!
     var posts = [Post]()
     
     override func didReceiveMemoryWarning() {
@@ -44,7 +43,14 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.slideMenuController()?.delegate = self
         
+        // Activity loader
+        NVActivityIndicatorView.DEFAULT_TYPE = .ballTrianglePath
+        NVActivityIndicatorView.DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME = 1000
+        self.startAnimating()
+        
+        // Feed listener to get posts from Firebase
         postsRef.observe(.value, with: { snapshot in
             var newPosts: [Post] = []
             
@@ -55,11 +61,20 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             
             self.posts = newPosts.reversed()
             self.collectionView?.reloadData()
+            self.stopAnimating()
         })
         
         collectionView?.alwaysBounceVertical = true
         collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+    }
+    
+    // Enable/disable scrolling depending on drawer state
+    func leftWillOpen() {
+        collectionView?.isScrollEnabled = false
+    }
+    func leftDidClose() {
+        collectionView?.isScrollEnabled = true
     }
     
     // Number of cells
@@ -108,7 +123,7 @@ class FeedCell: UICollectionViewCell {
                 let attributedText = NSMutableAttributedString(string: name, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
                 
                 let dateFormatter = DateFormatter()
-                let date = "\n" + dateFormatter.timeSince(from: NSDate.init(timeInterval: (post?.timestamp)!, since: NSDate() as Date), numericDates: true)  // 9 minutes ago
+                let date = "\n" + dateFormatter.timeSince(from: NSDate.init(timeInterval: (post?.timestamp)!, since: NSDate() as Date), numericDates: true)
                 
                 attributedText.append(NSAttributedString(string: date, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor(red: 155/255, green: 161/255, blue: 171/255, alpha: 1)]))
                 

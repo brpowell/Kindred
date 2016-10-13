@@ -9,5 +9,6 @@ target 'FamilyApp' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'NVActivityIndicatorView'
 
 end
