@@ -376,10 +376,55 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="FNT-Ge-M6B" kind="show" identifier="postSegue" id="zPy-6C-4nh"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j9W-Qf-uSw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2578" y="401"/>
+        </scene>
+        <!--New Post-->
+        <scene sceneID="brB-HP-j7c">
+            <objects>
+                <viewController id="FNT-Ge-M6B" userLabel="New Post" customClass="PostViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sI4-K0-C98"/>
+                        <viewControllerLayoutGuide type="bottom" id="b9x-Ye-5Pg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tcR-OY-ROF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fBG-2L-9mb" userLabel="postTextView">
+                                <frame key="frameInset" minX="16" minY="74" width="343" height="208"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.94972366268501984" green="0.94972366268501984" blue="0.94972366268501984" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d48-sp-pdW">
+                                <frame key="frameInset" minX="140" minY="318" width="95" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Post"/>
+                                <connections>
+                                    <action selector="onPostButton:" destination="FNT-Ge-M6B" eventType="touchUpInside" id="fp3-m6-ufk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create Post" id="PKf-7U-o6i" userLabel="Create Post"/>
+                    <connections>
+                        <outlet property="postTextView" destination="fBG-2L-9mb" id="PCl-X7-Dz6"/>
+                        <segue destination="Q5o-ch-KT8" kind="unwind" identifier="unwindToFeed" unwindAction="unwindToFeedWithSegue:" id="AO6-1W-xdi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H6a-2N-wLD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Q5o-ch-KT8" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3320.8000000000002" y="400.74962518740631"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="okv-6v-dkO">

@@ -17,6 +17,7 @@
 		9328F36E1DA9CE5300F16E36 /* FamilyApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9328F36C1DA9CE5300F16E36 /* FamilyApp.xcdatamodeld */; };
 		9328F3701DA9CE5300F16E36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9328F36F1DA9CE5300F16E36 /* Assets.xcassets */; };
 		9328F3731DA9CE5300F16E36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9328F3711DA9CE5300F16E36 /* LaunchScreen.storyboard */; };
+		933ACD8B1DAEDA2D00F616B5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933ACD8A1DAEDA2D00F616B5 /* PostViewController.swift */; };
 		935CCC541DADA20C00848D7E /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CCC531DADA20C00848D7E /* GroupsViewController.swift */; };
 		93AF2CA81DAD7C9D00879A1C /* FamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF2CA71DAD7C9D00879A1C /* FamilyViewController.swift */; };
 		93B5923B1DAA2F5D000635C6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5923A1DAA2F5D000635C6 /* RegisterViewController.swift */; };
@@ -40,6 +41,7 @@
 		9328F36F1DA9CE5300F16E36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9328F3721DA9CE5300F16E36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9328F3741DA9CE5300F16E36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		933ACD8A1DAEDA2D00F616B5 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		935CCC531DADA20C00848D7E /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		93AF2CA71DAD7C9D00879A1C /* FamilyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyViewController.swift; sourceTree = "<group>"; };
 		93B5923A1DAA2F5D000635C6 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				93177DC31DAB10580072B80E /* ContainerViewController.swift */,
 				93AF2CA71DAD7C9D00879A1C /* FamilyViewController.swift */,
 				935CCC531DADA20C00848D7E /* GroupsViewController.swift */,
+				933ACD8A1DAEDA2D00F616B5 /* PostViewController.swift */,
 			);
 			path = FamilyApp;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				93B5923D1DAAB4FF000635C6 /* FeedViewController.swift in Sources */,
 				9328F3681DA9CE5300F16E36 /* LoginViewController.swift in Sources */,
 				93177DC41DAB10580072B80E /* ContainerViewController.swift in Sources */,
+				933ACD8B1DAEDA2D00F616B5 /* PostViewController.swift in Sources */,
 				9328F36E1DA9CE5300F16E36 /* FamilyApp.xcdatamodeld in Sources */,
 				93B592431DAABB23000635C6 /* InputViewController.swift in Sources */,
 				9328F3661DA9CE5300F16E36 /* AppDelegate.swift in Sources */,

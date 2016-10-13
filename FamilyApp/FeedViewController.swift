@@ -49,8 +49,9 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     // Add a new post
     // TODO: actually create post
     @IBAction func onComposeButton(_ sender: AnyObject) {
-        posts.insert("another", at: 0)
-        collectionView?.reloadData()
+//        posts.insert("another", at: 0)
+//        collectionView?.reloadData()
+        self.performSegue(withIdentifier: "postSegue", sender: sender)
     }
     
 
@@ -58,6 +59,8 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func unwindToFeed(segue: UIStoryboardSegue) {}
 
 
 }
