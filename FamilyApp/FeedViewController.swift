@@ -12,14 +12,27 @@ import Firebase
 let cellId = "cellId"
 
 class Post {
+    var key: String?
     var name: String?
     var profile: UIImage?
     var body: String?
+    var timestamp: TimeInterval?
+    
+    init(snapshot: FIRDataSnapshot) {
+        self.key = snapshot.key
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        
+        self.name = snapshotValue["author"] as! String
+        self.body = snapshotValue["body"] as! String
+        self.timestamp = snapshotValue["timestamp"] as! TimeInterval
+    }
 }
 
 class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var welcomeLabel: UILabel!
+    
+    let postsRef = FIRDatabase.database().reference(withPath: "posts")
     
     var user: User!
     var posts = [Post]()
@@ -32,22 +45,17 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let bryanPost = Post()
-        let apurvaPost = Post()
-        let uyvietPost = Post()
-        
-        bryanPost.name = "Bryan Powell"
-        bryanPost.body = "Yo what's up everyone!"
-        
-        apurvaPost.name = "Apurva Gorti"
-        apurvaPost.body = "Hello Hello Hello Hello Hello Hello Hello Hello"
-        
-        uyvietPost.name = "Uyviet Nguyen"
-        uyvietPost.body = "Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Yo what's up everyone! Yo what's up everyone! Yo what's up everyone! Yo what's up everyone!"
-        
-        posts.append(bryanPost)
-        posts.append(apurvaPost)
-        posts.append(uyvietPost)
+        postsRef.observe(.value, with: { snapshot in
+            var newPosts: [Post] = []
+            
+            for post in snapshot.children {
+                let post = Post(snapshot: post as! FIRDataSnapshot)
+                newPosts.append(post)
+            }
+            
+            self.posts = newPosts.reversed()
+            self.collectionView?.reloadData()
+        })
         
         collectionView?.alwaysBounceVertical = true
         collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
@@ -73,7 +81,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             
             let knownHeight: CGFloat = 8 + 44
             
-            return CGSize(width: view.frame.width, height: rect.height + knownHeight + 24)
+            return CGSize(width: view.frame.width, height: rect.height + knownHeight + 40)
         }
         return CGSize(width: view.frame.width, height: 200)
     }
@@ -98,7 +106,11 @@ class FeedCell: UICollectionViewCell {
         didSet {
             if let name = post?.name {
                 let attributedText = NSMutableAttributedString(string: name, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
-                attributedText.append(NSAttributedString(string: "\nOctober 11", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor(red: 155/255, green: 161/255, blue: 171/255, alpha: 1)]))
+                
+                let dateFormatter = DateFormatter()
+                let date = "\n" + dateFormatter.timeSince(from: NSDate.init(timeInterval: (post?.timestamp)!, since: NSDate() as Date), numericDates: true)  // 9 minutes ago
+                
+                attributedText.append(NSAttributedString(string: date, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor(red: 155/255, green: 161/255, blue: 171/255, alpha: 1)]))
                 
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.lineSpacing = 4
@@ -178,5 +190,81 @@ extension UIView {
         }
         
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+    }
+}
+
+extension DateFormatter {
+    /**
+     Formats a date as the time since that date (e.g., “Last week, yesterday, etc.”).
+     
+     - Parameter from: The date to process.
+     - Parameter numericDates: Determines if we should return a numeric variant, e.g. "1 month ago" vs. "Last month".
+     
+     - Returns: A string with formatted `date`.
+     */
+    func timeSince(from: NSDate, numericDates: Bool = false) -> String {
+        let calendar = Calendar.current
+        let now = NSDate()
+        let earliest = now.earlierDate(from as Date)
+        let latest = earliest == now as Date ? from : now
+        let components = calendar.dateComponents([.year, .weekOfYear, .month, .day, .hour, .minute, .second], from: earliest, to: latest as Date)
+        
+        var result = ""
+        
+        if components.year! >= 2 {
+            result = "\(components.year!) years ago"
+        } else if components.year! >= 1 {
+            if numericDates {
+                result = "1 year ago"
+            } else {
+                result = "Last year"
+            }
+        } else if components.month! >= 2 {
+            result = "\(components.month!) months ago"
+        } else if components.month! >= 1 {
+            if numericDates {
+                result = "1 month ago"
+            } else {
+                result = "Last month"
+            }
+        } else if components.weekOfYear! >= 2 {
+            result = "\(components.weekOfYear!) weeks ago"
+        } else if components.weekOfYear! >= 1 {
+            if numericDates {
+                result = "1 week ago"
+            } else {
+                result = "Last week"
+            }
+        } else if components.day! >= 2 {
+            result = "\(components.day!) days ago"
+        } else if components.day! >= 1 {
+            if numericDates {
+                result = "1 day ago"
+            } else {
+                result = "Yesterday"
+            }
+        } else if components.hour! >= 2 {
+            result = "\(components.hour!) hours ago"
+        } else if components.hour! >= 1 {
+            if numericDates {
+                result = "1 hour ago"
+            } else {
+                result = "An hour ago"
+            }
+        } else if components.minute! >= 2 {
+            result = "\(components.minute!) minutes ago"
+        } else if components.minute! >= 1 {
+            if numericDates {
+                result = "1 minute ago"
+            } else {
+                result = "A minute ago"
+            }
+        } else if components.second! >= 3 {
+            result = "\(components.second!) seconds ago"
+        } else {
+            result = "Just now"
+        }
+        
+        return result
     }
 }
