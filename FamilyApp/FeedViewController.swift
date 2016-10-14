@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  FeedViewController.swift
 //  FamilyApp
 //
 //  Created by Bryan Powell on 10/9/16.
@@ -45,6 +45,8 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         super.viewDidLoad()
         self.slideMenuController()?.delegate = self
         
+        _ = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(updateDates), userInfo: nil, repeats: true)
+        
         // Activity loader
         NVActivityIndicatorView.DEFAULT_TYPE = .ballTrianglePath
         NVActivityIndicatorView.DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME = 1000
@@ -75,6 +77,12 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     func leftDidClose() {
         collectionView?.isScrollEnabled = true
+    }
+    
+    func updateDates() {
+        for cell in collectionView?.visibleCells as! [FeedCell] {
+            cell.loadNameLabel()
+        }
     }
     
     // Number of cells
@@ -119,20 +127,8 @@ class FeedCell: UICollectionViewCell {
     
     var post: Post? {
         didSet {
-            if let name = post?.name {
-                let attributedText = NSMutableAttributedString(string: name, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
-                
-                let dateFormatter = DateFormatter()
-                let date = "\n" + dateFormatter.timeSince(from: NSDate.init(timeInterval: (post?.timestamp)!, since: NSDate() as Date), numericDates: true)
-                
-                attributedText.append(NSAttributedString(string: date, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor(red: 155/255, green: 161/255, blue: 171/255, alpha: 1)]))
-                
-                let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.lineSpacing = 4
-                
-                attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
-                
-                nameLabel.attributedText = attributedText
+            if ((post?.name) != nil) {
+                loadNameLabel()
             }
             
             if let body = post?.body {
@@ -150,6 +146,23 @@ class FeedCell: UICollectionViewCell {
         fatalError()
     }
     
+    func loadNameLabel() {
+        let attributedText = NSMutableAttributedString(string: (self.post?.name!)!, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
+        
+        let dateFormatter = DateFormatter()
+        let delta = (self.post?.timestamp)! / 1000
+        let date = "\n" + dateFormatter.timeSince(from: NSDate(timeIntervalSince1970: delta), numericDates: true)
+        
+        attributedText.append(NSAttributedString(string: date, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor(red: 155/255, green: 161/255, blue: 171/255, alpha: 1)]))
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        
+        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
+        
+        nameLabel.attributedText = attributedText
+    }
+    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
@@ -160,7 +173,7 @@ class FeedCell: UICollectionViewCell {
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-//        imageView.contentMode = .scaleAspectFit
+        
         imageView.backgroundColor = UIColor.black
         imageView.image = UIImage(named: "profile")
         
@@ -176,7 +189,6 @@ class FeedCell: UICollectionViewCell {
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.isScrollEnabled = false
         textView.isEditable = false
-//        textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
     

@@ -192,10 +192,10 @@
                                 <color key="backgroundColor" red="0.71764705880000002" green="0.3921568627" blue="0.1058823529" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <items>
                                     <tabBarItem systemItem="contacts" id="lgN-BC-lQG"/>
-                                    <tabBarItem title="Tree" image="treeIcon" id="t4H-pU-T97"/>
-                                    <tabBarItem title="Suggestions" image="suggestIcon" id="w1i-aP-gfE"/>
+                                    <tabBarItem title="Tree" image="treeIcon" selectedImage="treeSelectedIcon" id="t4H-pU-T97"/>
+                                    <tabBarItem title="Suggestions" image="suggestIcon" selectedImage="suggestSelectedIcon" id="w1i-aP-gfE"/>
                                 </items>
-                                <color key="tintColor" red="0.71764705880000002" green="0.3921568627" blue="0.1058823529" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="selectedImageTintColor" red="0.71764705880000002" green="0.3921568627" blue="0.1058823529" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
@@ -222,6 +222,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="contactsBarButton" destination="lgN-BC-lQG" id="wkE-WH-0I8"/>
+                        <outlet property="tabBar" destination="qzl-VS-RJP" id="e91-cc-E8e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vIM-R7-Q2j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -477,7 +481,9 @@
         <image name="Password Filled-50" width="50" height="50"/>
         <image name="logo" width="159" height="159"/>
         <image name="suggestIcon" width="28" height="28"/>
+        <image name="suggestSelectedIcon" width="28" height="28"/>
         <image name="treeIcon" width="28" height="28"/>
+        <image name="treeSelectedIcon" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aDB-xd-Yiy"/>

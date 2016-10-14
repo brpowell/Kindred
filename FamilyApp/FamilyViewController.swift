@@ -10,10 +10,16 @@ import UIKit
 
 class FamilyViewController: UIViewController {
 
+    @IBOutlet weak var contactsBarButton: UITabBarItem!
+    @IBOutlet weak var tabBar: UITabBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        
+        tabBar.selectedItem = contactsBarButton
+        tabBar.tintColor = UIColor(red:0.72, green:0.91, blue:0.53, alpha:1.0)
+        tabBar.unselectedItemTintColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,15 +30,5 @@ class FamilyViewController: UIViewController {
     @IBAction func onMenuButton(_ sender: AnyObject) {
         self.slideMenuController()?.openLeft()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
