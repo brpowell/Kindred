@@ -185,7 +185,7 @@
         <!--Contacts-->
         <scene sceneID="mDx-iZ-cCf">
             <objects>
-                <viewController id="WkM-YF-W0c" userLabel="Contacts" customClass="FamilyViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WkM-YF-W0c" userLabel="Contacts" customClass="ContactsViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LMi-r5-V9V"/>
                         <viewControllerLayoutGuide type="bottom" id="5FZ-T7-b9d"/>
@@ -195,7 +195,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7M9-bU-PM4">
-                                <frame key="frameInset" minX="163" minY="273" width="70" height="21"/>
+                                <frame key="frameInset" minX="152" minY="323" width="70" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -204,31 +204,30 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="8IZ-HN-Vmn"/>
-                    <navigationItem key="navigationItem" title="Family" id="Fyc-tr-V5k">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="MenuIcon" id="1n9-0r-yLk" userLabel="menuButton">
+                    <navigationItem key="navigationItem" title="Family" id="uxC-b6-Sag">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="MenuIcon" id="sWa-lt-hdR" userLabel="menuButton">
                             <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="0.0"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="onMenuButton:" destination="WkM-YF-W0c" id="NRF-Vb-S8W"/>
+                                <action selector="onMenuButton:" destination="WkM-YF-W0c" id="BWk-aS-U8C"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="CbE-ay-2FY">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="zI2-lp-DOQ">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="onComposeButton:" destination="Ba8-Jd-81b" id="0vG-aq-Iw0"/>
+                                <action selector="onComposeButton:" destination="Ba8-Jd-81b" id="psn-nb-cUN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vIM-R7-Q2j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3366" y="-654"/>
+            <point key="canvasLocation" x="4692" y="-340"/>
         </scene>
         <!--Tree-->
         <scene sceneID="fag-sd-ygi">
             <objects>
-                <viewController id="i0W-SC-uW6" sceneMemberID="viewController">
+                <viewController id="i0W-SC-uW6" userLabel="Tree" customClass="TreeViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GgU-dC-jDV"/>
                         <viewControllerLayoutGuide type="bottom" id="dcH-xS-CtG"/>
@@ -238,7 +237,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tree" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gd-wE-cH6">
-                                <frame key="frameInset" minX="170" minY="301" width="34" height="21"/>
+                                <frame key="frameInset" minX="170" minY="323" width="34" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -247,16 +246,32 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Tree" image="treeIcon" selectedImage="treeSelectedIcon" id="a41-vB-ARH"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Family" id="z8K-6D-xmK">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="MenuIcon" id="iWF-8v-yYh" userLabel="menuButton">
+                            <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="0.0"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onMenuButton:" destination="i0W-SC-uW6" id="ewa-YS-Ifu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="UEE-F6-Fdy">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onComposeButton:" destination="Ba8-Jd-81b" id="7xu-qJ-7Le"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chW-XL-BrR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4105" y="-247"/>
+            <point key="canvasLocation" x="5631" y="392"/>
         </scene>
         <!--Suggestions-->
         <scene sceneID="ZRs-3P-LBp">
             <objects>
-                <viewController id="mJI-1S-alp" sceneMemberID="viewController">
+                <viewController id="mJI-1S-alp" userLabel="Suggestions" customClass="SuggestionsViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wgt-E4-H5y"/>
                         <viewControllerLayoutGuide type="bottom" id="YIh-7C-v8L"/>
@@ -266,7 +281,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Suggestions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfr-tf-j38">
-                                <frame key="frameInset" minX="140" minY="301" width="95" height="21"/>
+                                <frame key="frameInset" minX="140" minY="323" width="95" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -275,11 +290,27 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Suggestions" image="suggestIcon" selectedImage="suggestSelectedIcon" id="N0W-SU-fzZ"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Family" id="PhM-sa-6EB">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="MenuIcon" id="0Lc-8Y-jx2" userLabel="menuButton">
+                            <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="0.0"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onMenuButton:" destination="mJI-1S-alp" id="FUZ-HH-N5e"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="aua-1S-HkU">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onComposeButton:" destination="Ba8-Jd-81b" id="B75-Qz-pEO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WjR-qB-Kls" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3366" y="130"/>
+            <point key="canvasLocation" x="4692" y="1142"/>
         </scene>
         <!--Groups-->
         <scene sceneID="aDa-Nc-8ng">
@@ -294,7 +325,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Groups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1d7-FL-e9W">
-                                <frame key="frameInset" minX="163" minY="260" width="56" height="21"/>
+                                <frame key="frameInset" minX="159" minY="323" width="56" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -536,18 +567,91 @@
                 <tabBarController storyboardIdentifier="Family" automaticallyAdjustsScrollViewInsets="NO" id="qHZ-Dg-5Tp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="huP-4g-Oah">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="WkM-YF-W0c" kind="relationship" relationship="viewControllers" id="VVs-Z0-GZC"/>
-                        <segue destination="i0W-SC-uW6" kind="relationship" relationship="viewControllers" id="U7w-8p-Jfc"/>
-                        <segue destination="mJI-1S-alp" kind="relationship" relationship="viewControllers" id="2r8-6u-vuY"/>
+                        <segue destination="Ez6-DV-DgL" kind="relationship" relationship="viewControllers" id="TVa-cE-EjA"/>
+                        <segue destination="Tvo-NI-l2q" kind="relationship" relationship="viewControllers" id="U7w-8p-Jfc"/>
+                        <segue destination="uFV-lm-YUG" kind="relationship" relationship="viewControllers" id="2r8-6u-vuY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcz-lx-i0d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2592.8000000000002" y="-288.30584707646182"/>
+            <point key="canvasLocation" x="3852" y="392"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VVV-6Z-ZpK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ez6-DV-DgL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="8IZ-HN-Vmn"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Ow-B6-yEp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WkM-YF-W0c" kind="relationship" relationship="rootViewController" id="1UM-QO-mVn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0iX-sh-0iI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationItem title="Family" id="6ZJ-B9-KAy">
+                    <barButtonItem key="leftBarButtonItem" title="Item" image="MenuIcon" id="fza-Jf-mZR" userLabel="menuButton">
+                        <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="0.0"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="onMenuButton:" destination="WkM-YF-W0c" id="eLx-Db-m4P"/>
+                        </connections>
+                    </barButtonItem>
+                    <barButtonItem key="rightBarButtonItem" systemItem="search" id="VEJ-Ku-frB">
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="onComposeButton:" destination="Ba8-Jd-81b" id="ARw-MZ-UV4"/>
+                        </connections>
+                    </barButtonItem>
+                </navigationItem>
+            </objects>
+            <point key="canvasLocation" x="3852" y="-340"/>
+        </scene>
+        <!--Tree-->
+        <scene sceneID="cio-GR-fAf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tvo-NI-l2q" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Tree" image="treeIcon" selectedImage="treeSelectedIcon" id="a41-vB-ARH"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eqN-Gv-COI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="i0W-SC-uW6" kind="relationship" relationship="rootViewController" id="DYC-9I-uXV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mij-FR-UdF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4692" y="392"/>
+        </scene>
+        <!--Suggestions-->
+        <scene sceneID="XHg-gZ-kAi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uFV-lm-YUG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Suggestions" image="suggestIcon" selectedImage="suggestSelectedIcon" id="N0W-SU-fzZ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cge-5W-m2b">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mJI-1S-alp" kind="relationship" relationship="rootViewController" id="O5m-Ka-gcw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sxi-FB-9up" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3852" y="1142"/>
         </scene>
     </scenes>
     <resources>

@@ -1,24 +1,19 @@
 //
-//  FamilyViewController.swift
+//  TreeViewController.swift
 //  FamilyApp
 //
-//  Created by Bryan Powell on 10/11/16.
+//  Created by Bryan Powell on 10/16/16.
 //  Copyright © 2016 uab. All rights reserved.
 //
 
 import UIKit
 
-class FamilyViewController: UIViewController {
+class TreeViewController: UIViewController {
 
-//    @IBOutlet weak var contactsBarButton: UITabBarItem!
-//    @IBOutlet weak var tabBar: UITabBar!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        tabBar.selectedItem = contactsBarButton
-//        tabBar.tintColor = UIColor(red:0.72, green:0.91, blue:0.53, alpha:1.0)
-//        tabBar.unselectedItemTintColor = UIColor.white
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,5 +24,6 @@ class FamilyViewController: UIViewController {
     @IBAction func onMenuButton(_ sender: AnyObject) {
         self.slideMenuController()?.openLeft()
     }
+
 
 }

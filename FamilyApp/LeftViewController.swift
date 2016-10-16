@@ -38,8 +38,8 @@ class LeftViewController: UIViewController {
         self.feedViewController = UINavigationController(rootViewController: feedViewController!)
         
         // Initialize Family Controller
-        let familyViewController = self.storyboard?.instantiateViewController(withIdentifier: "Family")
-        self.familyViewController = UINavigationController(rootViewController: familyViewController!)
+//        let familyViewController =
+        self.familyViewController = self.storyboard?.instantiateViewController(withIdentifier: "Family")
         
         // Initialize Groups Controller
         let groupsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Groups")
