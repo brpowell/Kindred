@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct User {
+class User {
     
     let uid: String
     let email: String
@@ -17,7 +17,7 @@ struct User {
     let lastName: String
     let birthday: String
     
-    static var activeUser: String?
+    static var activeUserImage: UIImage?
     
     init(authData: FIRUser, firstName: String, lastName: String, birthday: String) {
         uid = authData.uid
@@ -34,10 +34,6 @@ struct User {
             "lastName": lastName,
             "birthday": birthday
         ]
-    }
-    
-    func setActivate() {
-        User.activeUser = self.uid
     }
     
 }

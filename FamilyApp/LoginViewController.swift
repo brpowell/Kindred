@@ -14,16 +14,29 @@ class LoginViewController: InputViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    static var listener: Bool = false
+    static var listener: Bool = true
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        LoginViewController.listener = true
+        
+        // Listen for auth state change. listener flag to prevent double fire
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if user != nil {
-                print(user?.email)
-                self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
+            if user != nil && LoginViewController.listener{
+                LoginViewController.listener = false
+                let uid = FIRAuth.auth()?.currentUser?.uid
+                let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + uid!)
+
+                profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
+                    if error != nil {
+                        print(error)
+                    }
+                    else {
+                        User.activeUserImage = UIImage(data: data!)
+                        self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
+                    }
+                }
             }
         }
     }
@@ -39,11 +52,13 @@ class LoginViewController: InputViewController {
         
         if email != "" && pass != "" {
             FIRAuth.auth()?.signIn(withEmail: email, password: pass, completion: { (user, error) in
-                User.activeUser = user?.email
+                if let error = error {
+                    print(error)
+                }
             })
         }
         else {
-            // Alert invalid email or password
+            // TODO: Alert invalid email or password
         }
     }
     
@@ -54,6 +69,8 @@ class LoginViewController: InputViewController {
             destination.password = passwordTextField.text!
         }
     }
+    
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {}
 
 }
 

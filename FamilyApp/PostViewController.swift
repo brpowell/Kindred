@@ -27,7 +27,6 @@ class PostViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
     @IBAction func onPostButton(_ sender: AnyObject) {
         if let postBody = postTextView.text {
             let time = FIRServerValue.timestamp()

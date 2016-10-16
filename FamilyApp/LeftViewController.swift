@@ -18,11 +18,23 @@ class LeftViewController: UIViewController {
     var groupsViewController: UIViewController!
     var feedViewController: UIViewController!
     
+    @IBOutlet weak var profileImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let user = FIRAuth.auth()?.currentUser
         userLabel.text = user?.displayName
+        print("THE CURRENT USER: " + userLabel.text!)
+        
+        if let image = User.activeUserImage {
+            profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
+            profileImage.clipsToBounds = true
+            profileImage.layer.borderWidth = 3.0
+            profileImage.layer.borderColor = UIColor.white.cgColor
+//            profileImage.contentMode = .scaleAspectFit
+            profileImage.image = image
+        }
         
         // Initialize Feed Controller
         let feedViewController = self.storyboard?.instantiateViewController(withIdentifier: "Feed")
@@ -47,7 +59,7 @@ class LeftViewController: UIViewController {
     
     @IBAction func onSignOut(_ sender: AnyObject) {
         try! FIRAuth.auth()!.signOut()
-        self.performSegue(withIdentifier: "signOutSegue", sender: sender)
+//        self.performSegue(withIdentifier: "signOutSegue", sender: sender)
     }
     
     @IBAction func onFeedButton(_ sender: AnyObject) {
