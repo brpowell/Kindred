@@ -28,10 +28,7 @@ class LeftViewController: UIViewController {
         print("THE CURRENT USER: " + userLabel.text!)
         
         if let image = User.activeUserImage {
-            profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
-            profileImage.clipsToBounds = true
-            profileImage.layer.borderWidth = 3.0
-            profileImage.layer.borderColor = UIColor.white.cgColor
+            profileImage.makeProfileFormat()
 //            profileImage.contentMode = .scaleAspectFit
             profileImage.image = image
         }

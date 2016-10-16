@@ -32,16 +32,16 @@ class PostViewController: UIViewController {
             let time = FIRServerValue.timestamp()
             let user = FIRAuth.auth()?.currentUser
             let key = postsRef.childByAutoId().key
-            //            let postInfo = ["uid": user?.uid, "author": user?.displayName, "body": postBody, "timestamp": time]
+
             let data = [
                 "uid": (user?.uid)!,
                 "author": (user?.displayName)!,
                 "body": postBody,
                 "timestamp": time] as [String : Any]
+            
             postsRef.child("\(key)").setValue(data)
             self.performSegue(withIdentifier: "unwindToFeed", sender: self)
         }
     }
-    
 
 }

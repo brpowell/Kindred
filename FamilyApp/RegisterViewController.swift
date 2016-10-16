@@ -18,7 +18,6 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
     @IBOutlet weak var birthdayTextField: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
     
-    
     var email = String()
     var password = String()
     let ref = FIRDatabase.database().reference(withPath: "users")
@@ -36,6 +35,8 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
         RegisterViewController.listener = true
         LoginViewController.listener = true
         imagePicker.delegate = self
+        profileImage.makeProfileFormat()
+
 //        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
 //        profileImage.clipsToBounds = true
 //        profileImage.layer.borderWidth = 3.0
@@ -150,8 +151,8 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            profileImage.contentMode = .scaleAspectFit
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+//            profileImage.contentMode = .scaleAspectFit
             profileImage.image = pickedImage
         }
         

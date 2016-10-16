@@ -27,6 +27,8 @@
 		93B592461DAAC5C7000635C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B592451DAAC5C7000635C6 /* User.swift */; };
 		93F22B0F1DB184C100911478 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F22B0E1DB184C100911478 /* Post.swift */; };
 		93F22B121DB1867D00911478 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F22B111DB1867D00911478 /* FeedView.swift */; };
+		93F22B151DB3FC7600911478 /* FeedCellHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F22B141DB3FC7500911478 /* FeedCellHelpers.swift */; };
+		93F22B171DB3FCA600911478 /* ImageHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F22B161DB3FCA600911478 /* ImageHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		93B592451DAAC5C7000635C6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		93F22B0E1DB184C100911478 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		93F22B111DB1867D00911478 /* FeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		93F22B141DB3FC7500911478 /* FeedCellHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCellHelpers.swift; sourceTree = "<group>"; };
+		93F22B161DB3FCA600911478 /* ImageHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelpers.swift; sourceTree = "<group>"; };
 		C4F58B8DF37F190F1658208E /* Pods_FamilyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FamilyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -107,6 +111,7 @@
 		9328F3641DA9CE5300F16E36 /* FamilyApp */ = {
 			isa = PBXGroup;
 			children = (
+				93F22B131DB3FC3B00911478 /* Helpers */,
 				93F22B0D1DB1835600911478 /* Controllers */,
 				93F22B0C1DB1835200911478 /* Views */,
 				93F22B0B1DB1834600911478 /* Models */,
@@ -154,6 +159,15 @@
 				93B592421DAABB23000635C6 /* InputViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		93F22B131DB3FC3B00911478 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				93F22B141DB3FC7500911478 /* FeedCellHelpers.swift */,
+				93F22B161DB3FCA600911478 /* ImageHelpers.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,7 +308,9 @@
 				9328F36E1DA9CE5300F16E36 /* FamilyApp.xcdatamodeld in Sources */,
 				93F22B0F1DB184C100911478 /* Post.swift in Sources */,
 				93B592431DAABB23000635C6 /* InputViewController.swift in Sources */,
+				93F22B151DB3FC7600911478 /* FeedCellHelpers.swift in Sources */,
 				9328F3661DA9CE5300F16E36 /* AppDelegate.swift in Sources */,
+				93F22B171DB3FCA600911478 /* ImageHelpers.swift in Sources */,
 				93B5923B1DAA2F5D000635C6 /* RegisterViewController.swift in Sources */,
 				93177DC21DAB0D080072B80E /* LeftViewController.swift in Sources */,
 				93F22B121DB1867D00911478 /* FeedView.swift in Sources */,

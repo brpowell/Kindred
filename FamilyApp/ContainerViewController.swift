@@ -17,6 +17,7 @@ class ContainerViewController: SlideMenuController {
         // Initialize drawer and set feed as default main view
         self.leftViewController = self.storyboard?.instantiateViewController(withIdentifier: "Left")
         
+        // On sign out, unwind to login
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user == nil {
                 self.performSegue(withIdentifier: "unwindToLogin", sender: self)
