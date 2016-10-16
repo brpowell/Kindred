@@ -10,15 +10,15 @@ import UIKit
 
 class FamilyViewController: UIViewController {
 
-    @IBOutlet weak var contactsBarButton: UITabBarItem!
-    @IBOutlet weak var tabBar: UITabBar!
+//    @IBOutlet weak var contactsBarButton: UITabBarItem!
+//    @IBOutlet weak var tabBar: UITabBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBar.selectedItem = contactsBarButton
-        tabBar.tintColor = UIColor(red:0.72, green:0.91, blue:0.53, alpha:1.0)
-        tabBar.unselectedItemTintColor = UIColor.white
+//        tabBar.selectedItem = contactsBarButton
+//        tabBar.tintColor = UIColor(red:0.72, green:0.91, blue:0.53, alpha:1.0)
+//        tabBar.unselectedItemTintColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {
