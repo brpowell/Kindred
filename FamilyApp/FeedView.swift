@@ -68,6 +68,8 @@ class FeedCell: UICollectionViewCell {
         imageView.backgroundColor = UIColor.black
         
         imageView.layer.cornerRadius = 22
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
+        imageView.layer.borderWidth = 1.0
         imageView.clipsToBounds = true
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
