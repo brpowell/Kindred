@@ -18,6 +18,8 @@
 		9328F3701DA9CE5300F16E36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9328F36F1DA9CE5300F16E36 /* Assets.xcassets */; };
 		9328F3731DA9CE5300F16E36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9328F3711DA9CE5300F16E36 /* LaunchScreen.storyboard */; };
 		933ACD8B1DAEDA2D00F616B5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933ACD8A1DAEDA2D00F616B5 /* PostViewController.swift */; };
+		93595C241DB48553003BB505 /* LeftDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93595C231DB48553003BB505 /* LeftDrawerView.swift */; };
+		93595C261DB517BC003BB505 /* SearchContactPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93595C251DB517BC003BB505 /* SearchContactPopup.swift */; };
 		935CCC541DADA20C00848D7E /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CCC531DADA20C00848D7E /* GroupsViewController.swift */; };
 		93AF2CA81DAD7C9D00879A1C /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */; };
 		93B5923B1DAA2F5D000635C6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5923A1DAA2F5D000635C6 /* RegisterViewController.swift */; };
@@ -48,6 +50,8 @@
 		9328F3721DA9CE5300F16E36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9328F3741DA9CE5300F16E36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		933ACD8A1DAEDA2D00F616B5 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		93595C231DB48553003BB505 /* LeftDrawerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftDrawerView.swift; sourceTree = "<group>"; };
+		93595C251DB517BC003BB505 /* SearchContactPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchContactPopup.swift; sourceTree = "<group>"; };
 		935CCC531DADA20C00848D7E /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		93B5923A1DAA2F5D000635C6 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 				9328F3711DA9CE5300F16E36 /* LaunchScreen.storyboard */,
 				9328F3691DA9CE5300F16E36 /* Main.storyboard */,
 				93F22B111DB1867D00911478 /* FeedView.swift */,
+				93595C231DB48553003BB505 /* LeftDrawerView.swift */,
+				93595C251DB517BC003BB505 /* SearchContactPopup.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -309,6 +315,7 @@
 			files = (
 				93B5923D1DAAB4FF000635C6 /* FeedViewController.swift in Sources */,
 				9328F3681DA9CE5300F16E36 /* LoginViewController.swift in Sources */,
+				93595C241DB48553003BB505 /* LeftDrawerView.swift in Sources */,
 				93177DC41DAB10580072B80E /* ContainerViewController.swift in Sources */,
 				933ACD8B1DAEDA2D00F616B5 /* PostViewController.swift in Sources */,
 				9328F36E1DA9CE5300F16E36 /* FamilyApp.xcdatamodeld in Sources */,
@@ -324,6 +331,7 @@
 				93F22B121DB1867D00911478 /* FeedView.swift in Sources */,
 				935CCC541DADA20C00848D7E /* GroupsViewController.swift in Sources */,
 				93177DC01DAB0B450072B80E /* SlideMenuController.swift in Sources */,
+				93595C261DB517BC003BB505 /* SearchContactPopup.swift in Sources */,
 				93AF2CA81DAD7C9D00879A1C /* ContactsViewController.swift in Sources */,
 				93B592461DAAC5C7000635C6 /* User.swift in Sources */,
 			);

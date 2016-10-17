@@ -25,4 +25,9 @@ class SuggestionsViewController: UIViewController {
         self.slideMenuController()?.openLeft()
     }
 
+    @IBAction func onSearchButton(_ sender: AnyObject) {
+        let searchContact = SearchContactPopup()
+        present(searchContact.controller, animated: true)
+    }
+    
 }

@@ -8,23 +8,34 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
-class LoginViewController: InputViewController {
+class LoginViewController: InputViewController, NVActivityIndicatorViewable {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     static var listener: Bool = true
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.emailTextField.text = ""
+        self.passwordTextField.text = ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         LoginViewController.listener = true
         
+        // Activity loader
+        NVActivityIndicatorView.DEFAULT_TYPE = .ballTrianglePath
+        NVActivityIndicatorView.DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME = 1000
+        
         // Listen for auth state change. listener flag to prevent double fire
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil && LoginViewController.listener{
                 LoginViewController.listener = false
+                self.startAnimating()
                 let uid = FIRAuth.auth()?.currentUser?.uid
                 let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + uid!)
 
@@ -47,6 +58,7 @@ class LoginViewController: InputViewController {
     }
     
     @IBAction func onLoginButton(_ sender: AnyObject) {
+        self.startAnimating()
         let email = emailTextField.text!
         let pass = passwordTextField.text!
         
@@ -54,11 +66,12 @@ class LoginViewController: InputViewController {
             FIRAuth.auth()?.signIn(withEmail: email, password: pass, completion: { (user, error) in
                 if let error = error {
                     print(error)
+                    self.stopAnimating()
                 }
             })
         }
         else {
-            // TODO: Alert invalid email or password
+            // TODO: Alert email or password blank
         }
     }
     

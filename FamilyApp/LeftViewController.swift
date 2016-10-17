@@ -29,7 +29,6 @@ class LeftViewController: UIViewController {
         
         if let image = User.activeUserImage {
             profileImage.makeProfileFormat()
-//            profileImage.contentMode = .scaleAspectFit
             profileImage.image = image
         }
         
@@ -38,7 +37,7 @@ class LeftViewController: UIViewController {
         self.feedViewController = UINavigationController(rootViewController: feedViewController!)
         
         // Initialize Family Controller
-//        let familyViewController =
+        // Each tabbed view has navigation controller embeded, as shown on storyboard
         self.familyViewController = self.storyboard?.instantiateViewController(withIdentifier: "Family")
         
         // Initialize Groups Controller
@@ -56,7 +55,6 @@ class LeftViewController: UIViewController {
     
     @IBAction func onSignOut(_ sender: AnyObject) {
         try! FIRAuth.auth()!.signOut()
-//        self.performSegue(withIdentifier: "signOutSegue", sender: sender)
     }
     
     @IBAction func onFeedButton(_ sender: AnyObject) {
