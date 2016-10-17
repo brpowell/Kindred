@@ -49,6 +49,7 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable {
                     }
                 }
             }
+            self.stopAnimating()
         }
     }
 
