@@ -11,20 +11,36 @@ import Firebase
 
 class User {
     
-    let uid: String
-    let email: String
-    let firstName: String
-    let lastName: String
-    let birthday: String
+    var uid: String
+    var firstName: String
+    var lastName: String
+    var email: String
+    var birthday: String
+    var photoUrl: URL?
     
     static var activeUserImage: UIImage?
     
     init(authData: FIRUser, firstName: String, lastName: String, birthday: String) {
-        uid = authData.uid
-        email = authData.email!
+        self.uid = authData.uid
+        self.email = authData.email!
         self.firstName = firstName
         self.lastName = lastName
         self.birthday = birthday
+        self.photoUrl = nil
+    }
+    
+    init(snapshot: FIRDataSnapshot) {
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        self.firstName = (snapshotValue["firstName"] as? String)!
+        self.lastName = (snapshotValue["lastName"] as? String)!
+        self.birthday = (snapshotValue["birthday"] as? String)!
+        self.email = (snapshotValue["email"] as? String)!
+        self.uid = snapshot.key
+        self.photoUrl = nil
+    }
+    
+    func setPhotoUrl(photoUrl: URL) {
+        self.photoUrl = photoUrl
     }
     
     func toAnyObject() -> [String: String] {
@@ -35,5 +51,4 @@ class User {
             "birthday": birthday
         ]
     }
-    
 }

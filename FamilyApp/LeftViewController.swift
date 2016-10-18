@@ -44,6 +44,11 @@ class LeftViewController: UIViewController {
         let groupsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Groups")
         self.groupsViewController = UINavigationController(rootViewController: groupsViewController!)
         
+        // Intialize Profile Controller
+        //TODO, also create new func
+        Database.db
+        
+        
         self.slideMenuController()?.changeMainViewController(self.feedViewController, close: true)
         
     }
