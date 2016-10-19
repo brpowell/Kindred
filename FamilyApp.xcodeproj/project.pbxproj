@@ -35,6 +35,7 @@
 		93F22B121DB1867D00911478 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F22B111DB1867D00911478 /* FeedView.swift */; };
 		93F22B151DB3FC7600911478 /* FeedCellHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F22B141DB3FC7500911478 /* FeedCellHelpers.swift */; };
 		93F22B171DB3FCA600911478 /* ImageHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F22B161DB3FCA600911478 /* ImageHelpers.swift */; };
+		CAA355D91DB72477003EA66F /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA355D81DB72477003EA66F /* Contact.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		93F22B141DB3FC7500911478 /* FeedCellHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCellHelpers.swift; sourceTree = "<group>"; };
 		93F22B161DB3FCA600911478 /* ImageHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelpers.swift; sourceTree = "<group>"; };
 		C4F58B8DF37F190F1658208E /* Pods_FamilyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FamilyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAA355D81DB72477003EA66F /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			children = (
 				93F22B0E1DB184C100911478 /* Post.swift */,
 				93B592451DAAC5C7000635C6 /* User.swift */,
+				CAA355D81DB72477003EA66F /* Contact.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -294,7 +297,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F16F1426BF55373696093779 /* [CP] Copy Pods Resources */ = {
@@ -331,6 +334,7 @@
 				93F22B151DB3FC7600911478 /* FeedCellHelpers.swift in Sources */,
 				9328F3661DA9CE5300F16E36 /* AppDelegate.swift in Sources */,
 				93F22B171DB3FCA600911478 /* ImageHelpers.swift in Sources */,
+				CAA355D91DB72477003EA66F /* Contact.swift in Sources */,
 				93C3D2811DB4421D002900DA /* TreeViewController.swift in Sources */,
 				93C3D2831DB44230002900DA /* SuggestionsViewController.swift in Sources */,
 				93B5923B1DAA2F5D000635C6 /* RegisterViewController.swift in Sources */,
