@@ -26,12 +26,16 @@ class ProfileViewController: UIViewController {
             picture.makeProfileFormat()
             picture.image = image
         }
+        
+        
+        let userId = Database.db.user.uid
+        Database.db.createGroup(groupName: "NEWGROUP", userId: userId)
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
 }
