@@ -15,6 +15,7 @@ class Contact {
     var firstName: String
     var lastName: String
     var birthday: String
+    var relationship: String?
     
     
     init(firstName: String, lastName: String, birthday: String) {

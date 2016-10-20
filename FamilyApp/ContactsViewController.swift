@@ -29,6 +29,10 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        apurva.relationship = "Sister"
+        uyviet.relationship = "Brother"
+        bryan.relationship = "First Cousin"
+        
         contacts.append(apurva)
         contacts.append(uyviet)
         contacts.append(bryan)
@@ -65,6 +69,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let row = indexPath.row
         cell.textLabel?.text = contacts[row].firstName
+        cell.detailTextLabel?.text = contacts[row].relationship
         
         return cell
     }

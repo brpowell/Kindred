@@ -17,6 +17,7 @@ class LeftViewController: UIViewController {
     var familyViewController: UIViewController!
     var groupsViewController: UIViewController!
     var feedViewController: UIViewController!
+    var profileViewController: UIViewController!
     
     @IBOutlet weak var profileImage: UIImageView!
     
@@ -25,12 +26,17 @@ class LeftViewController: UIViewController {
 
         let user = FIRAuth.auth()?.currentUser
         userLabel.text = user?.displayName
-        print("THE CURRENT USER: " + userLabel.text!)
         
         if let image = User.activeUserImage {
             profileImage.makeProfileFormat()
             profileImage.image = image
         }
+        
+        
+        // Enable profile picture tapping
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("profileTapped"))
+        profileImage.isUserInteractionEnabled = true
+        profileImage.addGestureRecognizer(tapGestureRecognizer)
         
         // Initialize Feed Controller
         let feedViewController = self.storyboard?.instantiateViewController(withIdentifier: "Feed")
@@ -46,6 +52,8 @@ class LeftViewController: UIViewController {
         
         // Intialize Profile Controller
         //TODO, also create new func
+        let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "Profile")
+        self.profileViewController = UINavigationController(rootViewController: profileViewController!)
         Database.db
         
         
@@ -72,6 +80,10 @@ class LeftViewController: UIViewController {
     
     @IBAction func onGroupsButton(_ sender: AnyObject) {
         self.slideMenuController()?.changeMainViewController(self.groupsViewController, close: true)
+    }
+    
+    func profileTapped() {
+        self.slideMenuController()?.changeMainViewController(self.profileViewController, close: true)
     }
 
 }

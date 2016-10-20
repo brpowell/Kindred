@@ -38,4 +38,7 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func onMenuButton(_ sender: AnyObject) {
+        self.slideMenuController()?.openLeft()
+    }
 }
