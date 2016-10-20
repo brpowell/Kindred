@@ -1,12 +1,27 @@
 # Family App (Working Title)
 
-This project has dependencies that can be installed from Cocoapods. If you don't have the package manager installed first follow the guide here https://cocoapods.org/
+This project has dependencies that can be installed from Cocoapods. If you don't have the package manager installed, follow the guide here https://cocoapods.org/
 
-Then
 ```
 git clone https://github.com/brpowell/familyapp
 cd familyapp
 pod install
 ```
 
-Make sure you open the newly generated `FamilyApp.xcworkspace` and not `FamilyApp.xcodeproj`
+## Building the Project
+Open Xcode and open the newly generated `FamilyApp.xcworkspace`, DO NOT OPEN `FamilyApp.xcodeproj`.
+
+Click on the blue 'FamilyApp' file on the left. Go to build settings and search for 'Legacy'.
+Set 'Use Legacy Swift Language Version' to no.
+
+Click on the blue 'Pods' file on the left. Go to build settings and search for 'Legacy'.
+Set 'Use Legacy Swift Language Version' to no.
+
+Please use iPhone 6 to build.
+
+
+## Signing In
+Registration will break if a password of less than 6 characters is used. It will also break if a profile image is not chosen in the following registration screen.
+Alternatively, you can login with the following.
+Username - professor@yahoo.com
+Password - 123456
