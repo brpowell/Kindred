@@ -11,6 +11,7 @@ import UIKit
 class SuggestionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+
     
     let apurva = Suggestion(firstName:"Harry", lastName:"Potter", relationship: "brother")
     let uyviet = Suggestion(firstName:"Albus", lastName:"Dumbledor", relationship: "grandfather")
@@ -21,7 +22,7 @@ class SuggestionsViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view
         suggestions.append(apurva)
         suggestions.append(uyviet)
         suggestions.append(bryan)
