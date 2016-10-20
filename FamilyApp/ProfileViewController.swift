@@ -29,6 +29,7 @@ class ProfileViewController: UIViewController {
         
         
         Database.db.getContacts()
+        Database.db.getGroupMembers(groupId: "-KUYam-BTTbSKf4NwVd-")
     
     }
 

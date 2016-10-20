@@ -65,13 +65,20 @@ class Database {
         ref = FIRDatabase.database().reference(withPath: "contacts").child(user.uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for person in snapshot.children {
-                
                 let snap = person as! FIRDataSnapshot
-                let val = snap.value
-
-                print(snap)
-                print(val)
-                print()
+                let uid = snap.key
+                print(uid)
+            }
+        })
+    }
+    
+    func getGroupMembers(groupId: String) {
+        ref = FIRDatabase.database().reference(withPath: "groupmembers").child(groupId)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            for person in snapshot.children {
+                let snap = person as! FIRDataSnapshot
+                let uid = snap.key
+                print(uid)
             }
         })
     }
