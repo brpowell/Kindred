@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CB08E27C600BB5C4DB99905 /* Pods_FamilyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F58B8DF37F190F1658208E /* Pods_FamilyApp.framework */; };
+		216692831DB9462400D357F7 /* CreateGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216692821DB9462400D357F7 /* CreateGroupsViewController.swift */; };
 		2187E5E31DB5856F009C6266 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2187E5E21DB5856F009C6266 /* ProfileViewController.swift */; };
 		2187E5E51DB5867B009C6266 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2187E5E41DB5867B009C6266 /* Database.swift */; };
 		93177DC01DAB0B450072B80E /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93177DBF1DAB0B450072B80E /* SlideMenuController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		216692821DB9462400D357F7 /* CreateGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupsViewController.swift; sourceTree = "<group>"; };
 		2187E5E21DB5856F009C6266 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		2187E5E41DB5867B009C6266 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		44D70E7EE6B2815014FD0622 /* Pods-FamilyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FamilyApp/Pods-FamilyApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -171,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				93177DC31DAB10580072B80E /* ContainerViewController.swift */,
-				935CCC531DADA20C00848D7E /* GroupsViewController.swift */,
 				933ACD8A1DAEDA2D00F616B5 /* PostViewController.swift */,
 				93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */,
 				93177DC11DAB0D080072B80E /* LeftViewController.swift */,
@@ -182,6 +183,8 @@
 				93B592421DAABB23000635C6 /* InputViewController.swift */,
 				93C3D2801DB4421D002900DA /* TreeViewController.swift */,
 				93C3D2821DB44230002900DA /* SuggestionsViewController.swift */,
+				935CCC531DADA20C00848D7E /* GroupsViewController.swift */,
+				216692821DB9462400D357F7 /* CreateGroupsViewController.swift */,
 				2187E5E21DB5856F009C6266 /* ProfileViewController.swift */,
 			);
 			name = Controllers;
@@ -336,6 +339,7 @@
 				9328F36E1DA9CE5300F16E36 /* FamilyApp.xcdatamodeld in Sources */,
 				2187E5E31DB5856F009C6266 /* ProfileViewController.swift in Sources */,
 				93F22B0F1DB184C100911478 /* Post.swift in Sources */,
+				216692831DB9462400D357F7 /* CreateGroupsViewController.swift in Sources */,
 				93B592431DAABB23000635C6 /* InputViewController.swift in Sources */,
 				93F22B151DB3FC7600911478 /* FeedCellHelpers.swift in Sources */,
 				9328F3661DA9CE5300F16E36 /* AppDelegate.swift in Sources */,
