@@ -19,15 +19,16 @@ class CreateGroupsViewController: InputViewController {
         if (!groupName.isEmpty) {
             Database.db.createGroup(groupName: groupNameTextField.text!, userId: userId)
             statusLabel.text = "Group created!"
+            statusLabel.isHidden = false
         } else {
             statusLabel.text = "Group not created"
+            statusLabel.isHidden = false
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        statusLabel.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {

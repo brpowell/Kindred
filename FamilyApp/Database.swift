@@ -45,12 +45,26 @@ class Database {
         ref = FIRDatabase.database().reference(withPath: "groups")
         let key = ref.childByAutoId().key
         ref.child("\(key)").setValue(["name": groupName])
+        
+        //Add current user to the group he/she just created
         addMemberToGroup(groupId: key, userId: userId)
     }
     
     func addMemberToGroup(groupId: String, userId: String) {
-        ref = FIRDatabase.database().reference(withPath: "members")
+        ref = FIRDatabase.database().reference(withPath: "groupmembers")
         ref.child("\(groupId)/\(userId)").setValue(true)
+    }
+    
+    func addContact(userId: String) {
+        ref = FIRDatabase.database().reference(withPath: "contacts")
+        let currentUserId = user.uid
+        ref.child("\(currentUserId)/\(userId)").setValue(true)
     }
 
 }
+
+
+
+
+
+
