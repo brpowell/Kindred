@@ -14,8 +14,12 @@ class Database {
     static let db = Database()
     var user: User!
     var ref: FIRDatabaseReference!
-
+    
     private init() {
+        findCurrentUser()
+    }
+    
+    func findCurrentUser() {
         if let currentUser = FIRAuth.auth()?.currentUser {
             let uid = currentUser.uid
             let photoUrl = currentUser.photoURL!
@@ -26,6 +30,15 @@ class Database {
                 self.user.setPhotoUrl(photoUrl: photoUrl)
             })
         }
+    }
+    
+    func findMember(uid: String) {
+        var findUser: User?
+        ref = FIRDatabase.database().reference(withPath: "users").child(uid)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            findUser = User(snapshot: snapshot)
+            print(findUser?.firstName)
+        })
     }
     
     func createGroup(groupName: String, userId: String) {
@@ -39,4 +52,5 @@ class Database {
         ref = FIRDatabase.database().reference(withPath: "members")
         ref.child("\(groupId)/\(userId)").setValue(true)
     }
+
 }
