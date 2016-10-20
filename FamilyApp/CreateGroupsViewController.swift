@@ -11,10 +11,17 @@ import UIKit
 class CreateGroupsViewController: InputViewController {
     
     @IBOutlet weak var groupNameTextField: UITextField!
-
+    @IBOutlet weak var statusLabel: UILabel!
+    
     @IBAction func onCreateGroupButton(_ sender: AnyObject) {
         let userId = Database.db.user.uid
-        Database.db.createGroup(groupName: groupNameTextField.text!, userId: userId)
+        let groupName = groupNameTextField.text!
+        if (!groupName.isEmpty) {
+            Database.db.createGroup(groupName: groupNameTextField.text!, userId: userId)
+            statusLabel.text = "Group created!"
+        } else {
+            statusLabel.text = "Group not created"
+        }
     }
     
     override func viewDidLoad() {
