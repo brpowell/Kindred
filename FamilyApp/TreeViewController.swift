@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TreeViewController: UIViewController {
+class TreeViewController: FamilyController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +26,7 @@ class TreeViewController: UIViewController {
     }
 
     @IBAction func onSearchButton(_ sender: AnyObject) {
-        let searchContact = SearchContactPopup()
-        present(searchContact.controller, animated: true)
+        search()
     }
 
 }

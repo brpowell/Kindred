@@ -17,6 +17,7 @@ class User {
     var email: String
     var birthday: String
     var photoUrl: URL?
+    var photo: UIImage?
     
     static var activeUserImage: UIImage?
     
@@ -36,6 +37,18 @@ class User {
         self.birthday = (snapshotValue["birthday"] as? String)!
         self.email = (snapshotValue["email"] as? String)!
         self.uid = snapshot.key
+        self.photoUrl = nil
+    }
+    
+    init(snapshot: [String: NSDictionary]) {
+        let key = snapshot.keys.first!
+        let userDict = snapshot[key]!
+
+        self.firstName = userDict.value(forKey: "firstName") as! String
+        self.lastName = userDict.value(forKey: "lastName") as! String
+        self.birthday = userDict.value(forKey: "birthday") as! String
+        self.email = userDict.value(forKey: "email") as! String
+        self.uid = key
         self.photoUrl = nil
     }
     

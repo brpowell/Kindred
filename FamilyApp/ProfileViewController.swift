@@ -16,6 +16,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var email: UILabel!
     @IBOutlet weak var picture: UIImageView!
     
+    static var user: User? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         name.text = Database.db.user.firstName + " " + Database.db.user.lastName
@@ -26,6 +28,11 @@ class ProfileViewController: UIViewController {
             picture.makeProfileFormat()
             picture.image = image
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
 
     override func didReceiveMemoryWarning() {
