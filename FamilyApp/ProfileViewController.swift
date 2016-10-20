@@ -26,6 +26,10 @@ class ProfileViewController: UIViewController {
             picture.makeProfileFormat()
             picture.image = image
         }
+        
+        
+        Database.db.getContacts()
+    
     }
 
     override func didReceiveMemoryWarning() {

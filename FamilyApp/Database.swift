@@ -60,6 +60,21 @@ class Database {
         let currentUserId = user.uid
         ref.child("\(currentUserId)/\(userId)").setValue(true)
     }
+    
+    func getContacts() {
+        ref = FIRDatabase.database().reference(withPath: "contacts").child(user.uid)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            for person in snapshot.children {
+                
+                let snap = person as! FIRDataSnapshot
+                let val = snap.value
+
+                print(snap)
+                print(val)
+                print()
+            }
+        })
+    }
 
 }
 
