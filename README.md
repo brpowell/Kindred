@@ -22,6 +22,7 @@ Please use iPhone 6 to build.
 
 ## Signing In
 Registration will break if a password of less than 6 characters is used. It will also break if a profile image is not chosen in the following registration screen.
-Alternatively, you can login with the following.
-Username - professor@yahoo.com
-Password - 123456
+Alternatively, you can login with the following login information. <br><br>
+
+Username - professor@yahoo.com<br>
+Password - 123456<br>
