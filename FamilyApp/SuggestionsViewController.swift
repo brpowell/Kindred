@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SuggestionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SuggestionsViewController: FamilyController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -62,8 +62,7 @@ class SuggestionsViewController: UIViewController, UITableViewDataSource, UITabl
     }
 
     @IBAction func onSearchButton(_ sender: AnyObject) {
-        let searchContact = SearchContactPopup()
-        present(searchContact.controller, animated: true)
+        search()
     }
     
 }

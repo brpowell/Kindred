@@ -8,10 +8,7 @@
 
 import UIKit
 
-class ContactsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-
-
+class ContactsViewController: FamilyController, UITableViewDataSource, UITableViewDelegate {
 
 //    @IBOutlet weak var contactsBarButton: UITabBarItem!
 //    @IBOutlet weak var tabBar: UITabBar!
@@ -85,7 +82,6 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     @IBAction func onSearchButton(_ sender: AnyObject) {
-        let searchContact = SearchContactPopup()
-        present(searchContact.controller, animated: true)
+        search()
     }
 }

@@ -1,19 +1,21 @@
 //
-//  TreeViewController.swift
+//  FamilyViewController.swift
 //  FamilyApp
 //
-//  Created by Bryan Powell on 10/16/16.
+//  Created by Bryan Powell on 10/11/16.
 //  Copyright © 2016 uab. All rights reserved.
 //
 
 import UIKit
 
-class TreeViewController: FamilyController {
+class ContactsViewController: UIViewController {
 
+//    @IBOutlet weak var contactsBarButton: UITabBarItem!
+//    @IBOutlet weak var tabBar: UITabBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,7 +28,7 @@ class TreeViewController: FamilyController {
     }
 
     @IBAction func onSearchButton(_ sender: AnyObject) {
-        search()
+        let searchContact = SearchContactPopup()
+        present(searchContact.controller, animated: true)
     }
-
 }
