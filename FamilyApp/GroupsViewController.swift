@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Firebase
 
 class GroupsViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

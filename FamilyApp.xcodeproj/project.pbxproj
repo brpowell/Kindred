@@ -33,6 +33,7 @@
 		93B592461DAAC5C7000635C6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B592451DAAC5C7000635C6 /* User.swift */; };
 		93C3D2811DB4421D002900DA /* TreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3D2801DB4421D002900DA /* TreeViewController.swift */; };
 		93C3D2831DB44230002900DA /* SuggestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C3D2821DB44230002900DA /* SuggestionsViewController.swift */; };
+		93CBEB501DB9A08200743E37 /* RelationPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CBEB4F1DB9A08200743E37 /* RelationPopoverViewController.swift */; };
 		93F22B0F1DB184C100911478 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F22B0E1DB184C100911478 /* Post.swift */; };
 		93F22B121DB1867D00911478 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F22B111DB1867D00911478 /* FeedView.swift */; };
 		93F22B151DB3FC7600911478 /* FeedCellHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F22B141DB3FC7500911478 /* FeedCellHelpers.swift */; };
@@ -73,6 +74,7 @@
 		93B592451DAAC5C7000635C6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		93C3D2801DB4421D002900DA /* TreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeViewController.swift; sourceTree = "<group>"; };
 		93C3D2821DB44230002900DA /* SuggestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionsViewController.swift; sourceTree = "<group>"; };
+		93CBEB4F1DB9A08200743E37 /* RelationPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationPopoverViewController.swift; sourceTree = "<group>"; };
 		93F22B0E1DB184C100911478 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		93F22B111DB1867D00911478 /* FeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		93F22B141DB3FC7500911478 /* FeedCellHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCellHelpers.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				216692821DB9462400D357F7 /* CreateGroupsViewController.swift */,
 				2187E5E21DB5856F009C6266 /* ProfileViewController.swift */,
 				932A98BF1DB954900020E1F1 /* OtherProfileViewController.swift */,
+				93CBEB4F1DB9A08200743E37 /* RelationPopoverViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -309,7 +312,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F16F1426BF55373696093779 /* [CP] Copy Pods Resources */ = {
@@ -354,6 +357,7 @@
 				93B5923B1DAA2F5D000635C6 /* RegisterViewController.swift in Sources */,
 				93177DC21DAB0D080072B80E /* LeftViewController.swift in Sources */,
 				93F22B121DB1867D00911478 /* FeedView.swift in Sources */,
+				93CBEB501DB9A08200743E37 /* RelationPopoverViewController.swift in Sources */,
 				935CCC541DADA20C00848D7E /* GroupsViewController.swift in Sources */,
 				932A98BE1DB94BB70020E1F1 /* FamilyController.swift in Sources */,
 				CAA355DD1DB87B4C003EA66F /* Suggestion.swift in Sources */,

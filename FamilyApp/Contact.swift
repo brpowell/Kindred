@@ -12,15 +12,29 @@ import UIKit
 
 class Contact {
     
-    var firstName: String
-    var lastName: String
-    var birthday: String
-    var relationship: String?
+    var name: String
+//    var birthday: String
+    var relationship: String
+    var uid: String
     
+    init(name: String, relationship: String, uid: String) {
+        self.name = name
+        self.relationship = relationship
+        self.uid = uid
+    }
     
-    init(firstName: String, lastName: String, birthday: String) {
-        self.firstName = firstName
-        self.lastName = lastName
-        self.birthday = birthday
+    init(snapshot: FIRDataSnapshot) {
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        self.name = (snapshotValue["name"] as? String)!
+        self.relationship = (snapshotValue["relationship"] as? String)!
+        print(snapshot)
+        self.uid = snapshot.key
+    }
+    
+    func toAnyObject() -> [String: String] {
+        return [
+            "name": name,
+            "relationship": relationship
+        ]
     }
 }

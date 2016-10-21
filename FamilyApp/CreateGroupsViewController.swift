@@ -14,7 +14,7 @@ class CreateGroupsViewController: InputViewController {
     @IBOutlet weak var statusLabel: UILabel!
     
     @IBAction func onCreateGroupButton(_ sender: AnyObject) {
-        let userId = Database.db.user.uid
+        let userId = Database.user.uid
         let groupName = groupNameTextField.text!
         if (!groupName.isEmpty) {
             Database.db.createGroup(groupName: groupNameTextField.text!, userId: userId)

@@ -64,4 +64,36 @@ class User {
             "birthday": birthday
         ]
     }
+    
+    func addContact(user: User, relationship: String) {
+        let newContactRef = Database.contactsRef.child(self.uid).child(user.uid)
+        let selfContactRef = Database.contactsRef.child(user.uid).child(self.uid)
+        
+        let contactName = user.firstName + " " + user.lastName
+        let selfName = self.firstName + " " + self.lastName
+        
+        var revRelationship: String?
+        
+        if relationship == "Mother" || relationship == "Father" {
+            revRelationship = "Child"
+        }
+        else if relationship == "Grandmother" || relationship == "Grandfather" {
+            revRelationship = "Grandchild"
+        }
+        else if relationship == "Aunt" || relationship == "Uncle" {
+            revRelationship = "Nephew or Niece"
+        }
+        else if relationship == "Nephew" || relationship == "Niece" {
+            revRelationship = "Uncle or Aunt"
+        }
+        else {
+            revRelationship = relationship
+        }
+        
+        let newContact = Contact(name: contactName, relationship: relationship, uid: user.uid)
+        let selfContact = Contact(name: selfName, relationship: revRelationship!, uid: self.uid)
+        
+        newContactRef.setValue(newContact.toAnyObject())
+        selfContactRef.setValue(selfContact.toAnyObject())
+    }
 }

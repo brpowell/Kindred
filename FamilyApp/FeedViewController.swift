@@ -28,7 +28,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("THE DISPLAY NAME: " + (FIRAuth.auth()?.currentUser?.displayName)!)
+
         LoginViewController.listener = true
         self.slideMenuController()?.delegate = self
         

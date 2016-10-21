@@ -54,7 +54,6 @@ class LeftViewController: UIViewController {
         //TODO, also create new func
         let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "Profile")
         self.profileViewController = UINavigationController(rootViewController: profileViewController!)
-        Database.db
         
         
         self.slideMenuController()?.changeMainViewController(self.feedViewController, close: true)

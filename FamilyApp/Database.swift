@@ -12,8 +12,11 @@ import Firebase
 class Database {
     
     static let db = Database()
-    var user: User!
+    static var user: User!
     var ref: FIRDatabaseReference!
+    
+    static let contactsRef = FIRDatabase.database().reference(withPath: "contacts")
+    static let usersRef = FIRDatabase.database().reference(withPath: "users")
     
     private init() {
         findCurrentUser()
@@ -26,8 +29,8 @@ class Database {
             
             ref = FIRDatabase.database().reference(withPath: "users").child(uid)
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                self.user = User(snapshot: snapshot)
-                self.user.setPhotoUrl(photoUrl: photoUrl)
+                Database.user = User(snapshot: snapshot)
+                Database.user.setPhotoUrl(photoUrl: photoUrl)
             })
         }
     }
@@ -57,12 +60,12 @@ class Database {
     
     func addContact(userId: String) {
         ref = FIRDatabase.database().reference(withPath: "contacts")
-        let currentUserId = user.uid
+        let currentUserId = Database.user.uid
         ref.child("\(currentUserId)/\(userId)").setValue(true)
     }
     
     func getContacts() {
-        ref = FIRDatabase.database().reference(withPath: "contacts").child(user.uid)
+        ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for person in snapshot.children {
                 let snap = person as! FIRDataSnapshot

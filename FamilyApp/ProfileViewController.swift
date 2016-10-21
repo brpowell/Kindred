@@ -20,9 +20,9 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        name.text = Database.db.user.firstName + " " + Database.db.user.lastName
-        birthday.text = Database.db.user.birthday
-        email.text = Database.db.user.email
+        name.text = Database.user.firstName + " " + Database.user.lastName
+        birthday.text = Database.user.birthday
+        email.text = Database.user.email
         
         if let image = User.activeUserImage {
             picture.makeProfileFormat()

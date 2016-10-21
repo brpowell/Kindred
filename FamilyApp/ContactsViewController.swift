@@ -7,15 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class ContactsViewController: FamilyController, UITableViewDataSource, UITableViewDelegate {
 
 //    @IBOutlet weak var contactsBarButton: UITabBarItem!
 //    @IBOutlet weak var tabBar: UITabBar!
-    
-    let apurva = Contact(firstName:"Apurva", lastName:"Gorti", birthday: "Oct 10, 1996")
-    let uyviet = Contact(firstName:"Uyviet", lastName:"Nguyen", birthday: "Aug 11, 2013")
-    let bryan = Contact(firstName:"Bryan", lastName:"Powell", birthday: "Jan 1, 1960")
     
     var contacts = [Contact]()
     
@@ -26,13 +23,20 @@ class ContactsViewController: FamilyController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        apurva.relationship = "Sister"
-        uyviet.relationship = "Brother"
-        bryan.relationship = "First Cousin"
+        let userContactsRef = Database.contactsRef.child((FIRAuth.auth()?.currentUser?.uid)!)
         
-        contacts.append(apurva)
-        contacts.append(uyviet)
-        contacts.append(bryan)
+        userContactsRef.observe(.value, with: { snapshot in
+            var newContacts: [Contact] = []
+            
+            for contact in snapshot.children {
+                let contact = Contact(snapshot: contact as! FIRDataSnapshot)
+                newContacts.append(contact)
+            }
+            
+            self.contacts = newContacts
+            self.tableView.reloadData()
+        })
+        
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -45,27 +49,32 @@ class ContactsViewController: FamilyController, UITableViewDataSource, UITableVi
         return contacts.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath as IndexPath)
-        
-        let row = indexPath.row
-        cell.textLabel?.text = contacts[row].firstName
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
-        let row = indexPath.row
-        print(contacts[row])
+        let contact = contacts[indexPath.row]
+        Database.usersRef.child(contact.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let u = User(snapshot: snapshot)
+            let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + u.uid)
+            
+            profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
+                if error != nil {
+                    print(error)
+                }
+                else {
+                    u.photo = UIImage(data: data!)
+                    OtherProfileViewController.user = u
+                    self.performSegue(withIdentifier: "profileSegue", sender: self)
+                }
+            }
+        })
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath as IndexPath)
         
         let row = indexPath.row
-        cell.textLabel?.text = contacts[row].firstName
+        cell.textLabel?.text = contacts[row].name
         cell.detailTextLabel?.text = contacts[row].relationship
         
         return cell

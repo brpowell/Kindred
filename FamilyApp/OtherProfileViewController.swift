@@ -8,12 +8,13 @@
 
 import UIKit
 
-class OtherProfileViewController: UIViewController {
+class OtherProfileViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
     static var user: User?
     
@@ -47,8 +48,17 @@ class OtherProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-//    @IBAction func onMenuButton(_ sender: AnyObject) {
-//        self.slideMenuController()?.openLeft()
-//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let popoverViewController = segue.destination as! RelationPopoverViewController
+        let controller = popoverViewController.popoverPresentationController
+        
+        controller!.delegate = self
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle
+    {
+        return .none
+    }
+    
 }

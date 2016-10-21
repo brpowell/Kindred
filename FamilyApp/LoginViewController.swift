@@ -45,11 +45,18 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable {
                     }
                     else {
                         User.activeUserImage = UIImage(data: data!)
-                        self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
+                        Database.usersRef.child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                            Database.user = User(snapshot: snapshot)
+                            self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
+                        })
+                        
                     }
                 }
             }
-            self.stopAnimating()
+            else {
+                self.stopAnimating()
+            }
+            
         }
     }
 
