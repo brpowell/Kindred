@@ -11,17 +11,25 @@ import Firebase
 import FirebaseDatabase
 import NVActivityIndicatorView
 
-class RegisterViewController: InputViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NVActivityIndicatorViewable {
+class RegisterViewController: InputViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NVActivityIndicatorViewable, UIPickerViewDataSource, UIPickerViewDelegate{
+    @available(iOS 2.0, *)
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
 
     @IBOutlet weak var firstTextField: UITextField!
     @IBOutlet weak var lastTextField: UITextField!
     @IBOutlet weak var birthdayTextField: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var genderTextField: UITextField!
     
     var email = String()
     var password = String()
     let ref = FIRDatabase.database().reference(withPath: "users")
     let imagePicker = UIImagePickerController()
+    
+    let genders = ["Female", "Male", "Other"]
     
     static var listener:Bool = true
     
@@ -36,6 +44,9 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
         LoginViewController.listener = true
         imagePicker.delegate = self
         profileImage.makeProfileFormat()
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        genderTextField.inputView = pickerView
 
 //        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
 //        profileImage.clipsToBounds = true
@@ -71,6 +82,18 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
 //            }
 //        }
     }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return genders.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return genders[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        genderTextField.text = genders[row]
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -93,7 +116,7 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func onRegisterDone(_ sender: AnyObject) {
-        if firstTextField.text != "" && lastTextField.text != "" && birthdayTextField.text != "" {
+        if firstTextField.text != "" && lastTextField.text != "" && birthdayTextField.text != "" && genderTextField.text != ""{
             self.startAnimating()
             FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                 if error != nil {
@@ -111,7 +134,8 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
                     else {
                         let first = self.firstTextField.text!
                         let last = self.lastTextField.text!
-                        let u = User(authData: user!, firstName: first, lastName: last, birthday: self.birthdayTextField.text!)
+                        let gen = self.genderTextField.text!
+                        let u = User(authData: user!, firstName: first, lastName: last, birthday: self.birthdayTextField.text!, gender: gen)
                         
                         let userRef = self.ref.child(u.uid)
                         userRef.setValue(u.toAnyObject())
@@ -159,6 +183,9 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
         dismiss(animated: true, completion: nil)
     }
 }
+
+
+
 
 extension UIImage {
     enum JPEGQuality: CGFloat {

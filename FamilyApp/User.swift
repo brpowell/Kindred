@@ -18,16 +18,18 @@ class User {
     var birthday: String
     var photoUrl: URL?
     var photo: UIImage?
+    var gender: String
     
     static var activeUserImage: UIImage?
     
-    init(authData: FIRUser, firstName: String, lastName: String, birthday: String) {
+    init(authData: FIRUser, firstName: String, lastName: String, birthday: String, gender: String) {
         self.uid = authData.uid
         self.email = authData.email!
         self.firstName = firstName
         self.lastName = lastName
         self.birthday = birthday
         self.photoUrl = nil
+        self.gender = gender
     }
     
     init(snapshot: FIRDataSnapshot) {
@@ -38,6 +40,7 @@ class User {
         self.email = (snapshotValue["email"] as? String)!
         self.uid = snapshot.key
         self.photoUrl = nil
+        self.gender = (snapshotValue["gender"] as? String)!
     }
     
     init(snapshot: [String: NSDictionary]) {
@@ -50,6 +53,7 @@ class User {
         self.email = userDict.value(forKey: "email") as! String
         self.uid = key
         self.photoUrl = nil
+        self.gender = userDict.value(forKey: "gender") as! String
     }
     
     func setPhotoUrl(photoUrl: URL) {
@@ -61,7 +65,8 @@ class User {
             "email": email,
             "firstName": firstName,
             "lastName": lastName,
-            "birthday": birthday
+            "birthday": birthday,
+            "gender": gender
         ]
     }
     
