@@ -53,7 +53,13 @@ class User {
         self.email = userDict.value(forKey: "email") as! String
         self.uid = key
         self.photoUrl = nil
-        self.gender = userDict.value(forKey: "gender") as! String
+        if (userDict.value(forKey: "gender") == nil) {
+            self.gender = "Other"
+        }
+        else {
+            self.gender = userDict.value(forKey: "gender") as! String
+        }
+        
     }
     
     func setPhotoUrl(photoUrl: URL) {
@@ -80,16 +86,59 @@ class User {
         var revRelationship: String?
         
         if relationship == "Mother" || relationship == "Father" {
-            revRelationship = "Child"
+            if (gender == "Female") {
+                revRelationship = "Daughter"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Son"
+            }
+            else {
+                revRelationship = "Child"
+            }
         }
         else if relationship == "Grandmother" || relationship == "Grandfather" {
-            revRelationship = "Grandchild"
+            if (gender == "Female") {
+                revRelationship = "Grandaughter"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Grandson"
+            }
+            else {
+                revRelationship = "Grandchild"
+            }
         }
         else if relationship == "Aunt" || relationship == "Uncle" {
-            revRelationship = "Nephew or Niece"
+            if (gender == "Female") {
+                revRelationship = "Neice"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Nephew"
+            }
+            else {
+                revRelationship = "Neice or Nephew"
+            }
         }
         else if relationship == "Nephew" || relationship == "Niece" {
-            revRelationship = "Uncle or Aunt"
+            if (gender == "Female") {
+                revRelationship = "Aunt"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Uncle"
+            }
+            else {
+                revRelationship = "Aunt or Uncle"
+            }
+        }
+        else if relationship == "Sister" || relationship == "Brother"{
+            if (gender == "Female") {
+                revRelationship = "Sister"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Brother"
+            }
+            else {
+                revRelationship = "Sibling"
+            }
         }
         else {
             revRelationship = relationship
