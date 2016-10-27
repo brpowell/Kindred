@@ -175,10 +175,9 @@
 		93F22B0D1DB1835600911478 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				935CCC531DADA20C00848D7E /* GroupsViewController.swift */,
-				93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */,
 				93177DC31DAB10580072B80E /* ContainerViewController.swift */,
 				933ACD8A1DAEDA2D00F616B5 /* PostViewController.swift */,
+				93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */,
 				93177DC11DAB0D080072B80E /* LeftViewController.swift */,
 				9328F3671DA9CE5300F16E36 /* LoginViewController.swift */,
 				93177DBF1DAB0B450072B80E /* SlideMenuController.swift */,
@@ -187,6 +186,7 @@
 				93B592421DAABB23000635C6 /* InputViewController.swift */,
 				93C3D2801DB4421D002900DA /* TreeViewController.swift */,
 				93C3D2821DB44230002900DA /* SuggestionsViewController.swift */,
+				935CCC531DADA20C00848D7E /* GroupsViewController.swift */,
 				216692821DB9462400D357F7 /* CreateGroupsViewController.swift */,
 				2187E5E21DB5856F009C6266 /* ProfileViewController.swift */,
 				932A98BF1DB954900020E1F1 /* OtherProfileViewController.swift */,
