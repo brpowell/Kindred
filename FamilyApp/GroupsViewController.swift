@@ -47,23 +47,6 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-        
-        let contact = groups[indexPath.row]
-        Database.usersRef.child(contact.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            let u = User(snapshot: snapshot)
-            let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + u.uid)
-            
-            profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
-                if error != nil {
-                    print(error)
-                }
-                else {
-                    u.photo = UIImage(data: data!)
-                    OtherProfileViewController.user = u
-                    self.performSegue(withIdentifier: "profileSegue", sender: self)
-                }
-            }
-        })
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
