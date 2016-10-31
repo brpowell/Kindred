@@ -53,11 +53,16 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-        let group = groups[indexPath.row]
-        print(group.name)
-        print(group.groupId)
-        
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == "chatSegue",
+            let destination = segue.destination as? ChatViewController,
+            let index = tableView.indexPathForSelectedRow?.row
+        {
+            let group = groups[index]
+            destination.group = group
+        }
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
