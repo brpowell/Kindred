@@ -84,17 +84,25 @@ class FeedCell: UICollectionViewCell {
         return textView
     }()
     
+    let postImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     func setupViews() {
         backgroundColor = UIColor.white
         
         addSubview(nameLabel)
         addSubview(profileImageView)
         addSubview(bodyTextView)
+        addSubview(postImageView)
         
         addConstraintsWithFormat(format: "H:|-8-[v0(44)]-8-[v1]|", views: profileImageView, nameLabel)
         addConstraintsWithFormat(format: "V:|-8-[v0]", views: nameLabel)
-        addConstraintsWithFormat(format: "V:|-8-[v0(44)]-4-[v1]|", views: profileImageView, bodyTextView)
+        addConstraintsWithFormat(format: "V:|-8-[v0(44)]-4-[v1]-4-[v2]|", views: profileImageView, bodyTextView, postImageView)
         addConstraintsWithFormat(format: "H:|-4-[v0]-4-|", views: bodyTextView)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: postImageView)
     }
 }
 

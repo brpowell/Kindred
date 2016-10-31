@@ -54,8 +54,6 @@ import UIKit
     
     func textViewDidChange(_ textView: UITextView) {
         
-        
-        
         if textView.text.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines).isEmpty {
             labelPlaceholder?.isHidden = false
             if let b = buttonToControl {

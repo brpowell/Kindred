@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class PostViewController: InputViewController, UITextViewDelegate, UINavigationControllerDelegate {
+class PostViewController: InputViewController, UITextViewDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIPickerViewDelegate {
 
     @IBOutlet weak var postView: PlaceholderUITextView!
     @IBOutlet weak var postButton: UIBarButtonItem!
@@ -17,6 +17,7 @@ class PostViewController: InputViewController, UITextViewDelegate, UINavigationC
     @IBOutlet weak var bottom: NSLayoutConstraint!
     
     var keyboardHeight: CGFloat = 0.0
+    let imagePicker = UIImagePickerController()
     
     let postsRef = FIRDatabase.database().reference(withPath:
     "posts")
@@ -39,7 +40,7 @@ class PostViewController: InputViewController, UITextViewDelegate, UINavigationC
             if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 // bottomHeight matches keyboard height
 //                bottomHeight?.constant = keyboardSize.height
-                bottom?.constant = keyboardSize.height + 10
+                bottom?.constant = keyboardSize.height
                 keyboardHeight = keyboardSize.height
                 view.setNeedsLayout()
             }
@@ -57,6 +58,7 @@ class PostViewController: InputViewController, UITextViewDelegate, UINavigationC
         self.automaticallyAdjustsScrollViewInsets = false
         postButton.isEnabled = false
         postView.buttonToControl = postButton
+        imagePicker.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,7 +77,7 @@ class PostViewController: InputViewController, UITextViewDelegate, UINavigationC
             }
             alertController.addAction(cancelAction)
             
-            let destroyAction = UIAlertAction(title: "Destroy", style: .destructive) { (action) in
+            let destroyAction = UIAlertAction(title: "Discard", style: .destructive) { (action) in
                 self.performSegue(withIdentifier: "unwindToFeed", sender: self)
             }
             alertController.addAction(destroyAction)
@@ -109,4 +111,28 @@ class PostViewController: InputViewController, UITextViewDelegate, UINavigationC
         }
     }
 
+    @IBAction func onAddPhoto(_ sender: AnyObject) {
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func onTakePhoto(_ sender: AnyObject) {
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .camera
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            //            profileImage.contentMode = .scaleAspectFit
+//            profileImage.image = pickedImage
+            print("Image Set")
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
