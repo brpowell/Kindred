@@ -39,8 +39,8 @@ class LeftViewController: UIViewController {
         profileImage.addGestureRecognizer(tapGestureRecognizer)
         
         // Initialize Feed Controller
-        let feedViewController = self.storyboard?.instantiateViewController(withIdentifier: "Feed")
-        self.feedViewController = UINavigationController(rootViewController: feedViewController!)
+        self.feedViewController = self.storyboard?.instantiateViewController(withIdentifier: "Feed")
+//        self.feedViewController = UINavigationController(rootViewController: feedViewController!)
         
         // Initialize Family Controller
         // Each tabbed view has navigation controller embeded, as shown on storyboard

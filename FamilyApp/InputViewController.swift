@@ -10,6 +10,8 @@ import UIKit
 
 class InputViewController: UIViewController {
 
+//    var bottomHeight: NSLayoutConstraint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,6 +25,7 @@ class InputViewController: UIViewController {
     // Hide keyboard code
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+
         return true
     }
     

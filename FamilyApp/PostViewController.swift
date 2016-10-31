@@ -9,17 +9,54 @@
 import UIKit
 import Firebase
 
-class PostViewController: UIViewController {
+class PostViewController: InputViewController, UITextViewDelegate, UINavigationControllerDelegate {
+
+    @IBOutlet weak var postView: PlaceholderUITextView!
+    @IBOutlet weak var postButton: UIBarButtonItem!
+    @IBOutlet weak var bottomHeight: NSLayoutConstraint!
+    @IBOutlet weak var bottom: NSLayoutConstraint!
     
-    @IBOutlet weak var postTextView: UITextView!
+    var keyboardHeight: CGFloat = 0.0
     
     let postsRef = FIRDatabase.database().reference(withPath:
     "posts")
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // Bottom height constraint value is based on whether keyboard is showing
+    func keyboardWillShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                // bottomHeight matches keyboard height
+//                bottomHeight?.constant = keyboardSize.height
+                bottom?.constant = keyboardSize.height + 10
+                keyboardHeight = keyboardSize.height
+                view.setNeedsLayout()
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification){
+        // No keyboard, so bottomHeight back to 0
+        bottom?.constant = (bottom?.constant)! - keyboardHeight
+        view.setNeedsLayout()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.automaticallyAdjustsScrollViewInsets = false
+        postButton.isEnabled = false
+        postView.buttonToControl = postButton
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,8 +64,36 @@ class PostViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    @IBAction func onCancelButton(_ sender: AnyObject) {
+        if postView.labelPlaceholder.isHidden {
+            let message = "Are you sure you want to discard this post?"
+            let alertController = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+
+            }
+            alertController.addAction(cancelAction)
+            
+            let destroyAction = UIAlertAction(title: "Destroy", style: .destructive) { (action) in
+                self.performSegue(withIdentifier: "unwindToFeed", sender: self)
+            }
+            alertController.addAction(destroyAction)
+            
+            self.present(alertController, animated: true)
+        }
+        else {
+            self.performSegue(withIdentifier: "unwindToFeed", sender: self)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        postView.textView.setContentOffset(CGPoint.zero, animated: false)
+    }
+    
     @IBAction func onPostButton(_ sender: AnyObject) {
-        if let postBody = postTextView.text {
+        if let postBody = postView.textView.text {
             let time = FIRServerValue.timestamp()
             let user = FIRAuth.auth()?.currentUser
             let key = postsRef.childByAutoId().key

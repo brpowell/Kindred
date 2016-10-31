@@ -116,6 +116,8 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         return CGSize(width: view.frame.width, height: 200)
     }
     
+    @IBAction func unwindToFeed(segue: UIStoryboardSegue) {}
+    
     // Trigger left drawer on menu button
     @IBAction func onMenuButton(_ sender: AnyObject) {
         self.slideMenuController()?.openLeft()
@@ -125,6 +127,5 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     @IBAction func onComposeButton(_ sender: AnyObject) {
         self.performSegue(withIdentifier: "postSegue", sender: sender)
     }
-    
-    @IBAction func unwindToFeed(segue: UIStoryboardSegue) {}
+
 }
