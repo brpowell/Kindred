@@ -19,10 +19,10 @@ class Database {
     static let usersRef = FIRDatabase.database().reference(withPath: "users")
     
     private init() {
-        findCurrentUser()
+        getCurrentUser()
     }
     
-    func findCurrentUser() {
+    func getCurrentUser() {
         if let currentUser = FIRAuth.auth()?.currentUser {
             let uid = currentUser.uid
             let photoUrl = currentUser.photoURL!
@@ -35,7 +35,7 @@ class Database {
         }
     }
     
-    func findMember(uid: String) {
+    func getUser(uid: String) {
         var findUser: User?
         ref = FIRDatabase.database().reference(withPath: "users").child(uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
