@@ -13,6 +13,7 @@ class FeedCell: UICollectionViewCell {
     
     static var postImageCache = NSCache<NSString, UIImage>()
     
+    
     var post: Post? {
         didSet {
             if ((post?.name) != nil) {
@@ -30,12 +31,35 @@ class FeedCell: UICollectionViewCell {
                 profileImageView.image = UIImage(named: "profile")
             }
             
+            let uid = (post?.uid)!
+            
+            // Load the profile image
+            if let image = Database.profileImageCache.object(forKey: NSString(string: uid)) {
+                profileImageView.image = image
+            }
+            else {
+                let profileImageRef = Database.profileImagesRef.child(uid)
+                profileImageRef.data(withMaxSize: 1024*1024) { data, error in
+                    if error != nil {
+                        print(error)
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            let image = UIImage(data: data!)
+                            let key: NSString = NSString(string: uid)
+                            Database.profileImageCache.setObject(image!, forKey: key)
+                            self.profileImageView.image = image
+                        }
+                    }
+                }
+            }
+            
+            // Load post image if one exists
             if (post?.hasImage)! {
                 if let image = FeedCell.postImageCache.object(forKey: NSString(string: (self.post?.key)!)) {
                     postImageView.image = image
                 }
                 else {
-                    print("\n\nSETTINGS IMAGE\n\n")
                     let postImageRef = Database.postImagesRef.child((post?.key)!)
                     postImageRef.data(withMaxSize: 1024*1024) { data, error in
                         if error != nil {
@@ -52,6 +76,7 @@ class FeedCell: UICollectionViewCell {
                     }
                 }
             }
+            
             setupViews()
         }
     }
@@ -131,8 +156,9 @@ class FeedCell: UICollectionViewCell {
         addSubview(postImageView)
         
         addConstraintsWithFormat(format: "H:|-8-[v0(44)]-8-[v1]|", views: profileImageView, nameLabel)
-        addConstraintsWithFormat(format: "V:|-8-[v0]", views: nameLabel)
         addConstraintsWithFormat(format: "H:|-4-[v0]-4-|", views: bodyTextView)
+        addConstraintsWithFormat(format: "V:|-8-[v0]", views: nameLabel)
+        
         if (post?.hasImage)! {
             addConstraintsWithFormat(format: "V:|-8-[v0(44)]-4-[v1]-4-[v2(200)]|", views: profileImageView, bodyTextView, postImageView)
             addConstraintsWithFormat(format: "H:|[v0]|", views: postImageView)

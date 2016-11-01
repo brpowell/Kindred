@@ -21,7 +21,9 @@ class Database {
     static let contactsRef = FIRDatabase.database().reference(withPath: "contacts")
     static let usersRef = FIRDatabase.database().reference(withPath: "users")
     static let postImagesRef = FIRStorage.storage().reference(withPath: "postImages")
+    static let profileImagesRef = FIRStorage.storage().reference(withPath: "profileImages")
     
+    static var profileImageCache = NSCache<NSString, UIImage>()
     
     private init() {
         findCurrentUser()
