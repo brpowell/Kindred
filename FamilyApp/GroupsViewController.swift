@@ -30,9 +30,11 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 
                 let groupRef = FIRDatabase.database().reference(withPath: "groups").child("\(groupId)")
                 groupRef.observe(.value, with: { snapshot in
-                    let g = Group(snapshot: snapshot)
-                    self.groups.append(g)
-                    self.tableView.reloadData()
+                    if (snapshot.exists()) {
+                        let g = Group(snapshot: snapshot)
+                        self.groups.append(g)
+                        self.tableView.reloadData()
+                    }
                 })
             }
             
