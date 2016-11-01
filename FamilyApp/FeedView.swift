@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
 class FeedCell: UICollectionViewCell {
+    
+    static var postImageCache = NSCache<NSString, UIImage>()
     
     var post: Post? {
         didSet {
@@ -27,13 +30,35 @@ class FeedCell: UICollectionViewCell {
                 profileImageView.image = UIImage(named: "profile")
             }
             
+            if (post?.hasImage)! {
+                if let image = FeedCell.postImageCache.object(forKey: NSString(string: (self.post?.key)!)) {
+                    postImageView.image = image
+                }
+                else {
+                    print("\n\nSETTINGS IMAGE\n\n")
+                    let postImageRef = Database.postImagesRef.child((post?.key)!)
+                    postImageRef.data(withMaxSize: 1024*1024) { data, error in
+                        if error != nil {
+                            print(error)
+                        }
+                        else {
+                            DispatchQueue.main.async {
+                                let image = UIImage(data: data!)
+                                let key: NSString = NSString(string: (self.post?.key)!)
+                                FeedCell.postImageCache.setObject(image!, forKey: key)
+                                self.postImageView.image = image
+                            }
+                        }
+                    }
+                }
+            }
             setupViews()
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+//        setupViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -84,6 +109,7 @@ class FeedCell: UICollectionViewCell {
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.isScrollEnabled = false
         textView.isEditable = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
     
@@ -91,6 +117,8 @@ class FeedCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         return imageView
     }()
     

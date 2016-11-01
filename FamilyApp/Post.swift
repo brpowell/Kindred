@@ -18,6 +18,7 @@ class Post {
     var uid: String?
     var profile: UIImage?
     var hasImage: Bool?
+    var image: UIImage?
     
     init(snapshot: FIRDataSnapshot) {
         self.key = snapshot.key

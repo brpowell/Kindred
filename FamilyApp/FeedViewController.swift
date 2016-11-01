@@ -100,7 +100,16 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     // Create cell for post
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let feedCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FeedCell
+        
+        // Clean cell content
+        feedCell.bodyTextView.text = nil
+        feedCell.postImageView.image = nil
+        feedCell.nameLabel.text = nil
+        feedCell.profileImageView.image = nil
+        
+        // Load cell content
         feedCell.post = posts[indexPath.item]
+        
         return feedCell
     }
     
@@ -111,7 +120,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             
             // 8: profileImage, 44: bodyText
             // Add 200 if post has an image
-            var knownHeight: CGFloat = 8 + 4 + 44
+            var knownHeight: CGFloat = 8 + 44 + 4
             if posts[indexPath.item].hasImage! {
                 knownHeight += 4 + 200
             }
