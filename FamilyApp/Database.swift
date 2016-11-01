@@ -26,10 +26,10 @@ class Database {
     static var profileImageCache = NSCache<NSString, UIImage>()
     
     private init() {
-        findCurrentUser()
+        getCurrentUser()
     }
     
-    func findCurrentUser() {
+    func getCurrentUser() {
         if let currentUser = FIRAuth.auth()?.currentUser {
             let uid = currentUser.uid
             let photoUrl = currentUser.photoURL!
@@ -42,36 +42,13 @@ class Database {
         }
     }
     
-    func findMember(uid: String) {
+    func getUser(uid: String) {
         var findUser: User?
         ref = FIRDatabase.database().reference(withPath: "users").child(uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             findUser = User(snapshot: snapshot)
             print(findUser?.firstName)
         })
-    }
-    
-    func createGroup(groupName: String, userId: String) {
-        ref = FIRDatabase.database().reference(withPath: "groups")
-        let key = ref.childByAutoId().key
-        ref.child("\(key)").setValue(["name": groupName])
-        
-        //Add current user to the group he/she just created
-        addMemberToGroup(groupId: key, userId: userId)
-    }
-    
-    func addMemberToGroup(groupId: String, userId: String) {
-        ref = FIRDatabase.database().reference(withPath: "groups")
-        ref.child("\(groupId)/\("members")/\(userId)").setValue(true)
-        
-        ref = FIRDatabase.database().reference(withPath: "users")
-        ref.child("\(userId)/\("groups")/\(groupId)").setValue(true)
-    }
-    
-    func addContact(userId: String) {
-        ref = FIRDatabase.database().reference(withPath: "contacts")
-        let currentUserId = Database.user.uid
-        ref.child("\(currentUserId)/\(userId)").setValue(true)
     }
     
     func getContacts() {
@@ -95,6 +72,30 @@ class Database {
             }
         })
     }
+    
+    func addMemberToGroup(groupId: String, userId: String) {
+        ref = FIRDatabase.database().reference(withPath: "groups")
+        ref.child("\(groupId)/\("members")/\(userId)").setValue(true)
+        
+        ref = FIRDatabase.database().reference(withPath: "users")
+        ref.child("\(userId)/\("groups")/\(groupId)").setValue(true)
+    }
+    
+    func addContact(userId: String) {
+        ref = FIRDatabase.database().reference(withPath: "contacts")
+        let currentUserId = Database.user.uid
+        ref.child("\(currentUserId)/\(userId)").setValue(true)
+    }
+    
+    func createGroup(groupName: String, userId: String) {
+        ref = FIRDatabase.database().reference(withPath: "groups")
+        let key = ref.childByAutoId().key
+        ref.child("\(key)").setValue(["name": groupName])
+        
+        //Add current user to the group he/she just created
+        addMemberToGroup(groupId: key, userId: userId)
+    }
+    
 
 }
 

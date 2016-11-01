@@ -11,6 +11,8 @@
 		216692831DB9462400D357F7 /* CreateGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216692821DB9462400D357F7 /* CreateGroupsViewController.swift */; };
 		2187E5E31DB5856F009C6266 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2187E5E21DB5856F009C6266 /* ProfileViewController.swift */; };
 		2187E5E51DB5867B009C6266 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2187E5E41DB5867B009C6266 /* Database.swift */; };
+		218F57D41DC7E43300F6800B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218F57D31DC7E43300F6800B /* ChatViewController.swift */; };
+		2193E6861DC28EF40009F6BD /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2193E6851DC28EF40009F6BD /* Group.swift */; };
 		93177DC01DAB0B450072B80E /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93177DBF1DAB0B450072B80E /* SlideMenuController.swift */; };
 		93177DC21DAB0D080072B80E /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93177DC11DAB0D080072B80E /* LeftViewController.swift */; };
 		93177DC41DAB10580072B80E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93177DC31DAB10580072B80E /* ContainerViewController.swift */; };
@@ -49,6 +51,8 @@
 		216692821DB9462400D357F7 /* CreateGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupsViewController.swift; sourceTree = "<group>"; };
 		2187E5E21DB5856F009C6266 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		2187E5E41DB5867B009C6266 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		218F57D31DC7E43300F6800B /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		2193E6851DC28EF40009F6BD /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		44D70E7EE6B2815014FD0622 /* Pods-FamilyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FamilyApp/Pods-FamilyApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8EC68DBDC7EA55CE69DAF06B /* Pods-FamilyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FamilyApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-FamilyApp/Pods-FamilyApp.release.xcconfig"; sourceTree = "<group>"; };
 		93177DBF1DAB0B450072B80E /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
@@ -156,10 +160,11 @@
 		93F22B0B1DB1834600911478 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				93F22B0E1DB184C100911478 /* Post.swift */,
-				93B592451DAAC5C7000635C6 /* User.swift */,
 				CAA355D81DB72477003EA66F /* Contact.swift */,
+				2193E6851DC28EF40009F6BD /* Group.swift */,
+				93F22B0E1DB184C100911478 /* Post.swift */,
 				CAA355DC1DB87B4C003EA66F /* Suggestion.swift */,
+				93B592451DAAC5C7000635C6 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -180,7 +185,9 @@
 		93F22B0D1DB1835600911478 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				216692821DB9462400D357F7 /* CreateGroupsViewController.swift */,
 				935CCC531DADA20C00848D7E /* GroupsViewController.swift */,
+				218F57D31DC7E43300F6800B /* ChatViewController.swift */,
 				93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */,
 				93177DC31DAB10580072B80E /* ContainerViewController.swift */,
 				933ACD8A1DAEDA2D00F616B5 /* PostViewController.swift */,
@@ -192,7 +199,6 @@
 				93B592421DAABB23000635C6 /* InputViewController.swift */,
 				93C3D2801DB4421D002900DA /* TreeViewController.swift */,
 				93C3D2821DB44230002900DA /* SuggestionsViewController.swift */,
-				216692821DB9462400D357F7 /* CreateGroupsViewController.swift */,
 				2187E5E21DB5856F009C6266 /* ProfileViewController.swift */,
 				932A98BF1DB954900020E1F1 /* OtherProfileViewController.swift */,
 				93CBEB4F1DB9A08200743E37 /* RelationPopoverViewController.swift */,
@@ -319,7 +325,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F16F1426BF55373696093779 /* [CP] Copy Pods Resources */ = {
@@ -347,6 +353,7 @@
 				93B5923D1DAAB4FF000635C6 /* FeedViewController.swift in Sources */,
 				9328F3681DA9CE5300F16E36 /* LoginViewController.swift in Sources */,
 				93595C241DB48553003BB505 /* LeftDrawerView.swift in Sources */,
+				2193E6861DC28EF40009F6BD /* Group.swift in Sources */,
 				93177DC41DAB10580072B80E /* ContainerViewController.swift in Sources */,
 				CA6C49BF1DBC1FF700E6EE40 /* AppDelegate.swift in Sources */,
 				933ACD8B1DAEDA2D00F616B5 /* PostViewController.swift in Sources */,
@@ -361,6 +368,7 @@
 				CAA355D91DB72477003EA66F /* Contact.swift in Sources */,
 				93C3D2811DB4421D002900DA /* TreeViewController.swift in Sources */,
 				93C3D2831DB44230002900DA /* SuggestionsViewController.swift in Sources */,
+				218F57D41DC7E43300F6800B /* ChatViewController.swift in Sources */,
 				938903011DC6DEF3000BD9CC /* PlaceholderUITextView.swift in Sources */,
 				93B5923B1DAA2F5D000635C6 /* RegisterViewController.swift in Sources */,
 				93177DC21DAB0D080072B80E /* LeftViewController.swift in Sources */,

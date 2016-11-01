@@ -11,5 +11,7 @@ target 'FamilyApp' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'NVActivityIndicatorView'
+  pod 'JSQMessagesViewController'
+
 
 end
