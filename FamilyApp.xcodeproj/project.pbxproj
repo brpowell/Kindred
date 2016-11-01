@@ -185,8 +185,9 @@
 		93F22B0D1DB1835600911478 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				218F57D31DC7E43300F6800B /* ChatViewController.swift */,
+				216692821DB9462400D357F7 /* CreateGroupsViewController.swift */,
 				935CCC531DADA20C00848D7E /* GroupsViewController.swift */,
+				218F57D31DC7E43300F6800B /* ChatViewController.swift */,
 				93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */,
 				93177DC31DAB10580072B80E /* ContainerViewController.swift */,
 				933ACD8A1DAEDA2D00F616B5 /* PostViewController.swift */,
@@ -198,7 +199,6 @@
 				93B592421DAABB23000635C6 /* InputViewController.swift */,
 				93C3D2801DB4421D002900DA /* TreeViewController.swift */,
 				93C3D2821DB44230002900DA /* SuggestionsViewController.swift */,
-				216692821DB9462400D357F7 /* CreateGroupsViewController.swift */,
 				2187E5E21DB5856F009C6266 /* ProfileViewController.swift */,
 				932A98BF1DB954900020E1F1 /* OtherProfileViewController.swift */,
 				93CBEB4F1DB9A08200743E37 /* RelationPopoverViewController.swift */,

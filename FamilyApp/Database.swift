@@ -44,29 +44,6 @@ class Database {
         })
     }
     
-    func createGroup(groupName: String, userId: String) {
-        ref = FIRDatabase.database().reference(withPath: "groups")
-        let key = ref.childByAutoId().key
-        ref.child("\(key)").setValue(["name": groupName])
-        
-        //Add current user to the group he/she just created
-        addMemberToGroup(groupId: key, userId: userId)
-    }
-    
-    func addMemberToGroup(groupId: String, userId: String) {
-        ref = FIRDatabase.database().reference(withPath: "groups")
-        ref.child("\(groupId)/\("members")/\(userId)").setValue(true)
-        
-        ref = FIRDatabase.database().reference(withPath: "users")
-        ref.child("\(userId)/\("groups")/\(groupId)").setValue(true)
-    }
-    
-    func addContact(userId: String) {
-        ref = FIRDatabase.database().reference(withPath: "contacts")
-        let currentUserId = Database.user.uid
-        ref.child("\(currentUserId)/\(userId)").setValue(true)
-    }
-    
     func getContacts() {
         ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -88,6 +65,30 @@ class Database {
             }
         })
     }
+    
+    func addMemberToGroup(groupId: String, userId: String) {
+        ref = FIRDatabase.database().reference(withPath: "groups")
+        ref.child("\(groupId)/\("members")/\(userId)").setValue(true)
+        
+        ref = FIRDatabase.database().reference(withPath: "users")
+        ref.child("\(userId)/\("groups")/\(groupId)").setValue(true)
+    }
+    
+    func addContact(userId: String) {
+        ref = FIRDatabase.database().reference(withPath: "contacts")
+        let currentUserId = Database.user.uid
+        ref.child("\(currentUserId)/\(userId)").setValue(true)
+    }
+    
+    func createGroup(groupName: String, userId: String) {
+        ref = FIRDatabase.database().reference(withPath: "groups")
+        let key = ref.childByAutoId().key
+        ref.child("\(key)").setValue(["name": groupName])
+        
+        //Add current user to the group he/she just created
+        addMemberToGroup(groupId: key, userId: userId)
+    }
+    
 
 }
 
