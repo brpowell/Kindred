@@ -17,6 +17,7 @@ class Post {
     var timestamp: TimeInterval?
     var uid: String?
     var profile: UIImage?
+    var hasImage: Bool?
     
     init(snapshot: FIRDataSnapshot) {
         self.key = snapshot.key
@@ -26,5 +27,11 @@ class Post {
         self.body = snapshotValue["body"] as? String
         self.timestamp = snapshotValue["timestamp"] as? TimeInterval
         self.uid = snapshotValue["uid"] as? String
+        self.hasImage = false
+        
+        if let hasImage = snapshotValue["hasImage"] as? Bool {
+            self.hasImage = hasImage
+        }
+        
     }
 }

@@ -28,7 +28,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         LoginViewController.listener = true
         self.slideMenuController()?.delegate = self
         
@@ -109,9 +109,14 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         if let bodyText = posts[indexPath.item].body {
             let rect = NSString(string: bodyText).boundingRect(with: CGSize(width: view.frame.width, height: 1000), options: NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin), attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
             
-            let knownHeight: CGFloat = 8 + 44
+            // 8: profileImage, 44: bodyText
+            // Add 200 if post has an image
+            var knownHeight: CGFloat = 8 + 4 + 44
+            if posts[indexPath.item].hasImage! {
+                knownHeight += 4 + 200
+            }
             
-            return CGSize(width: view.frame.width, height: rect.height + knownHeight + 40)
+            return CGSize(width: view.frame.width, height: rect.height + knownHeight + 36)
         }
         return CGSize(width: view.frame.width, height: 200)
     }

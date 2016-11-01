@@ -497,8 +497,10 @@
 			baseConfigurationReference = 44D70E7EE6B2815014FD0622 /* Pods-FamilyApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CODE_SIGN_ENTITLEMENTS = FamilyApp/FamilyApp.entitlements;
 				DEVELOPMENT_TEAM = JZ454C5V8J;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				INFOPLIST_FILE = FamilyApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.uab.FamilyApp;
@@ -512,8 +514,10 @@
 			baseConfigurationReference = 8EC68DBDC7EA55CE69DAF06B /* Pods-FamilyApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CODE_SIGN_ENTITLEMENTS = FamilyApp/FamilyApp.entitlements;
 				DEVELOPMENT_TEAM = JZ454C5V8J;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				INFOPLIST_FILE = FamilyApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.uab.FamilyApp;

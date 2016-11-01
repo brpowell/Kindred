@@ -19,18 +19,21 @@ class FeedCell: UICollectionViewCell {
             if let body = post?.body {
                 bodyTextView.text = body
             }
+            
             if let profileImage = post?.profile {
                 profileImageView.image = profileImage
             }
             else {
                 profileImageView.image = UIImage(named: "profile")
             }
+            
+            setupViews()
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -87,6 +90,7 @@ class FeedCell: UICollectionViewCell {
     let postImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -100,9 +104,15 @@ class FeedCell: UICollectionViewCell {
         
         addConstraintsWithFormat(format: "H:|-8-[v0(44)]-8-[v1]|", views: profileImageView, nameLabel)
         addConstraintsWithFormat(format: "V:|-8-[v0]", views: nameLabel)
-        addConstraintsWithFormat(format: "V:|-8-[v0(44)]-4-[v1]-4-[v2]|", views: profileImageView, bodyTextView, postImageView)
         addConstraintsWithFormat(format: "H:|-4-[v0]-4-|", views: bodyTextView)
-        addConstraintsWithFormat(format: "H:|[v0]|", views: postImageView)
+        if (post?.hasImage)! {
+            addConstraintsWithFormat(format: "V:|-8-[v0(44)]-4-[v1]-4-[v2(200)]|", views: profileImageView, bodyTextView, postImageView)
+            addConstraintsWithFormat(format: "H:|[v0]|", views: postImageView)
+        }
+        else {
+            addConstraintsWithFormat(format: "V:|-8-[v0(44)]-4-[v1]|", views: profileImageView, bodyTextView)
+        }
+        
     }
 }
 

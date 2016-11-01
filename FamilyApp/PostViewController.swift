@@ -15,9 +15,11 @@ class PostViewController: InputViewController, UITextViewDelegate, UINavigationC
     @IBOutlet weak var postButton: UIBarButtonItem!
     @IBOutlet weak var bottomHeight: NSLayoutConstraint!
     @IBOutlet weak var bottom: NSLayoutConstraint!
+    @IBOutlet weak var addPhotoButton: UIButton!
     
     var keyboardHeight: CGFloat = 0.0
     let imagePicker = UIImagePickerController()
+    var postImage: UIImage?
     
     let postsRef = FIRDatabase.database().reference(withPath:
     "posts")
@@ -96,18 +98,41 @@ class PostViewController: InputViewController, UITextViewDelegate, UINavigationC
     
     @IBAction func onPostButton(_ sender: AnyObject) {
         if let postBody = postView.textView.text {
+            postButton.isEnabled = false
+            
             let time = FIRServerValue.timestamp()
             let user = FIRAuth.auth()?.currentUser
             let key = postsRef.childByAutoId().key
 
-            let data = [
+            var data = [
                 "uid": (user?.uid)!,
                 "author": (user?.displayName)!,
                 "body": postBody,
-                "timestamp": time] as [String : Any]
+                "timestamp": time,
+                "image": false] as [String : Any]
             
-            postsRef.child("\(key)").setValue(data)
-            self.performSegue(withIdentifier: "unwindToFeed", sender: self)
+            if let image = postImage {
+                let postImageRef = Database.postImagesRef.child(key)
+                let imageData = image.jpegData(quality: .medium)
+                postImageRef.put(imageData!, metadata: nil) { metadata, error in
+                    
+                    if error != nil {
+                        print(error)
+                        self.postButton.isEnabled = true
+                    }
+                    else {
+                        data["hasImage"] = true
+                        self.postsRef.child("\(key)").setValue(data)
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "unwindToFeed", sender: self)
+                        }
+                    }
+                }
+            }
+            else {
+                postsRef.child("\(key)").setValue(data)
+                self.performSegue(withIdentifier: "unwindToFeed", sender: self)
+            }
         }
     }
 
@@ -127,9 +152,7 @@ class PostViewController: InputViewController, UITextViewDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            //            profileImage.contentMode = .scaleAspectFit
-//            profileImage.image = pickedImage
-            print("Image Set")
+            postImage = pickedImage
         }
         
         dismiss(animated: true, completion: nil)

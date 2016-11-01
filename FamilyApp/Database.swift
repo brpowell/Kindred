@@ -11,12 +11,17 @@ import Firebase
 
 class Database {
     
+    var ref: FIRDatabaseReference!
+    let storageUrl = "gs://familyapp-e0bae.appspot.com"
+    
     static let db = Database()
     static var user: User!
-    var ref: FIRDatabaseReference!
+    
     
     static let contactsRef = FIRDatabase.database().reference(withPath: "contacts")
     static let usersRef = FIRDatabase.database().reference(withPath: "users")
+    static let postImagesRef = FIRStorage.storage().reference(withPath: "postImages")
+    
     
     private init() {
         findCurrentUser()
