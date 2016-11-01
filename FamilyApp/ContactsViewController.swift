@@ -57,16 +57,24 @@ class ContactsViewController: FamilyController, UITableViewDataSource, UITableVi
             let u = User(snapshot: snapshot)
             let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + u.uid)
             
-            profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
-                if error != nil {
-                    print(error)
-                }
-                else {
-                    u.photo = UIImage(data: data!)
-                    OtherProfileViewController.user = u
-                    self.performSegue(withIdentifier: "profileSegue", sender: self)
+            if let image = Database.profileImageCache.object(forKey: NSString(string: u.uid)) {
+                u.photo = image
+                OtherProfileViewController.user = u
+                self.performSegue(withIdentifier: "profileSegue", sender: self)
+            }
+            else {
+                profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
+                    if error != nil {
+                        print(error)
+                    }
+                    else {
+                        u.photo = UIImage(data: data!)
+                        OtherProfileViewController.user = u
+                        self.performSegue(withIdentifier: "profileSegue", sender: self)
+                    }
                 }
             }
+        
         })
     }
     
