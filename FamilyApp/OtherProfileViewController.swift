@@ -18,6 +18,19 @@ class OtherProfileViewController: UIViewController, UIPopoverPresentationControl
     
     static var user: User?
     
+    @IBOutlet weak var contentView: UIView!
+    
+    @IBOutlet var buttons: [UIButton]!
+    
+    var activityViewController: UIViewController!
+    var contactsViewController: UIViewController!
+    var infoViewController: UIViewController!
+    
+    var viewControllers: [UIViewController]!
+    
+    var selectedIndex: Int = 0
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,19 +42,37 @@ class OtherProfileViewController: UIViewController, UIPopoverPresentationControl
             }
         }
         
-        if let birthday = user?.birthday {
-            birthdayLabel.text = birthday
-        }
-        
-        if let email = user?.email {
-            emailLabel.text = email
-        }
-        
         if let image = user?.photo {
             userProfileImage.makeProfileFormat()
             userProfileImage.image = image
         }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
+        
+        activityViewController = storyboard.instantiateViewController(withIdentifier: "ProfileActivityViewController")
+        contactsViewController = storyboard.instantiateViewController(withIdentifier: "ProfileContactsViewController")
+        infoViewController = storyboard.instantiateViewController(withIdentifier: "ProfileInfoViewController")
+        
+        viewControllers = [activityViewController, contactsViewController, infoViewController]
+        
+        buttons[selectedIndex].isSelected = true
+        didPressTab(buttons[selectedIndex])
+    }
+    
+    @IBAction func didPressTab(_ sender: UIButton) {
+        let previousIndex = selectedIndex
+        selectedIndex = sender.tag
+        buttons[previousIndex].isSelected = false
+        let previousVC = viewControllers[previousIndex]
+        previousVC.willMove(toParentViewController: nil)
+        previousVC.view.removeFromSuperview()
+        previousVC.removeFromParentViewController()
+        sender.isSelected = true
+        let vc = viewControllers[selectedIndex]
+        addChildViewController(vc)
+        vc.view.frame = contentView.bounds
+        contentView.addSubview(vc.view)
+        vc.didMove(toParentViewController: self)
     }
 
     override func didReceiveMemoryWarning() {
