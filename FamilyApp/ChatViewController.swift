@@ -35,8 +35,6 @@ final class ChatViewController: JSQMessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.senderDisplayName = Database.user.firstName
-        
-        addMessage(withId: "foo", name: "Mr.Bolt", text: "I am so fast!")
         finishReceivingMessage()
     }
 
