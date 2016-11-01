@@ -22,6 +22,7 @@ class CreateGroupsViewController: InputViewController, UITableViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         statusLabel.isHidden = true
+        tableView.allowsMultipleSelection = true
         
         ref = FIRDatabase.database().reference(withPath: "contacts").child("\(Database.user.uid)")
         ref.observe(.value, with: { snapshot in
@@ -33,7 +34,6 @@ class CreateGroupsViewController: InputViewController, UITableViewDataSource, UI
                 self.tableView.reloadData()
             }
         })
-        
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -65,26 +65,14 @@ class CreateGroupsViewController: InputViewController, UITableViewDataSource, UI
         return contacts.count
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-    }
-    
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath as IndexPath)
         
         let row = indexPath.row
         cell.textLabel?.text = contacts[row].name
+        cell.detailTextLabel?.text = contacts[row].relationship
         
         return cell
     }
-    
-    @IBAction func onMenuButton(_ sender: AnyObject) {
-        self.slideMenuController()?.openLeft()
-    }
-    
-
-
-    
-    
     
 }
