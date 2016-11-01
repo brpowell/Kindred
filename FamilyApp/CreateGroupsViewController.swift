@@ -25,23 +25,13 @@ class CreateGroupsViewController: InputViewController, UITableViewDataSource, UI
         
         ref = FIRDatabase.database().reference(withPath: "contacts").child("\(Database.user.uid)")
         ref.observe(.value, with: { snapshot in
-            self.contacts.removeAll()
-            for item in snapshot.children {
+            for person in snapshot.children {
+                let snap = person as! FIRDataSnapshot
+                let contact = Contact(snapshot: snap)
                 
-                let contact = Contact(snapshot: item)
-                contacts.append(contact)
-//                let snap = contact as! FIRDataSnapshot
-//                let groupId = snap.key
-//                
-//                let groupRef = FIRDatabase.database().reference(withPath: "groups").child("\(groupId)")
-//                groupRef.observe(.value, with: { snapshot in
-//                    let g = Group(snapshot: snapshot)
-//                    self.groups.append(g)
-//                    self.tableView.reloadData()
-//                })
+                self.contacts.append(contact)
+                self.tableView.reloadData()
             }
-            
-            self.tableView.reloadData()
         })
         
         
