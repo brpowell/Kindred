@@ -11,28 +11,21 @@ import Firebase
 import NVActivityIndicatorView
 
 class LoginViewController: InputViewController, NVActivityIndicatorViewable, UITextFieldDelegate {
-
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var emailLine: UIView!
-    @IBOutlet weak var passwordLine: UIView!
-    
+    @IBOutlet weak var emailField: FATextField!
+    @IBOutlet weak var passwordField: FATextField!
     
     static var listener: Bool = true
 
     override func viewWillAppear(_ animated: Bool) {
-        self.emailTextField.text = ""
-        self.passwordTextField.text = ""
+        self.emailField.textField.text = ""
+        self.passwordField.textField.text = ""
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         LoginViewController.listener = true
-        
-        self.emailTextField.delegate = self
-        self.passwordTextField.delegate = self
         
         // Activity loader
         NVActivityIndicatorView.DEFAULT_TYPE = .ballTrianglePath
@@ -72,14 +65,12 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
         // Dispose of any resources that can be recreated.
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-
-    }
-    
     @IBAction func onLoginButton(_ sender: AnyObject) {
         self.startAnimating()
-        let email = emailTextField.text!
-        let pass = passwordTextField.text!
+//        let email = emailTextField.text!
+//        let pass = passwordTextField.text!
+        let email = emailField.textField.text!
+        let pass = passwordField.textField.text!
         
         if email != "" && pass != "" {
             FIRAuth.auth()?.signIn(withEmail: email, password: pass, completion: { (user, error) in
@@ -98,8 +89,8 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "registerSegue",
             let destination = segue.destination as? RegisterViewController {
-            destination.email = emailTextField.text!
-            destination.password = passwordTextField.text!
+            destination.email = emailField.textField.text!
+            destination.password = passwordField.textField.text!
         }
     }
     
