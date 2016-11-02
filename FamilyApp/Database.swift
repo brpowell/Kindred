@@ -96,7 +96,12 @@ class Database {
         addMemberToGroup(groupId: key, userId: userId)
     }
     
-
+    func deleteGroup(groupId: String) {
+        //Delete group from all users
+        //Delete group chat
+        //Delete group
+    }
+    
 }
 
 
