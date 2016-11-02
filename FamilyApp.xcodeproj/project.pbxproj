@@ -28,6 +28,7 @@
 		935CCC541DADA20C00848D7E /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935CCC531DADA20C00848D7E /* GroupsViewController.swift */; };
 		938903011DC6DEF3000BD9CC /* PlaceholderUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938903001DC6DEF3000BD9CC /* PlaceholderUITextView.swift */; };
 		938903031DC6E0C0000BD9CC /* PlaceholderUITextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 938903021DC6E0C0000BD9CC /* PlaceholderUITextView.xib */; };
+		9393D1261DC95B39004A8D44 /* FATextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393D1251DC95B39004A8D44 /* FATextField.swift */; };
 		93AF2CA81DAD7C9D00879A1C /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */; };
 		93B5923B1DAA2F5D000635C6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5923A1DAA2F5D000635C6 /* RegisterViewController.swift */; };
 		93B5923D1DAAB4FF000635C6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5923C1DAAB4FF000635C6 /* FeedViewController.swift */; };
@@ -76,6 +77,7 @@
 		935CCC531DADA20C00848D7E /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		938903001DC6DEF3000BD9CC /* PlaceholderUITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderUITextView.swift; sourceTree = "<group>"; };
 		938903021DC6E0C0000BD9CC /* PlaceholderUITextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceholderUITextView.xib; sourceTree = "<group>"; };
+		9393D1251DC95B39004A8D44 /* FATextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FATextField.swift; sourceTree = "<group>"; };
 		93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		93B5923A1DAA2F5D000635C6 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		93B5923C1DAAB4FF000635C6 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				93595C231DB48553003BB505 /* LeftDrawerView.swift */,
 				CAA355DE1DB87ED9003EA66F /* SuggestionTableViewCell.swift */,
 				938903021DC6E0C0000BD9CC /* PlaceholderUITextView.xib */,
+				9393D1251DC95B39004A8D44 /* FATextField.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				93C3D2831DB44230002900DA /* SuggestionsViewController.swift in Sources */,
 				218F57D41DC7E43300F6800B /* ChatViewController.swift in Sources */,
 				938903011DC6DEF3000BD9CC /* PlaceholderUITextView.swift in Sources */,
+				9393D1261DC95B39004A8D44 /* FATextField.swift in Sources */,
 				CA82FEFC1DC9204900A4B485 /* ProfileInfoViewController.swift in Sources */,
 				93B5923B1DAA2F5D000635C6 /* RegisterViewController.swift in Sources */,
 				93177DC21DAB0D080072B80E /* LeftViewController.swift in Sources */,
