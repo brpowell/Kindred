@@ -891,7 +891,7 @@
             </objects>
             <point key="canvasLocation" x="1766" y="-394"/>
         </scene>
-        <!--My Feed-->
+        <!--Kindred-->
         <scene sceneID="k4U-Ow-m5e">
             <objects>
                 <collectionViewController id="Ba8-Jd-81b" customClass="FeedViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -920,7 +920,7 @@
                             <outlet property="delegate" destination="Ba8-Jd-81b" id="Pgh-PY-YR5"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="My Feed" id="oiF-O4-xpK">
+                    <navigationItem key="navigationItem" title="Kindred" id="oiF-O4-xpK">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="MenuIcon" id="g0z-4v-Wcn" userLabel="menuButton">
                             <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="0.0"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1104,7 +1104,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tvo-NI-l2q" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Tree" image="treeIcon" selectedImage="treeSelectedIcon" id="a41-vB-ARH"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eqN-Gv-COI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eqN-Gv-COI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
