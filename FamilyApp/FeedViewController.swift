@@ -26,9 +26,15 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         // Dispose of any resources that can be recreated.
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+
         LoginViewController.listener = true
         //self.slideMenuController()?.delegate = self
         

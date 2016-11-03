@@ -25,7 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set global navbar appearance properties
 //        UINavigationBar.appearance().barTintColor = UIColor(red:0.29, green:0.56, blue:0.89, alpha:1.0)
         UINavigationBar.appearance().barTintColor = FAColor.blueLight
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white, NSFontAttributeName: UIFont(name: "Arial Rounded MT Bold", size: 22)!]
+//        self.navigationController?.navigationBar.titleTextAttributes = [ ]
+        
 //        UINavigationBar.appearance().tintColor = UIColor.white
         
         return true
