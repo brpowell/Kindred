@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import UIKit
 
-class Contact {
+class Contact : Equatable{
     
 //    static let generationMap = {
 //        "Grandmother": -2,
@@ -52,5 +52,9 @@ class Contact {
             "name": name,
             "relationship": relationship
         ]
+    }
+    
+    static func == (lhs: Contact, rhs: Contact) -> Bool {
+        return lhs.uid == rhs.uid
     }
 }

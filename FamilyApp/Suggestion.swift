@@ -10,15 +10,19 @@ import Foundation
 import Firebase
 import UIKit
 
-class Suggestion {
+class Suggestion: Equatable {
     
-    var firstName: String
-    var lastName: String
+    var name: String
+    var uid: String
     var relationship: String
     
-    init(firstName: String, lastName: String, relationship: String) {
-        self.firstName = firstName
-        self.lastName = lastName
+    init(name: String, uid: String, relationship: String) {
+        self.name = name
+        self.uid = uid
         self.relationship = relationship
+    }
+    
+    static func == (lhs: Suggestion, rhs: Suggestion) -> Bool {
+        return lhs.uid == rhs.uid
     }
 }
