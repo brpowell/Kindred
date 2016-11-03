@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SuggestionsViewController: FamilyController, UITableViewDataSource, UITableViewDelegate {
+class SuggestionsViewController: FamilyController, UITableViewDataSource, UITableViewDelegate, AddContactDelegate {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -83,10 +83,28 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         let row = indexPath.row
         cell.nameLabel.text = suggestions[row].name
         cell.relationshipLabel.text = suggestions[row].relationship
+        cell.index = row
+
         
         return cell
     }
-
+    
+    func addNewContact(conIndex: Int) {
+        let myUID = FIRAuth.auth()?.currentUser?.uid
+        let suggestion = suggestions[conIndex]
+        let otherUid = suggestion.uid
+        let newContactRef = Database.contactsRef.child(myUID!).child(otherUid)
+        let selfContactRef = Database.contactsRef.child(otherUid).child(myUID!)
+        let contactName = suggestions[conIndex].name
+        let selfName = FIRAuth.auth()?.currentUser?.displayName
+        let revRelationship = "suggested Relationship"
+        let relationship = "suggested Relationship"
+        let newContact = Contact(name: contactName, relationship: relationship, uid: otherUid)
+        let selfContact = Contact(name: selfName!, relationship: revRelationship, uid: myUID!)
+        newContactRef.setValue(newContact.toAnyObject())
+        selfContactRef.setValue(selfContact.toAnyObject())
+        print("Contact added!")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

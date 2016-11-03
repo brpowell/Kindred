@@ -460,6 +460,9 @@
                                                     <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <state key="normal" title="Add"/>
+                                                    <connections>
+                                                        <action selector="pressAdd:" destination="gyd-Tt-00D" eventType="touchUpInside" id="ZQp-fP-N9b"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1457,7 +1460,7 @@
         <image name="treeSelectedIcon" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yHC-1o-TE9"/>
+        <segue reference="taL-9Y-Skv"/>
         <segue reference="4jI-j3-2Ab"/>
     </inferredMetricsTieBreakers>
 </document>

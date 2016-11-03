@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AddContactDelegate {
+    func addNewContact(conIndex: Int)
+}
+
 class SuggestionTableViewCell: UITableViewCell {
 
     // MARK: Properties
@@ -17,6 +21,11 @@ class SuggestionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var relationshipLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
+    
+    var index: Int = 0
+    
+    var delegate: AddContactDelegate?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,5 +36,12 @@ class SuggestionTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    @IBAction func pressAdd(_ sender: Any) {
+        print("ADD A FUCKING CONTACT!!!!!")
+        delegate?.addNewContact(conIndex: index)
+    }
+    
+    
 
 }
