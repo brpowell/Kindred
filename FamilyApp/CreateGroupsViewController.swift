@@ -11,8 +11,7 @@ import Firebase
 
 class CreateGroupsViewController: InputViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var groupNameTextField: UITextField!
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var groupNameField: FATextField!
     
     @IBOutlet weak var tableView: UITableView!
     var ref: FIRDatabaseReference!
@@ -21,7 +20,6 @@ class CreateGroupsViewController: InputViewController, UITableViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        statusLabel.isHidden = true
         tableView.allowsMultipleSelection = true
         
         ref = FIRDatabase.database().reference(withPath: "contacts").child("\(Database.user.uid)")
@@ -46,14 +44,13 @@ class CreateGroupsViewController: InputViewController, UITableViewDataSource, UI
     
     @IBAction func onCreateGroupButton(_ sender: AnyObject) {
         let userId = Database.user.uid
-        let groupName = groupNameTextField.text!
+        let groupName = groupNameField.textField.text!
         if (!groupName.isEmpty) {
-            Database.db.createGroup(groupName: groupNameTextField.text!, userId: userId)
-            statusLabel.text = "Group created!"
-            statusLabel.isHidden = false
+            Database.db.createGroup(groupName: groupNameField.textField.text!, userId: userId)
+
         } else {
-            statusLabel.text = "Group not created"
-            statusLabel.isHidden = false
+            
+            Alerts.okError(title: "No Members", message: "Please select 1 or more to join your group", viewController: self)
         }
     }
     
@@ -72,7 +69,24 @@ class CreateGroupsViewController: InputViewController, UITableViewDataSource, UI
         cell.textLabel?.text = contacts[row].name
         cell.detailTextLabel?.text = contacts[row].relationship
         
+        let image = UIImage(named: "uncheckedIcon")
+        cell.imageView?.image = image
+        
+        let selectedImage = UIImage(named: "checkedIcon")
+        selectedImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        cell.imageView?.highlightedImage = selectedImage
+        cell.imageView?.tintColor = FAColor.lightGreen
+        
+//        if(cell.isSelected) {
+//           cell.backgroundColor = UIColor.clear
+//        }
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.backgroundColor = UIColor.clear
     }
     
 }

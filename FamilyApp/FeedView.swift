@@ -157,6 +157,7 @@ class FeedCell: UICollectionViewCell {
 //        self.contentView.clipsToBounds = true
 //        self.contentView.layer.masksToBounds = true
         
+
         addSubview(nameLabel)
         addSubview(profileImageView)
         addSubview(bodyTextView)

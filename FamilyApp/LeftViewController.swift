@@ -42,21 +42,19 @@ class LeftViewController: UIViewController, SlideMenuControllerDelegate {
         
         
         // Enable profile picture tapping
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("profileTapped"))
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(LeftViewController.profileTapped))
         profileImage.isUserInteractionEnabled = true
         profileImage.addGestureRecognizer(tapGestureRecognizer)
         
         // Initialize Feed Controller
         self.feedViewController = self.storyboard?.instantiateViewController(withIdentifier: "Feed")
-//        self.feedViewController = UINavigationController(rootViewController: feedViewController!)
         
         // Initialize Family Controller
         // Each tabbed view has navigation controller embeded, as shown on storyboard
         self.familyViewController = self.storyboard?.instantiateViewController(withIdentifier: "Family")
         
         // Initialize Groups Controller
-        let groupsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Groups")
-        self.groupsViewController = UINavigationController(rootViewController: groupsViewController!)
+        self.groupsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Groups")
         
         // Intialize Profile Controller
         //TODO, also create new func
@@ -66,7 +64,6 @@ class LeftViewController: UIViewController, SlideMenuControllerDelegate {
         // Intialize Settings Controller
         let settingsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Settings")
         self.settingsViewController = UINavigationController(rootViewController: settingsViewController!)
-        
         
         self.slideMenuController()?.changeMainViewController(self.feedViewController, close: true)
         
