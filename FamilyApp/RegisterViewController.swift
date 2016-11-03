@@ -11,30 +11,25 @@ import Firebase
 import FirebaseDatabase
 import NVActivityIndicatorView
 
-class RegisterViewController: InputViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NVActivityIndicatorViewable, UIPickerViewDataSource, UIPickerViewDelegate{
+class RegisterViewController: InputViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NVActivityIndicatorViewable, UIPickerViewDataSource, UIPickerViewDelegate {
+    
     @available(iOS 2.0, *)
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
-
-    //@IBOutlet weak var firstTextField: UITextField!
-    //@IBOutlet weak var lastTextField: UITextField!
-    //@IBOutlet weak var birthdayTextField: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
-    //@IBOutlet weak var genderTextField: UITextField!
-    
     
     @IBOutlet weak var firstField: FATextField!
     @IBOutlet weak var lastField: FATextField!
     @IBOutlet weak var birthdayField: FATextField!
     @IBOutlet weak var genderField: FATextField!
     
-    
     var email = String()
     var password = String()
     let ref = FIRDatabase.database().reference(withPath: "users")
     let imagePicker = UIImagePickerController()
+    var profileImageSet = false
     
     let genders = ["Female", "Male", "Other"]
     
@@ -54,40 +49,6 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
         let pickerView = UIPickerView()
         pickerView.delegate = self
         genderField.textField.inputView = pickerView
-
-//        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
-//        profileImage.clipsToBounds = true
-//        profileImage.layer.borderWidth = 3.0
-//        profileImage.layer.borderColor = UIColor.white.cgColor
-        
-        // Firebase Auth Listener
-//        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-//            if user != nil && RegisterViewController.listener {
-//                RegisterViewController.listener = false
-//                let first = self.firstTextField.text!
-//                let last = self.lastTextField.text!
-//                let u = User(authData: user!, firstName: first, lastName: last, birthday: self.birthdayTextField.text!)
-//                
-//                let userRef = self.ref.child(u.uid)
-//                userRef.setValue(u.toAnyObject())
-//                
-//                let changeRequest = user?.profileChangeRequest()
-//                changeRequest?.displayName = first + " " + last
-//                
-//                User.activeUserImage = self.profileImage.image!
-//                
-//                changeRequest?.commitChanges { error in
-//                    if let error = error {
-//                        print(error)
-//                    } else {
-//                        // Profile updated
-//                        self.performSegue(withIdentifier: "registerHomeSegue", sender: nil)
-//                    }
-//                }
-//            } else {
-//                // No user is signed in.
-//            }
-//        }
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -107,23 +68,8 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
         // Dispose of any resources that can be recreated.
     }
     
-    
-    @IBAction func birthdayEditing(_ sender: UITextField) {
-        let datePickerView:UIDatePicker = UIDatePicker()
-        datePickerView.datePickerMode = UIDatePickerMode.date
-        sender.inputView = datePickerView
-        datePickerView.addTarget(self, action: #selector(RegisterViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
-    }
-    
-    func datePickerValueChanged(_ sender:UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.medium
-        dateFormatter.timeStyle = DateFormatter.Style.none
-        birthdayField.textField.text = dateFormatter.string(from: sender.date)
-    }
-    
     @IBAction func onRegisterDone(_ sender: AnyObject) {
-        if firstField.textField.text != "" && lastField.textField.text != "" && birthdayField.textField.text != "" && genderField.textField.text != ""{
+        if fieldCheck() {
             self.startAnimating()
             FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                 if error != nil {
@@ -158,9 +104,9 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
                                 print(error)
                             } else {
                                 // Profile updated
-                                self.stopAnimating()
                                 self.performSegue(withIdentifier: "registerHomeSegue", sender: nil)
                             }
+                            self.stopAnimating()
                         }
                     }
                 }
@@ -168,23 +114,68 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
 
         }
     }
-
-    @IBAction func onImageButton(_ sender: AnyObject) {
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .photoLibrary
+    
+    // Validate text fields
+    func fieldCheck() -> Bool {
+        var title = "Missing Fields"
+        var message = "Please fill in all of the profile fields"
         
-        present(imagePicker, animated: true, completion: nil)
+        if firstField.textField.text != "" && lastField.textField.text != "" && birthdayField.textField.text != "" && genderField.textField.text != "" {
+            if profileImageSet {
+                return true
+            }
+            title = "No Photo"
+            message = "Please select a photo for your profile picture"
+        }
+        
+        Alerts.okError(title: title, message: message, viewController: self)
+        
+        return false
+    }
+    
+    // Add profile picture
+    @IBAction func onImageButton(_ sender: AnyObject) {
+        let alertController = UIAlertController(title: "Image Source", message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        // Photo library option
+        let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+        alertController.addAction(libraryAction)
+        
+        // Camera option
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                self.imagePicker.allowsEditing = true
+                self.imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+                self.imagePicker.cameraCaptureMode = .photo
+                self.imagePicker.modalPresentationStyle = .fullScreen
+                self.present(self.imagePicker, animated: true, completion: nil)
+            } else {
+                let alertVC = UIAlertController(title: "No Camera", message: "Sorry, this device has no camera", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style:.default, handler: nil)
+                alertVC.addAction(okAction)
+                self.present(alertVC, animated: true, completion: nil)
+            }
+        }
+        alertController.addAction(cameraAction)
+        
+        self.present(alertController, animated: true)
     }
     
     @IBAction func onBackbutton(_ sender: AnyObject) {
         self.performSegue(withIdentifier: "unwindToLogin", sender: sender)
     }
     
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-//            profileImage.contentMode = .scaleAspectFit
             profileImage.image = pickedImage
+            self.profileImageSet = true
         }
         
         dismiss(animated: true, completion: nil)
@@ -194,18 +185,4 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
 
 
 
-extension UIImage {
-    enum JPEGQuality: CGFloat {
-        case lowest = 0
-        case low = 0.25
-        case medium = 0.5
-        case high = 0.75
-        case highest = 1
-    }
-    
-    var pngData: Data? { return UIImagePNGRepresentation(self) }
-    
-    func jpegData(quality: JPEGQuality) -> Data? {
-        return UIImageJPEGRepresentation(self, quality.rawValue)
-    }
-}
+

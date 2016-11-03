@@ -9,7 +9,10 @@
 import UIKit
 
 @IBDesignable
-class FATextField: UIView, UITextFieldDelegate {
+class FATextField: UIView, UITextFieldDelegate, UIPickerViewDelegate {
+    
+    let animationDeltaY: CGFloat = 5.0
+    let animationDuration: TimeInterval = 0.25
     
     var textField = UITextField()
     var iconView = UIImageView()
@@ -28,12 +31,6 @@ class FATextField: UIView, UITextFieldDelegate {
         setupView()
         textField.delegate = self
     }
-    
-//    @IBInspectable var iconColor: UIColor = UIColor.black {
-//        didSet {
-//            reloadView()
-//        }
-//    }
     
     @IBInspectable var barColor: UIColor = UIColor(red:0.75, green:0.93, blue:0.38, alpha:1.0) {
         didSet {
@@ -56,7 +53,7 @@ class FATextField: UIView, UITextFieldDelegate {
         }
     }
     
-    @IBInspectable var keyboardType: String = "email" {
+    @IBInspectable var type: String = "email" {
         didSet {
             reloadView()
         }
@@ -70,16 +67,30 @@ class FATextField: UIView, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.iconView.tintColor = UIColor.white
-        UIView.animate(withDuration: 0.25) {
-            self.iconView.center.y = self.iconView.center.y - 5
+        UIView.animate(withDuration: self.animationDuration) {
+            self.iconView.center.y -= self.animationDeltaY
             self.barLine.backgroundColor = self.editingColor
         }
+        
+        if type == "date" {
+            let datePickerView = UIDatePicker()
+            datePickerView.datePickerMode = UIDatePickerMode.date
+            self.textField.inputView = datePickerView
+            datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: UIControlEvents.valueChanged)
+        }
+    }
+    
+    func datePickerValueChanged(_ sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        self.textField.text = dateFormatter.string(from: sender.date)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.iconView.tintColor = UIColor.black
-        UIView.animate(withDuration: 0.25) {
-            self.iconView.center.y = self.iconView.center.y + 5
+        UIView.animate(withDuration: self.animationDuration) {
+            self.iconView.center.y += self.animationDeltaY
             self.barLine.backgroundColor = self.barColor
         }
     }
@@ -92,7 +103,8 @@ class FATextField: UIView, UITextFieldDelegate {
         textField.isSecureTextEntry = false
         textField.autocapitalizationType = self.capitalization ? .words : .none
         
-        switch(self.keyboardType) {
+        // Keyboard type
+        switch(self.type) {
             case "email":
                 textField.keyboardType = .emailAddress
             case "password":
@@ -116,6 +128,8 @@ class FATextField: UIView, UITextFieldDelegate {
         textField.textColor = UIColor.white
         textField.placeholder = self.placeholder
         textField.tintColor = barColor
+        textField.spellCheckingType = .no
+        textField.autocorrectionType = .no
         
         barLine.backgroundColor = self.barColor
         
