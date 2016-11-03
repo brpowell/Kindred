@@ -32,11 +32,9 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
 
         LoginViewController.listener = true
-        //self.slideMenuController()?.delegate = self
+        self.slideMenuController()?.delegate = self
         
         _ = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(updateDates), userInfo: nil, repeats: true)
         
@@ -63,16 +61,6 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
                 
                 newPosts.append(post)
             }
-
-//            let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + uid!)
-//            profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
-//                if error != nil {
-//                    //                          print(error)
-//                }
-//                else {
-//                    self.profileCache[uid!] = UIImage(data: data!)
-//                }
-//            }
             
             self.posts = newPosts.reversed()
             self.collectionView?.reloadData()
@@ -131,7 +119,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
                 knownHeight += 4 + 200
             }
             
-            return CGSize(width: view.frame.width, height: rect.height + knownHeight + 36)
+            return CGSize(width: view.frame.width - 20, height: rect.height + knownHeight + 36)
         }
         return CGSize(width: view.frame.width, height: 200)
     }
