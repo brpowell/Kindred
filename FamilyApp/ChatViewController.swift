@@ -25,6 +25,11 @@ final class ChatViewController: JSQMessagesViewController {
         self.senderDisplayName = Database.user.firstName
         self.senderId = FIRAuth.auth()?.currentUser?.uid
         self.title = group!.name
+        
+        var image = UIImage(named: "groupIcon")!
+        image = image.resize(targetSize: CGSize(width: 22, height: 22))
+        self.addRightBarButtonWithImage(image)
+        
     
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
