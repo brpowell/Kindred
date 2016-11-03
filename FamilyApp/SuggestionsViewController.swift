@@ -7,15 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class SuggestionsViewController: FamilyController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
 
-    
-    let apurva = Suggestion(firstName:"Harry", lastName:"Potter", relationship: "brother")
-    let uyviet = Suggestion(firstName:"Albus", lastName:"Dumbledor", relationship: "grandfather")
-    let bryan = Suggestion(firstName:"Hermione", lastName:"Granger", relationship: "second cousin")
+
     
     var suggestions = [Suggestion]()
     
@@ -23,12 +21,50 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         super.viewDidLoad()
 
         // Do any additional setup after loading the view
-        suggestions.append(apurva)
-        suggestions.append(uyviet)
-        suggestions.append(bryan)
+        
+        let userContactsRef = Database.contactsRef.child((FIRAuth.auth()?.currentUser?.uid)!)
+        var contacts: [Contact] = []
+        
+        userContactsRef.observeSingleEvent(of: .value, with: { snapshot in
+            var newContacts: [Contact] = []
+            
+            for contact in snapshot.children {
+                let contact = Contact(snapshot: contact as! FIRDataSnapshot)
+                newContacts.append(contact)
+            }
+            contacts = newContacts
+            
+            for con in contacts {
+                let userRef = Database.contactsRef.child((con.uid))
+                userRef.observeSingleEvent(of: .value, with: {
+                    snapshot in
+                    var newSuggestions: [Suggestion] = []
+                    for contact in snapshot.children {
+                        let contact = Contact(snapshot: contact as! FIRDataSnapshot)
+                        if !contacts.contains(contact) {
+                        
+                        let sug = Suggestion(name: contact.name, uid: contact.uid, relationship: "Potential Family Relationship")
+                        newSuggestions.append(sug)
+                        }
+                    }
+                    for suggest in newSuggestions {
+                        if !(self.suggestions.contains(suggest)) {
+                            self.suggestions.append(suggest)
+                        }
+                    }
+                    self.tableView.reloadData()
+                })
+            }
+        })
+        
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    
+    
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return suggestions.count
     }
@@ -45,7 +81,7 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath) as! SuggestionTableViewCell
         
         let row = indexPath.row
-        cell.nameLabel.text = suggestions[row].firstName + " " + suggestions[row].lastName
+        cell.nameLabel.text = suggestions[row].name
         cell.relationshipLabel.text = suggestions[row].relationship
         
         return cell
