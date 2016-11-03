@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CB08E27C600BB5C4DB99905 /* Pods_FamilyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F58B8DF37F190F1658208E /* Pods_FamilyApp.framework */; };
+		210262071DCBC7FC00389D8D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210262061DCBC7FC00389D8D /* SettingsViewController.swift */; };
 		216692831DB9462400D357F7 /* CreateGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216692821DB9462400D357F7 /* CreateGroupsViewController.swift */; };
 		2187E5E31DB5856F009C6266 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2187E5E21DB5856F009C6266 /* ProfileViewController.swift */; };
 		2187E5E51DB5867B009C6266 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2187E5E41DB5867B009C6266 /* Database.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		210262061DCBC7FC00389D8D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		216692821DB9462400D357F7 /* CreateGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupsViewController.swift; sourceTree = "<group>"; };
 		2187E5E21DB5856F009C6266 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		2187E5E41DB5867B009C6266 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
@@ -186,10 +188,10 @@
 			children = (
 				9328F3711DA9CE5300F16E36 /* LaunchScreen.storyboard */,
 				9328F3691DA9CE5300F16E36 /* Main.storyboard */,
+				938903021DC6E0C0000BD9CC /* PlaceholderUITextView.xib */,
 				93F22B111DB1867D00911478 /* FeedView.swift */,
 				93595C231DB48553003BB505 /* LeftDrawerView.swift */,
 				CAA355DE1DB87ED9003EA66F /* SuggestionTableViewCell.swift */,
-				938903021DC6E0C0000BD9CC /* PlaceholderUITextView.xib */,
 				9393D1251DC95B39004A8D44 /* FATextField.swift */,
 			);
 			name = Views;
@@ -198,6 +200,7 @@
 		93F22B0D1DB1835600911478 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				210262061DCBC7FC00389D8D /* SettingsViewController.swift */,
 				CA82FEF71DC9204900A4B485 /* ProfileActivityViewController.swift */,
 				CA82FEF81DC9204900A4B485 /* ProfileContactsViewController.swift */,
 				CA82FEF91DC9204900A4B485 /* ProfileInfoViewController.swift */,
@@ -207,17 +210,17 @@
 				93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */,
 				93177DC31DAB10580072B80E /* ContainerViewController.swift */,
 				933ACD8A1DAEDA2D00F616B5 /* PostViewController.swift */,
-				93177DC11DAB0D080072B80E /* LeftViewController.swift */,
-				9328F3671DA9CE5300F16E36 /* LoginViewController.swift */,
 				93177DBF1DAB0B450072B80E /* SlideMenuController.swift */,
 				93B5923A1DAA2F5D000635C6 /* RegisterViewController.swift */,
 				93B5923C1DAAB4FF000635C6 /* FeedViewController.swift */,
 				93B592421DAABB23000635C6 /* InputViewController.swift */,
 				93C3D2801DB4421D002900DA /* TreeViewController.swift */,
 				93C3D2821DB44230002900DA /* SuggestionsViewController.swift */,
+				93CBEB4F1DB9A08200743E37 /* RelationPopoverViewController.swift */,
 				2187E5E21DB5856F009C6266 /* ProfileViewController.swift */,
 				932A98BF1DB954900020E1F1 /* OtherProfileViewController.swift */,
-				93CBEB4F1DB9A08200743E37 /* RelationPopoverViewController.swift */,
+				9328F3671DA9CE5300F16E36 /* LoginViewController.swift */,
+				93177DC11DAB0D080072B80E /* LeftViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -343,7 +346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F16F1426BF55373696093779 /* [CP] Copy Pods Resources */ = {
@@ -391,6 +394,7 @@
 				938903011DC6DEF3000BD9CC /* PlaceholderUITextView.swift in Sources */,
 				9393D1261DC95B39004A8D44 /* FATextField.swift in Sources */,
 				CA82FEFC1DC9204900A4B485 /* ProfileInfoViewController.swift in Sources */,
+				210262071DCBC7FC00389D8D /* SettingsViewController.swift in Sources */,
 				93B5923B1DAA2F5D000635C6 /* RegisterViewController.swift in Sources */,
 				93177DC21DAB0D080072B80E /* LeftViewController.swift in Sources */,
 				93F22B121DB1867D00911478 /* FeedView.swift in Sources */,

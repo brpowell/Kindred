@@ -18,12 +18,14 @@ class LeftViewController: UIViewController, SlideMenuControllerDelegate {
     var groupsViewController: UIViewController!
     var feedViewController: UIViewController!
     var profileViewController: UIViewController!
+    var settingsViewController: UIViewController!
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var feedButton: DrawerButton!
     @IBOutlet weak var familyButton: DrawerButton!
     @IBOutlet weak var groupsButton: DrawerButton!
     @IBOutlet weak var signOutButton: DrawerButton!
+    @IBOutlet weak var settingsButton: DrawerButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +63,10 @@ class LeftViewController: UIViewController, SlideMenuControllerDelegate {
         let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "Profile")
         self.profileViewController = UINavigationController(rootViewController: profileViewController!)
         
+        // Intialize Settings Controller
+        let settingsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Settings")
+        self.settingsViewController = UINavigationController(rootViewController: settingsViewController!)
+        
         
         self.slideMenuController()?.changeMainViewController(self.feedViewController, close: true)
         
@@ -85,6 +91,10 @@ class LeftViewController: UIViewController, SlideMenuControllerDelegate {
     
     @IBAction func onGroupsButton(_ sender: AnyObject) {
         self.slideMenuController()?.changeMainViewController(self.groupsViewController, close: true)
+    }
+    
+    @IBAction func onSettingsButton(_ sender: AnyObject) {
+        self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)
     }
     
     func profileTapped() {
