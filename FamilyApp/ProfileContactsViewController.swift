@@ -28,8 +28,7 @@ class ProfileContactsViewController: UIViewController, UITableViewDataSource, UI
         
         let myUserContactsRef = Database.contactsRef.child((FIRAuth.auth()?.currentUser?.uid)!)
         
-        
-        
+    
         myUserContactsRef.observe(.value, with: { snapshot in
             var myNewContacts: [Contact] = []
             for contact in snapshot.children {

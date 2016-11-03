@@ -150,6 +150,13 @@ class FeedCell: UICollectionViewCell {
     func setupViews() {
         backgroundColor = UIColor.white
         
+//        self.contentView.layer.shadowColor = UIColor.black.cgColor
+//        self.contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
+//        self.contentView.layer.shadowOpacity = 0.8
+//        self.contentView.layer.shadowRadius = 2.0
+//        self.contentView.clipsToBounds = true
+//        self.contentView.layer.masksToBounds = true
+        
         addSubview(nameLabel)
         addSubview(profileImageView)
         addSubview(bodyTextView)
