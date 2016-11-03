@@ -12,6 +12,22 @@ import UIKit
 
 class Contact {
     
+//    static let generationMap = {
+//        "Grandmother": -2,
+//        "Grandfather": -2,
+//        "Grandparent": -2,
+//        "Granduncle": -2,
+//        "Grandaunt": -2,
+//        "Mother": -1,
+//        "Father": -1,
+//        "Uncle": -1,
+//        "Aunt": -1,
+//        "Brother": 0,
+//        "Sister": 0,
+//        "Son": 1,
+//        "Daughter": 1
+//    }
+    
     var name: String
 //    var birthday: String
     var relationship: String

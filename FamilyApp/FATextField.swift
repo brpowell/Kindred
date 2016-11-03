@@ -45,6 +45,7 @@ class FATextField: UIView, UITextFieldDelegate {
     
     @IBInspectable var icon: UIImage = UIImage() {
         didSet {
+            icon = icon.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             reloadView()
         }
     }
@@ -68,23 +69,27 @@ class FATextField: UIView, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.iconView.tintColor = UIColor.white
         UIView.animate(withDuration: 0.25) {
+            self.iconView.center.y = self.iconView.center.y - 5
             self.barLine.backgroundColor = self.editingColor
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        self.iconView.tintColor = UIColor.black
         UIView.animate(withDuration: 0.25) {
+            self.iconView.center.y = self.iconView.center.y + 5
             self.barLine.backgroundColor = self.barColor
         }
     }
     
     private func reloadView() {
         iconView.image = self.icon
+        iconView.tintColor = UIColor.black
         barLine.backgroundColor = self.barColor
         textField.placeholder = self.placeholder
         textField.isSecureTextEntry = false
-        
         textField.autocapitalizationType = self.capitalization ? .words : .none
         
         switch(self.keyboardType) {
