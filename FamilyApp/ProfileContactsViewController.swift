@@ -77,16 +77,24 @@ class ProfileContactsViewController: UIViewController, UITableViewDataSource, UI
             let u = User(snapshot: snapshot)
             let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + u.uid)
             
-            profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
-                if error != nil {
-                    print(error)
-                }
-                else {
-                    u.photo = UIImage(data: data!)
-                    OtherProfileViewController.user = u
-                    self.performSegue(withIdentifier: "profileSegue", sender: self)
+            if let image = Database.profileImageCache.object(forKey: NSString(string: u.uid)) {
+                u.photo = image
+                OtherProfileViewController.user = u
+                self.performSegue(withIdentifier: "profileContactSegue", sender: self)
+            }
+            else {
+                profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
+                    if error != nil {
+                        print(error)
+                    }
+                    else {
+                        u.photo = UIImage(data: data!)
+                        OtherProfileViewController.user = u
+                        self.performSegue(withIdentifier: "profileContactSegue", sender: self)
+                    }
                 }
             }
+            
         })
     }
     
@@ -106,14 +114,17 @@ class ProfileContactsViewController: UIViewController, UITableViewDataSource, UI
     }
     
 
-    /*
+    
     // MARK: - Navigation
+    let segueIdentifier = "profileContactsSegue"
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
+        ///let destination = segue.destination as? OtherProfileViewController
+
+    //}
+    
 
 }
