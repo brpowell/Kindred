@@ -18,11 +18,18 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
     }
 
 
-    @IBOutlet weak var firstTextField: UITextField!
-    @IBOutlet weak var lastTextField: UITextField!
-    @IBOutlet weak var birthdayTextField: UITextField!
+    //@IBOutlet weak var firstTextField: UITextField!
+    //@IBOutlet weak var lastTextField: UITextField!
+    //@IBOutlet weak var birthdayTextField: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var genderTextField: UITextField!
+    //@IBOutlet weak var genderTextField: UITextField!
+    
+    
+    @IBOutlet weak var firstField: FATextField!
+    @IBOutlet weak var lastField: FATextField!
+    @IBOutlet weak var birthdayField: FATextField!
+    @IBOutlet weak var genderField: FATextField!
+    
     
     var email = String()
     var password = String()
@@ -46,7 +53,7 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
         profileImage.makeProfileFormat()
         let pickerView = UIPickerView()
         pickerView.delegate = self
-        genderTextField.inputView = pickerView
+        genderField.textField.inputView = pickerView
 
 //        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
 //        profileImage.clipsToBounds = true
@@ -92,7 +99,7 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        genderTextField.text = genders[row]
+        genderField.textField.text = genders[row]
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,11 +119,11 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
         dateFormatter.timeStyle = DateFormatter.Style.none
-        birthdayTextField.text = dateFormatter.string(from: sender.date)
+        birthdayField.textField.text = dateFormatter.string(from: sender.date)
     }
     
     @IBAction func onRegisterDone(_ sender: AnyObject) {
-        if firstTextField.text != "" && lastTextField.text != "" && birthdayTextField.text != "" && genderTextField.text != ""{
+        if firstField.textField.text != "" && lastField.textField.text != "" && birthdayField.textField.text != "" && genderField.textField.text != ""{
             self.startAnimating()
             FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                 if error != nil {
@@ -132,10 +139,10 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
                         print(error)
                     }
                     else {
-                        let first = self.firstTextField.text!
-                        let last = self.lastTextField.text!
-                        let gen = self.genderTextField.text!
-                        let u = User(authData: user!, firstName: first, lastName: last, birthday: self.birthdayTextField.text!, gender: gen)
+                        let first = self.firstField.textField.text!
+                        let last = self.lastField.textField.text!
+                        let gen = self.genderField.textField.text!
+                        let u = User(authData: user!, firstName: first, lastName: last, birthday: self.birthdayField.textField.text!, gender: gen)
                         
                         let userRef = self.ref.child(u.uid)
                         userRef.setValue(u.toAnyObject())
