@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LeftViewController: UIViewController {
+class LeftViewController: UIViewController, SlideMenuControllerDelegate {
 
     @IBOutlet weak var userLabel: UILabel!
     
@@ -20,6 +20,10 @@ class LeftViewController: UIViewController {
     var profileViewController: UIViewController!
     
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var feedButton: DrawerButton!
+    @IBOutlet weak var familyButton: DrawerButton!
+    @IBOutlet weak var groupsButton: DrawerButton!
+    @IBOutlet weak var signOutButton: DrawerButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +35,8 @@ class LeftViewController: UIViewController {
             profileImage.makeProfileFormat()
             profileImage.image = image
         }
+        
+        self.slideMenuController()?.delegate = self
         
         
         // Enable profile picture tapping
@@ -84,5 +90,27 @@ class LeftViewController: UIViewController {
     func profileTapped() {
         self.slideMenuController()?.changeMainViewController(self.profileViewController, close: true)
     }
+    
+//    func leftWillOpen() {
+//        feedButton.center.x = self.view.center.x - self.view.bounds.width
+//        familyButton.center.x = self.view.center.x - self.view.bounds.width
+//        groupsButton.center.x = self.view.center.x - self.view.bounds.width
+//        signOutButton.center.x = self.view.center.x - self.view.bounds.width
+//    }
+//    
+//    func leftDidOpen() {
+//        UIView.animate(withDuration: 0.1, animations: {
+//            self.feedButton.center.x += self.view.bounds.width - 28
+//        })
+//        UIView.animate(withDuration: 0.1, delay: 0.1 ,animations: {
+//            self.familyButton.center.x += self.view.bounds.width - 28
+//        })
+//        UIView.animate(withDuration: 0.1, delay: 0.2 ,animations: {
+//            self.groupsButton.center.x += self.view.bounds.width - 28
+//        })
+//        UIView.animate(withDuration: 0.1, delay: 0.3 ,animations: {
+//            self.signOutButton.center.x += self.view.bounds.width - 28
+//        })
+//    }
 
 }

@@ -30,7 +30,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         super.viewDidLoad()
         
         LoginViewController.listener = true
-        self.slideMenuController()?.delegate = self
+        //self.slideMenuController()?.delegate = self
         
         _ = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(updateDates), userInfo: nil, repeats: true)
         

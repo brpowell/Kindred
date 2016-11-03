@@ -30,6 +30,7 @@
 		938903031DC6E0C0000BD9CC /* PlaceholderUITextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 938903021DC6E0C0000BD9CC /* PlaceholderUITextView.xib */; };
 		9393D1261DC95B39004A8D44 /* FATextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393D1251DC95B39004A8D44 /* FATextField.swift */; };
 		9393D12A1DCAF732004A8D44 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393D1291DCAF732004A8D44 /* Alerts.swift */; };
+		93AABC3C1DCB094500DAE129 /* FAColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AABC3B1DCB094500DAE129 /* FAColor.swift */; };
 		93AF2CA81DAD7C9D00879A1C /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */; };
 		93B5923B1DAA2F5D000635C6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5923A1DAA2F5D000635C6 /* RegisterViewController.swift */; };
 		93B5923D1DAAB4FF000635C6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5923C1DAAB4FF000635C6 /* FeedViewController.swift */; };
@@ -80,6 +81,7 @@
 		938903021DC6E0C0000BD9CC /* PlaceholderUITextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceholderUITextView.xib; sourceTree = "<group>"; };
 		9393D1251DC95B39004A8D44 /* FATextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FATextField.swift; sourceTree = "<group>"; };
 		9393D1291DCAF732004A8D44 /* Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		93AABC3B1DCB094500DAE129 /* FAColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAColor.swift; sourceTree = "<group>"; };
 		93AF2CA71DAD7C9D00879A1C /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		93B5923A1DAA2F5D000635C6 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		93B5923C1DAAB4FF000635C6 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				932A98BD1DB94BB70020E1F1 /* FamilyController.swift */,
 				938903001DC6DEF3000BD9CC /* PlaceholderUITextView.swift */,
 				9393D1291DCAF732004A8D44 /* Alerts.swift */,
+				93AABC3B1DCB094500DAE129 /* FAColor.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				CA6C49BF1DBC1FF700E6EE40 /* AppDelegate.swift in Sources */,
 				933ACD8B1DAEDA2D00F616B5 /* PostViewController.swift in Sources */,
 				9328F36E1DA9CE5300F16E36 /* FamilyApp.xcdatamodeld in Sources */,
+				93AABC3C1DCB094500DAE129 /* FAColor.swift in Sources */,
 				2187E5E31DB5856F009C6266 /* ProfileViewController.swift in Sources */,
 				93F22B0F1DB184C100911478 /* Post.swift in Sources */,
 				932A98C01DB954900020E1F1 /* OtherProfileViewController.swift in Sources */,

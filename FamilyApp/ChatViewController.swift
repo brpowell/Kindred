@@ -29,6 +29,8 @@ final class ChatViewController: JSQMessagesViewController {
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
+//        self.collectionView.backgroundColor = FAColor.blueLight
+        
         observeMessages()
     }
     
@@ -53,13 +55,17 @@ final class ChatViewController: JSQMessagesViewController {
     //Messages from current user
     private func setupOutgoingBubble() -> JSQMessagesBubbleImage {
         let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-        return bubbleImageFactory!.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
+//        let color = UIColor.jsq_messageBubbleBlue()
+        let color = FAColor.blueMedium
+        return bubbleImageFactory!.outgoingMessagesBubbleImage(with: color)
     }
     
     //Messages from others
     private func setupIncomingBubble() -> JSQMessagesBubbleImage {
         let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-        return bubbleImageFactory!.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
+//        let color = UIColor.jsq_messageBubbleLightGray()
+        let color = FAColor.lightGreen
+        return bubbleImageFactory!.incomingMessagesBubbleImage(with: color)
     }
     
     //Color of text bubbles
