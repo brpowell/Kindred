@@ -201,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				210262061DCBC7FC00389D8D /* SettingsViewController.swift */,
+				2187E5E21DB5856F009C6266 /* ProfileViewController.swift */,
+				93177DC11DAB0D080072B80E /* LeftViewController.swift */,
 				CA82FEF71DC9204900A4B485 /* ProfileActivityViewController.swift */,
 				CA82FEF81DC9204900A4B485 /* ProfileContactsViewController.swift */,
 				CA82FEF91DC9204900A4B485 /* ProfileInfoViewController.swift */,
@@ -217,10 +219,8 @@
 				93C3D2801DB4421D002900DA /* TreeViewController.swift */,
 				93C3D2821DB44230002900DA /* SuggestionsViewController.swift */,
 				93CBEB4F1DB9A08200743E37 /* RelationPopoverViewController.swift */,
-				2187E5E21DB5856F009C6266 /* ProfileViewController.swift */,
 				932A98BF1DB954900020E1F1 /* OtherProfileViewController.swift */,
 				9328F3671DA9CE5300F16E36 /* LoginViewController.swift */,
-				93177DC11DAB0D080072B80E /* LeftViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

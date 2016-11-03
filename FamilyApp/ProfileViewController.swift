@@ -29,15 +29,10 @@ class ProfileViewController: UIViewController {
             picture.image = image
         }
         
-        
-        Database.db.getContacts()
-        Database.db.getGroupMembers(groupId: "-KUYam-BTTbSKf4NwVd-")
-    
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
     }
 
     override func didReceiveMemoryWarning() {
