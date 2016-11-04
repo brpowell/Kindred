@@ -38,7 +38,7 @@ class SuggestionTableViewCell: UITableViewCell {
     }
     
     @IBAction func pressAdd(_ sender: Any) {
-        print("ADD A FUCKING CONTACT!!!!!")
+        addButton.isEnabled = false;
         delegate?.addNewContact(conIndex: index)
     }
     
