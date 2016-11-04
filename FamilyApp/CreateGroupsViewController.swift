@@ -12,10 +12,11 @@ import Firebase
 class CreateGroupsViewController: InputViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var groupNameField: FATextField!
-    
     @IBOutlet weak var tableView: UITableView!
+    
     var ref: FIRDatabaseReference!
     var contacts = [Contact]()
+    var selectedContacts = [Bool]()
     let textCellIdentifier = "contactCell"
     
     override func viewDidLoad() {
@@ -29,6 +30,7 @@ class CreateGroupsViewController: InputViewController, UITableViewDataSource, UI
                 let contact = Contact(snapshot: snap)
                 
                 self.contacts.append(contact)
+                self.selectedContacts.append(false)
                 self.tableView.reloadData()
             }
         })
@@ -45,16 +47,23 @@ class CreateGroupsViewController: InputViewController, UITableViewDataSource, UI
     @IBAction func onCreateGroupButton(_ sender: AnyObject) {
         let userId = Database.user.uid
         let groupName = groupNameField.textField.text!
+        
         if (!groupName.isEmpty) {
-            Database.db.createGroup(groupName: groupNameField.textField.text!, userId: userId)
-
-        } else {
+            let groupId = Database.db.createGroup(groupName: groupNameField.textField.text!, userId: userId)
+            for index in 0...selectedContacts.count-1 {
+                if (selectedContacts[index]) {
+                    Database.db.addMemberToGroup(groupId: groupId, userId: contacts[index].uid)
+                }
+            }
             
-            Alerts.okError(title: "No Members", message: "Please select 1 or more to join your group", viewController: self)
+            Alerts.okError(title: "Group Created", message: "Members selected have been added to the group", viewController: self)
+            
+        } else {
+            Alerts.okError(title: "No Name", message: "Please enter a group name", viewController: self)
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    private func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
@@ -85,8 +94,15 @@ class CreateGroupsViewController: InputViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.backgroundColor = UIColor.clear
+        let row = indexPath.row
+        selectedContacts[row] = true
     }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        selectedContacts[row] = false
+    }
+    
+    
     
 }
