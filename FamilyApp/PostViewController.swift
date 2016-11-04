@@ -144,10 +144,18 @@ class PostViewController: InputViewController, UITextViewDelegate, UINavigationC
     }
     
     @IBAction func onTakePhoto(_ sender: AnyObject) {
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .camera
-        
-        present(imagePicker, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            self.imagePicker.cameraCaptureMode = .photo
+            self.imagePicker.modalPresentationStyle = .fullScreen
+            self.present(self.imagePicker, animated: true, completion: nil)
+        } else {
+            let alertVC = UIAlertController(title: "No Camera", message: "Sorry, this device has no camera", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style:.default, handler: nil)
+            alertVC.addAction(okAction)
+            self.present(alertVC, animated: true, completion: nil)
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

@@ -1052,27 +1052,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZK-DH-lgx" customClass="PlaceholderUITextView" customModule="FamilyApp" customModuleProvider="target">
-                                <rect key="frame" x="16" y="72" width="343" height="557"/>
+                                <rect key="frame" x="16" y="72" width="343" height="551"/>
                                 <color key="backgroundColor" red="0.71764705880000002" green="0.3921568627" blue="0.1058823529" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Share with your contacts."/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="B64-eY-Ecv">
-                                <rect key="frame" x="0.0" y="637" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="631" width="375" height="36"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kre-a6-pIw" userLabel="addPhotoButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="30"/>
-                                        <color key="backgroundColor" red="0.72156862749999995" green="0.91372549020000005" blue="0.52549019610000003" alpha="0.42340874233128833" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Set Photo"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="36"/>
+                                        <color key="backgroundColor" red="0.098039215690000001" green="0.40000000000000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="Set Photo">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="onAddPhoto:" destination="FNT-Ge-M6B" eventType="touchUpInside" id="k6K-jZ-xFg"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZW1-Xb-7AJ" userLabel="takePhotoButton">
-                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="30"/>
-                                        <color key="backgroundColor" red="0.72156862749999995" green="0.91372549020000005" blue="0.52549019610000003" alpha="0.46012269938650308" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Take Photo"/>
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="36"/>
+                                        <color key="backgroundColor" red="0.20000000000000001" green="0.65098039220000004" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="Take Photo">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="onTakePhoto:" destination="FNT-Ge-M6B" eventType="touchUpInside" id="HFW-nU-6up"/>
                                         </connections>
@@ -1149,6 +1155,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.20000000000000001" green="0.65098039220000004" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="Ez6-DV-DgL" kind="relationship" relationship="viewControllers" id="TVa-cE-EjA"/>
