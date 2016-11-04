@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SuggestionsViewController: FamilyController, UITableViewDataSource, UITableViewDelegate {
+class SuggestionsViewController: FamilyController, UITableViewDataSource, UITableViewDelegate, AddContactDelegate {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -42,9 +42,10 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
                     for contact in snapshot.children {
                         let contact = Contact(snapshot: contact as! FIRDataSnapshot)
                         if !contacts.contains(contact) {
-                        
+                            if !(contact.uid == FIRAuth.auth()?.currentUser?.uid) {
                         let sug = Suggestion(name: contact.name, uid: contact.uid, relationship: "Potential Family Relationship")
                         newSuggestions.append(sug)
+                            }
                         }
                     }
                     for suggest in newSuggestions {
@@ -83,10 +84,31 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         let row = indexPath.row
         cell.nameLabel.text = suggestions[row].name
         cell.relationshipLabel.text = suggestions[row].relationship
+        cell.index = row
+        cell.delegate = self
+        
+
         
         return cell
     }
-
+    
+    func addNewContact(conIndex: Int) {
+        let myUID = FIRAuth.auth()?.currentUser?.uid
+        let suggestion = suggestions[conIndex]
+        let otherUid = suggestion.uid
+        let newContactRef = Database.contactsRef.child(myUID!).child(otherUid)
+        let selfContactRef = Database.contactsRef.child(otherUid).child(myUID!)
+        let contactName = suggestions[conIndex].name
+        let selfName = FIRAuth.auth()?.currentUser?.displayName
+        let revRelationship = "suggested Relationship"
+        let relationship = "suggested Relationship"
+        let newContact = Contact(name: contactName, relationship: relationship, uid: otherUid)
+        let selfContact = Contact(name: selfName!, relationship: revRelationship, uid: myUID!)
+        newContactRef.setValue(newContact.toAnyObject())
+        selfContactRef.setValue(selfContact.toAnyObject())
+        suggestions.remove(at: conIndex)
+        print("Contact added!")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

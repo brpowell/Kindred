@@ -428,6 +428,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="0.24705882352941178" green="0.65490196078431373" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SuggestionTableViewCell" rowHeight="80" id="gyd-Tt-00D" customClass="SuggestionTableViewCell" customModule="FamilyApp">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
@@ -457,15 +458,21 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lp2-wZ-hj1">
                                                     <rect key="frame" x="311" y="14" width="56" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                                    <color key="backgroundColor" red="0.14901960784313725" green="0.40392156862745099" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <state key="normal" title="Add"/>
+                                                    <state key="normal" title="Add">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="pressAdd:" destination="gyd-Tt-00D" eventType="touchUpInside" id="ZQp-fP-N9b"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addButton" destination="lp2-wZ-hj1" id="g6M-yG-m6g"/>
                                             <outlet property="nameLabel" destination="oXv-t1-YlV" id="0hm-ex-uYc"/>
+                                            <outlet property="profilePic" destination="Xa9-x5-P9H" id="43B-BK-Usb"/>
                                             <outlet property="relationshipLabel" destination="DSZ-3X-hxB" id="h8y-2Q-fPV"/>
                                         </connections>
                                     </tableViewCell>
@@ -1600,7 +1607,7 @@
         <image name="uncheckedIcon" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yHC-1o-TE9"/>
+        <segue reference="taL-9Y-Skv"/>
         <segue reference="4jI-j3-2Ab"/>
     </inferredMetricsTieBreakers>
 </document>
