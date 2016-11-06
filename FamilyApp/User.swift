@@ -19,8 +19,18 @@ class User {
     var photoUrl: URL?
     var photo: UIImage?
     var gender: String
+    var posts: [String: Post]?
     
     static var activeUserImage: UIImage?
+    
+    init() {
+        firstName = ""
+        lastName = ""
+        email = ""
+        birthday = ""
+        gender = ""
+        uid = ""
+    }
     
     init(authData: FIRUser, firstName: String, lastName: String, birthday: String, gender: String) {
         self.uid = authData.uid
@@ -74,6 +84,13 @@ class User {
             "birthday": birthday,
             "gender": gender
         ]
+    }
+    
+    func hasProfileFields() -> Bool {
+        if firstName != "" && lastName != "" && email != "" && birthday != "" && gender != "" && uid != "" {
+            return true
+        }
+        return false
     }
     
     func addContact(user: User, relationship: String) {

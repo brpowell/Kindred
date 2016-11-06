@@ -31,28 +31,44 @@ class FeedCell: UICollectionViewCell {
                 profileImageView.image = UIImage(named: "profile")
             }
             
-            let uid = (post?.uid)!
+            // Add user to user cache if they don't exist, save their post
+            let uid = NSString(string: (post?.uid)!)
+            var user = Database.userCache.object(forKey: uid)
+            if user != nil {
+                user?.posts?[(post?.key)!] = post
+            }
+            else {
+                let name = post?.name?.components(separatedBy: " ")
+                user = User()
+                user?.firstName = (name?[0])!
+                user?.lastName = (name?[1])!
+                user?.posts?[(post?.key)!] = post
+                Database.userCache.setObject(user!, forKey: uid)
+            }
             
-            // Load the profile image
-            if let image = Database.profileImageCache.object(forKey: NSString(string: uid)) {
+            // Check if user has a profile image downloaded, if not fetch one and add to cache
+            if let image = user?.photo {
                 profileImageView.image = image
             }
             else {
-                let profileImageRef = Database.profileImagesRef.child(uid)
-                profileImageRef.data(withMaxSize: 1024*1024) { data, error in
+                let profileImageRef = Database.profileImagesRef.child(uid as String)
+                profileImageRef.data(withMaxSize: Database.maxDataSize, completion: { data, error in
                     if error != nil {
-                        print(error)
+                        print(error!)
                     }
                     else {
                         DispatchQueue.main.async {
                             let image = UIImage(data: data!)
-                            let key: NSString = NSString(string: uid)
-                            Database.profileImageCache.setObject(image!, forKey: key)
+                            user?.photo = image
                             self.profileImageView.image = image
+                            Database.userCache.object(forKey: uid)?.posts?[(self.post?.key)!] = self.post
                         }
                     }
-                }
+                })
             }
+            
+            
+            
             
             // Load post image if one exists
             if (post?.hasImage)! {
@@ -76,6 +92,50 @@ class FeedCell: UICollectionViewCell {
                     }
                 }
             }
+            
+//            // Load the profile image
+//            if let image = Database.profileImageCache.object(forKey: NSString(string: uid)) {
+//                profileImageView.image = image
+//            }
+//            else {
+//                let profileImageRef = Database.profileImagesRef.child(uid)
+//                profileImageRef.data(withMaxSize: 1024*1024) { data, error in
+//                    if error != nil {
+//                        print(error)
+//                    }
+//                    else {
+//                        DispatchQueue.main.async {
+//                            let image = UIImage(data: data!)
+//                            let key: NSString = NSString(string: uid)
+//                            Database.profileImageCache.setObject(image!, forKey: key)
+//                            self.profileImageView.image = image
+//                        }
+//                    }
+//                }
+//            }
+//            
+//            // Load post image if one exists
+//            if (post?.hasImage)! {
+//                if let image = FeedCell.postImageCache.object(forKey: NSString(string: (self.post?.key)!)) {
+//                    postImageView.image = image
+//                }
+//                else {
+//                    let postImageRef = Database.postImagesRef.child((post?.key)!)
+//                    postImageRef.data(withMaxSize: 1024*1024) { data, error in
+//                        if error != nil {
+//                            print(error)
+//                        }
+//                        else {
+//                            DispatchQueue.main.async {
+//                                let image = UIImage(data: data!)
+//                                let key: NSString = NSString(string: (self.post?.key)!)
+//                                FeedCell.postImageCache.setObject(image!, forKey: key)
+//                                self.postImageView.image = image
+//                            }
+//                        }
+//                    }
+//                }
+//            }
             
             setupViews()
         }

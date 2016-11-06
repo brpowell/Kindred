@@ -70,6 +70,8 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.alwaysBounceVertical = true
         collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        
+        print(Database.userCache)
     }
     
     // Enable/disable scrolling depending on drawer state

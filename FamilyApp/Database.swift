@@ -12,7 +12,6 @@ import Firebase
 class Database {
     
     var ref: FIRDatabaseReference!
-    let storageUrl = "gs://familyapp-e0bae.appspot.com"
     
     static let db = Database()
     static var user: User!
@@ -24,6 +23,9 @@ class Database {
     static let profileImagesRef = FIRStorage.storage().reference(withPath: "profileImages")
     
     static var profileImageCache = NSCache<NSString, UIImage>()
+    
+    static let maxDataSize: Int64 = 1024 * 1024
+    static var userCache = NSCache<NSString, User>()
     
     private init() {
         getCurrentUser()
