@@ -11,6 +11,9 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var switchOne: UISwitch!
+    @IBOutlet weak var switchTwo: UISwitch!
+    @IBOutlet weak var switchThree: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +21,12 @@ class SettingsViewController: UIViewController {
         containerView.layer.borderColor = FAColor.green.cgColor
         containerView.layer.borderWidth = 2.0
         containerView.layer.cornerRadius = 6.0
+        
+        if (let val = UserDefaults.standard.bool(forKey: "settingOne")) {
+            switchOne.isOn = val
+        } else {
+            switchOne.isOn = true
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -32,4 +41,17 @@ class SettingsViewController: UIViewController {
     @IBAction func onMenuButton(_ sender: Any) {
         self.slideMenuController()?.openLeft()
     }
+    
+    @IBAction func changeSwitchOne(_ sender: AnyObject) {
+        if (switchOne.isOn) {
+            UserDefaults.standard.set(true, forKey: "settingOne")
+        } else {
+            UserDefaults.standard.set(false, forKey: "settingOne")
+        }
+        
+        print(switchOne.isOn)
+    }
+    
+    
+    
 }
