@@ -22,10 +22,22 @@ class SettingsViewController: UIViewController {
         containerView.layer.borderWidth = 2.0
         containerView.layer.cornerRadius = 6.0
         
-        if (let val = UserDefaults.standard.bool(forKey: "settingOne")) {
-            switchOne.isOn = val
+        if (UserDefaults.standard.object(forKey: "settingOne") != nil) {
+            self.switchOne.isOn = UserDefaults.standard.bool(forKey: "settingOne")
         } else {
-            switchOne.isOn = true
+            self.switchOne.isOn = true
+        }
+        
+        if (UserDefaults.standard.object(forKey: "settingTwo") != nil) {
+            self.switchTwo.isOn = UserDefaults.standard.bool(forKey: "settingTwo")
+        } else {
+            self.switchTwo.isOn = true
+        }
+        
+        if (UserDefaults.standard.object(forKey: "settingThree") != nil) {
+            self.switchThree.isOn = UserDefaults.standard.bool(forKey: "settingThree")
+        } else {
+            self.switchThree.isOn = true
         }
     }
 
@@ -48,10 +60,22 @@ class SettingsViewController: UIViewController {
         } else {
             UserDefaults.standard.set(false, forKey: "settingOne")
         }
-        
-        print(switchOne.isOn)
     }
     
+    @IBAction func changeSwitchTwo(_ sender: AnyObject) {
+        if (switchTwo.isOn) {
+            UserDefaults.standard.set(true, forKey: "settingTwo")
+        } else {
+            UserDefaults.standard.set(false, forKey: "settingTwo")
+        }
+    }
     
+    @IBAction func changeSwitchThree(_ sender: AnyObject) {
+        if (switchThree.isOn) {
+            UserDefaults.standard.set(true, forKey: "settingThree")
+        } else {
+            UserDefaults.standard.set(false, forKey: "settingThree")
+        }
+    }
     
 }
