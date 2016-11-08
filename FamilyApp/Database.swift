@@ -103,7 +103,7 @@ class Database {
                         "settingTwo": true,
                         "settingThree": true ]
         ref = FIRDatabase.database().reference(withPath: "settings")
-        ref.setValue(["\(Database.user.uid)": initial])
+        ref.updateChildValues(["\(Database.user.uid)": initial])
     }
     
     func deleteGroup(groupId: String) {
