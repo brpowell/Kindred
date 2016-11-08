@@ -1,4 +1,4 @@
-# Family App (Working Title)
+# Kindred - Family App
 
 This project has dependencies that can be installed from Cocoapods. If you don't have the package manager installed, follow the guide here https://cocoapods.org/
 
