@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SettingsViewController: UIViewController {
 
@@ -14,6 +15,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var switchOne: UISwitch!
     @IBOutlet weak var switchTwo: UISwitch!
     @IBOutlet weak var switchThree: UISwitch!
+    let ref = FIRDatabase.database().reference(withPath: "settings").child(Database.user.uid)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,23 +24,30 @@ class SettingsViewController: UIViewController {
         containerView.layer.borderWidth = 2.0
         containerView.layer.cornerRadius = 6.0
         
-        if (UserDefaults.standard.object(forKey: "settingOne") != nil) {
-            self.switchOne.isOn = UserDefaults.standard.bool(forKey: "settingOne")
-        } else {
-            self.switchOne.isOn = true
-        }
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            if (snapshot.exists()) {
+                let settings = Settings(snapshot: snapshot)
+                self.switchOne.isOn = settings.settingOne!
+                self.switchTwo.isOn = settings.settingTwo!
+                self.switchThree.isOn = settings.settingThree!
+                
+            } else {
+                self.switchOne.isOn = true
+                self.switchTwo.isOn = true
+                self.switchThree.isOn = true
+                Database.db.createSettings()
+            }
+        })
         
-        if (UserDefaults.standard.object(forKey: "settingTwo") != nil) {
-            self.switchTwo.isOn = UserDefaults.standard.bool(forKey: "settingTwo")
-        } else {
-            self.switchTwo.isOn = true
-        }
         
-        if (UserDefaults.standard.object(forKey: "settingThree") != nil) {
-            self.switchThree.isOn = UserDefaults.standard.bool(forKey: "settingThree")
-        } else {
-            self.switchThree.isOn = true
-        }
+        
+//        if (UserDefaults.standard.object(forKey: "settingOne") != nil) {
+//            self.switchOne.isOn = UserDefaults.standard.bool(forKey: "settingOne")
+//        } else {
+//            self.switchOne.isOn = true
+//        }
+//        UserDefaults.standard.set(false, forKey: "settingThree")
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -47,7 +56,6 @@ class SettingsViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func onMenuButton(_ sender: Any) {
@@ -56,25 +64,25 @@ class SettingsViewController: UIViewController {
     
     @IBAction func changeSwitchOne(_ sender: AnyObject) {
         if (switchOne.isOn) {
-            UserDefaults.standard.set(true, forKey: "settingOne")
+            ref.updateChildValues(["settingOne": true])
         } else {
-            UserDefaults.standard.set(false, forKey: "settingOne")
+            ref.updateChildValues(["settingOne": false])
         }
     }
     
     @IBAction func changeSwitchTwo(_ sender: AnyObject) {
         if (switchTwo.isOn) {
-            UserDefaults.standard.set(true, forKey: "settingTwo")
+            ref.updateChildValues(["settingTwo": true])
         } else {
-            UserDefaults.standard.set(false, forKey: "settingTwo")
+            ref.updateChildValues(["settingTwo": false])
         }
     }
     
     @IBAction func changeSwitchThree(_ sender: AnyObject) {
         if (switchThree.isOn) {
-            UserDefaults.standard.set(true, forKey: "settingThree")
+            ref.updateChildValues(["settingThree": true])
         } else {
-            UserDefaults.standard.set(false, forKey: "settingThree")
+            ref.updateChildValues(["settingThree": false])
         }
     }
     

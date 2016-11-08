@@ -10,6 +10,7 @@
 		1CB08E27C600BB5C4DB99905 /* Pods_FamilyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F58B8DF37F190F1658208E /* Pods_FamilyApp.framework */; };
 		210262071DCBC7FC00389D8D /* VC_Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210262061DCBC7FC00389D8D /* VC_Settings.swift */; };
 		216692831DB9462400D357F7 /* VC_Groups_Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216692821DB9462400D357F7 /* VC_Groups_Create.swift */; };
+		21706C631DD253B10056F60E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706C621DD253B10056F60E /* Settings.swift */; };
 		2187E5E31DB5856F009C6266 /* VC_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2187E5E21DB5856F009C6266 /* VC_Profile.swift */; };
 		2187E5E51DB5867B009C6266 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2187E5E41DB5867B009C6266 /* Database.swift */; };
 		218F57D41DC7E43300F6800B /* VC_Groups_Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218F57D31DC7E43300F6800B /* VC_Groups_Chat.swift */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		210262061DCBC7FC00389D8D /* VC_Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VC_Settings.swift; sourceTree = "<group>"; };
 		216692821DB9462400D357F7 /* VC_Groups_Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VC_Groups_Create.swift; sourceTree = "<group>"; };
+		21706C621DD253B10056F60E /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		2187E5E21DB5856F009C6266 /* VC_Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VC_Profile.swift; sourceTree = "<group>"; };
 		2187E5E41DB5867B009C6266 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		218F57D31DC7E43300F6800B /* VC_Groups_Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VC_Groups_Chat.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				93F22B0E1DB184C100911478 /* Post.swift */,
 				CAA355DC1DB87B4C003EA66F /* Suggestion.swift */,
 				93B592451DAAC5C7000635C6 /* User.swift */,
+				21706C621DD253B10056F60E /* Settings.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				CA82FEFA1DC9204900A4B485 /* VC_Profile_Activity.swift in Sources */,
 				93177DC01DAB0B450072B80E /* SlideMenuController.swift in Sources */,
 				9393D12A1DCAF732004A8D44 /* Alerts.swift in Sources */,
+				21706C631DD253B10056F60E /* Settings.swift in Sources */,
 				93AF2CA81DAD7C9D00879A1C /* VC_Family_Contacts.swift in Sources */,
 				93B592461DAAC5C7000635C6 /* User.swift in Sources */,
 				CA82FEFB1DC9204900A4B485 /* VC_Profile_Contacts.swift in Sources */,

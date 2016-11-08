@@ -16,7 +16,6 @@ class Database {
     static let db = Database()
     static var user: User!
     
-    
     static let contactsRef = FIRDatabase.database().reference(withPath: "contacts")
     static let usersRef = FIRDatabase.database().reference(withPath: "users")
     static let postImagesRef = FIRStorage.storage().reference(withPath: "postImages")
@@ -97,6 +96,14 @@ class Database {
         //Add current user to the group he/she just created
         addMemberToGroup(groupId: key, userId: userId)
         return key
+    }
+    
+    func createSettings() {
+        let initial = [ "settingOne": true,
+                        "settingTwo": true,
+                        "settingThree": true ]
+        ref = FIRDatabase.database().reference(withPath: "settings")
+        ref.setValue(["\(Database.user.uid)": initial])
     }
     
     func deleteGroup(groupId: String) {
