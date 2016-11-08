@@ -127,7 +127,7 @@ final class ChatViewController: JSQMessagesViewController {
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         
-        messageRef = FIRDatabase.database().reference(withPath: "groupchat").child("\(group!.groupId)")
+        messageRef = FIRDatabase.database().reference(withPath: "groupchats").child("\(group!.groupId)")
         let itemRef = messageRef?.childByAutoId()
         let messageItem = [
             "senderId": senderId!,
@@ -141,7 +141,7 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     private func observeMessages() {
-        messageRef = FIRDatabase.database().reference(withPath: "groupchat").child("\(group!.groupId)")
+        messageRef = FIRDatabase.database().reference(withPath: "groupchats").child("\(group!.groupId)")
         let messageQuery = messageRef?.queryLimited(toLast:25)
         
         newMessageRefHandle = messageQuery?.observe(.childAdded, with: { (snapshot) -> Void in
