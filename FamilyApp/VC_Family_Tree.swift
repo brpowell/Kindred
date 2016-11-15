@@ -15,21 +15,30 @@ class TreeViewController: FamilyController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: 100,y: 100), radius: CGFloat(20), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = circlePath.cgPath
-        //change the fill color
-        shapeLayer.fillColor = UIColor.blue.cgColor
-        //you can change the stroke color
-        shapeLayer.strokeColor = UIColor.red.cgColor
-        //you can change the line width
-        shapeLayer.lineWidth = 3.0
-        view.layer.addSublayer(shapeLayer)
+//        let circlePath = UIBezierPath(arcCenter: CGPoint(x: 100,y: 100), radius: CGFloat(20), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
+//        let shapeLayer = CAShapeLayer()
+//        shapeLayer.path = circlePath.cgPath
+//        //change the fill color
+//        shapeLayer.fillColor = UIColor.blue.cgColor
+//        //you can change the stroke color
+//        shapeLayer.strokeColor = UIColor.red.cgColor
+//        //you can change the line width
+//        shapeLayer.lineWidth = 3.0
+//        view.layer.addSublayer(shapeLayer)
 
         
-        let size:CGFloat = 35.0 // 35.0 chosen arbitrarily
+        
+        
+        drawFamilyMember(name: Database.user.firstName, xCoor: 200, yCoor: 200)
+        
+        
+        
+    }
+    
+    func drawFamilyMember(name: String, xCoor: Int, yCoor: Int) {
+        let size:CGFloat = 60.0 // 35.0 chosen arbitrarily
         let countLabel = UILabel()
-        countLabel.text = "Uyviet"
+        countLabel.text = name
         countLabel.textColor = UIColor.green
         countLabel.textAlignment = .center
         countLabel.font = UIFont.systemFont(ofSize: 14.0)
@@ -38,9 +47,8 @@ class TreeViewController: FamilyController {
         countLabel.layer.borderWidth = 3.0
         countLabel.layer.backgroundColor = UIColor.clear.cgColor
         countLabel.layer.borderColor = UIColor.green.cgColor
-        countLabel.center = CGPoint(x: 200,y :200)
+        countLabel.center = CGPoint(x: xCoor,y: yCoor)
         self.view.addSubview(countLabel)
-        
     }
     
     override func didReceiveMemoryWarning() {
