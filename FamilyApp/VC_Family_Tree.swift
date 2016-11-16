@@ -31,7 +31,7 @@ class TreeViewController: FamilyController {
         let box = TreeView()
         box.center = CGPoint(x: 100,y: 100)
         box.proPicURL = FIRAuth.auth()?.currentUser?.photoURL
-        box.setup(name: "ICEEE")
+        box.setup(name: Database.user.firstName)
         self.view.addSubview(box)
         
         

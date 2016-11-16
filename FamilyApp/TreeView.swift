@@ -14,14 +14,14 @@ class TreeView: UIView {
     var name: String?
     var proPicURL: URL?
     var profilePicture = UIImageView()
-    var box = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+    var box = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 100))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         box.backgroundColor = UIColor.clear
         box.layer.borderColor = UIColor.green.cgColor
-        box.layer.borderWidth = 10
+        box.layer.borderWidth = 1
         
         
         addSubview(box)
@@ -32,10 +32,11 @@ class TreeView: UIView {
     }
     
     func setup(name: String) {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
-        label.center = CGPoint(x: 100, y: 170)
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 10))
+        label.center = CGPoint(x: 25, y: 90)
         label.textAlignment = .center
-        label.text = "ICE"
+        label.text = name
+        label.font = label.font.withSize(10)
         label.textColor = UIColor.black
         addSubview(label)
     }
