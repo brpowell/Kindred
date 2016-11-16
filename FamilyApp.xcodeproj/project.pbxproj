@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CB08E27C600BB5C4DB99905 /* Pods_FamilyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F58B8DF37F190F1658208E /* Pods_FamilyApp.framework */; };
-		210125C11DDB93C10078AE44 /* FamilyMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210125C01DDB93C10078AE44 /* FamilyMemberView.swift */; };
+		210125C11DDB93C10078AE44 /* TreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210125C01DDB93C10078AE44 /* TreeView.swift */; };
 		210262071DCBC7FC00389D8D /* VC_Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210262061DCBC7FC00389D8D /* VC_Settings.swift */; };
 		216692831DB9462400D357F7 /* VC_Groups_Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216692821DB9462400D357F7 /* VC_Groups_Create.swift */; };
 		21706C631DD253B10056F60E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21706C621DD253B10056F60E /* Settings.swift */; };
@@ -58,7 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		210125C01DDB93C10078AE44 /* FamilyMemberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyMemberView.swift; sourceTree = "<group>"; };
+		210125C01DDB93C10078AE44 /* TreeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeView.swift; sourceTree = "<group>"; };
 		210262061DCBC7FC00389D8D /* VC_Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VC_Settings.swift; sourceTree = "<group>"; };
 		216692821DB9462400D357F7 /* VC_Groups_Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VC_Groups_Create.swift; sourceTree = "<group>"; };
 		21706C621DD253B10056F60E /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 				93F22B111DB1867D00911478 /* FeedView.swift */,
 				93595C231DB48553003BB505 /* LeftDrawerView.swift */,
 				CAA355DE1DB87ED9003EA66F /* SuggestionTableViewCell.swift */,
-				210125C01DDB93C10078AE44 /* FamilyMemberView.swift */,
+				210125C01DDB93C10078AE44 /* TreeView.swift */,
 				9393D1251DC95B39004A8D44 /* FATextField.swift */,
 			);
 			name = Views;
@@ -396,7 +396,7 @@
 				93B592431DAABB23000635C6 /* VC_Input.swift in Sources */,
 				93F22B151DB3FC7600911478 /* FeedCellHelpers.swift in Sources */,
 				93F22B171DB3FCA600911478 /* ImageHelpers.swift in Sources */,
-				210125C11DDB93C10078AE44 /* FamilyMemberView.swift in Sources */,
+				210125C11DDB93C10078AE44 /* TreeView.swift in Sources */,
 				CAA355D91DB72477003EA66F /* Contact.swift in Sources */,
 				93C3D2811DB4421D002900DA /* VC_Family_Tree.swift in Sources */,
 				93C3D2831DB44230002900DA /* VC_Family_Suggestions.swift in Sources */,

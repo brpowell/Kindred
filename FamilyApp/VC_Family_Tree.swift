@@ -28,28 +28,29 @@ class TreeViewController: FamilyController {
 //        view.layer.addSublayer(shapeLayer)
 
         
-        let box = FamilyMemberView()
+        let box = TreeView()
         box.center = CGPoint(x: 100,y: 100)
         box.proPicURL = FIRAuth.auth()?.currentUser?.photoURL
+        box.setup(name: "ICEEE")
         self.view.addSubview(box)
         
         
         
         
-        var xCoordinate = 200
-        var yCoordinate = 200
-        drawFamilyMember(name: Database.user.firstName, xCoor: 200, yCoor: 200)
-        
-        var ref: FIRDatabaseReference!
-        ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            for person in snapshot.children {
-                let snap = person as! FIRDataSnapshot
-                let user = Contact(snapshot: snap)
-                xCoordinate += 120
-                self.drawFamilyMember(name: user.name, xCoor: xCoordinate, yCoor: yCoordinate)
-            }
-        })
+//        var xCoordinate = 200
+//        var yCoordinate = 200
+//        drawFamilyMember(name: Database.user.firstName, xCoor: 200, yCoor: 200)
+//        
+//        var ref: FIRDatabaseReference!
+//        ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
+//        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+//            for person in snapshot.children {
+//                let snap = person as! FIRDataSnapshot
+//                let user = Contact(snapshot: snap)
+//                xCoordinate += 120
+//                self.drawFamilyMember(name: user.name, xCoor: xCoordinate, yCoor: yCoordinate)
+//            }
+//        })
     }
     
     func drawFamilyMember(name: String, xCoor: Int, yCoor: Int) {
