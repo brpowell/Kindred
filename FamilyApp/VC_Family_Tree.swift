@@ -22,13 +22,10 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
         scrollView.frame = view.bounds
         scrollView.contentSize = CGSize(width: 1000, height: 1000)      //change this dynamically later
         scrollView.delegate = self
-        
         containerView = UIView()
         containerView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
-
-        
         var xCoord = 100
-        let yCoord = 300
+        let yCoord = 200
         
         //Add the current user to the tree
         let box = TreeView()
