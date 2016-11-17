@@ -14,12 +14,7 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
     
     var scrollView: UIScrollView!
     var containerView: UIView!
-    
-    let relationships = [
-        "Mother", "Father", "Sister", "Brother",
-        "Aunt", "Uncle", "First Cousin", "Nephew", "Niece",
-        "Grandmother", "Grandfather", "Granddaughter", "Grandson"
-    ]
+    var relationships = [String : Int]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +59,18 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
     }
     
     func relationshipMap() {
-        print()
+        let define = [
+            "Mother", "Father", "Sister", "Brother",
+            "Maternal Grandmother", "Maternal Grandfather",
+            "Maternal Aunt", "Maternal Uncle", "Maternal Cousin", "Maternal Niece", "Maternal Nephew",
+            "Paternal Grandmother",  "Paternal Grandfather",
+            "Paternal Aunt",  "Paternal Uncle", "Paternal Cousin", "Paternal Niece", "Paternal Nephew"
+        ]
+    
+        relationships["Mother"] = 1
+        relationships["Father"] = 1
+    
+    
     }
     
     func drawFamilyMember(name: String, xCoor: Int, yCoor: Int) {
