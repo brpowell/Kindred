@@ -14,6 +14,12 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
     
     var scrollView: UIScrollView!
     var containerView: UIView!
+    
+    let relationships = [
+        "Mother", "Father", "Sister", "Brother",
+        "Aunt", "Uncle", "First Cousin", "Nephew", "Niece",
+        "Grandmother", "Grandfather", "Granddaughter", "Grandson"
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +31,7 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
         containerView = UIView()
         containerView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
         var xCoord = 100
-        let yCoord = 200
+        var yCoord = 200
         
         //Add the current user to the tree
         let box = TreeView()
@@ -36,16 +42,20 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
         var ref: FIRDatabaseReference!
         ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            for person in snapshot.children {
-                xCoord += 60
+            for snap in snapshot.children {
                 
-                let snap = person as! FIRDataSnapshot
-                let user = Contact(snapshot: snap)
+                let contact = Contact(snapshot: snap as! FIRDataSnapshot)
+                let person = TreeView()
+
+                if (contact.relationship == "Sister" || contact.relationship == "Brother") {
+                    xCoord += 60
+                } else {
+                    yCoord += 120
+                }
                 
-                let new = TreeView()
-                new.center = CGPoint(x: xCoord, y: yCoord)
-                new.setup(name: user.name)
-                self.containerView.addSubview(new)
+                person.center = CGPoint(x: xCoord, y: yCoord)
+                person.setup(name: contact.name)
+                self.containerView.addSubview(person)
             }
         })
         
