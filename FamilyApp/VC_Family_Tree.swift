@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreGraphics
-import SpriteKit
 import Firebase
 
 class TreeViewController: FamilyController, UIScrollViewDelegate {
@@ -19,15 +18,17 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        containerView = UIView()
         scrollView = UIScrollView(frame: view.bounds)
-        scrollView.backgroundColor = UIColor.white
-        scrollView.contentSize = CGSize(width: 1000, height: 1000)
+        scrollView.frame = view.bounds
+        scrollView.contentSize = CGSize(width: 1000, height: 1000)      //change this dynamically later
         scrollView.delegate = self
         
+        containerView = UIView()
+        containerView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
+
         
         var xCoord = 100
-        var yCoord = 100
+        let yCoord = 300
         
         //Add the current user to the tree
         let box = TreeView()
@@ -35,12 +36,11 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
         box.setup(name: Database.user.firstName)
         containerView.addSubview(box)
         
-        
         var ref: FIRDatabaseReference!
         ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for person in snapshot.children {
-                xCoord += 600
+                xCoord += 60
                 
                 let snap = person as! FIRDataSnapshot
                 let user = Contact(snapshot: snap)
@@ -52,18 +52,8 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
             }
         })
         
-        
-        
         scrollView.addSubview(containerView)
-        view.addSubview(scrollView)
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        scrollView.frame = view.bounds
-        containerView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
+        self.view.addSubview(scrollView)
     }
     
     func drawFamilyMember(name: String, xCoor: Int, yCoor: Int) {
