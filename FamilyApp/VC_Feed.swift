@@ -43,6 +43,9 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         NVActivityIndicatorView.DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME = 1000
         self.startAnimating()
         
+        collectionView!.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+//        self.collectionView?.contentInset =
+        
         let ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
         let ownName = Database.user.firstName + " " + Database.user.lastName
         var contacts: [String] = [ownName]
