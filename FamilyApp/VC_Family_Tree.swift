@@ -69,8 +69,18 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
     
         relationships["Mother"] = 1
         relationships["Father"] = 1
-    
-    
+        relationships["Sister"] = 0
+        relationships["Brother"] = 0
+        relationships["Maternal Grandmother"] = 2
+        relationships["Paternal Grandmother"] = 2
+        relationships["Maternal Aunt"] = 1
+        relationships["Paternal Aunt"] = 1
+        relationships["Maternal Uncle"] = 1
+        relationships["Paternal Uncle"] = 1
+        relationships["Maternal Grandfather"] = 2
+        relationships["Paternal Grandfather"] = 2
+        relationships["Maternal Cousin"] = 0
+        relationships["Paternal Cousin"] = 0
     }
     
     func drawFamilyMember(name: String, xCoor: Int, yCoor: Int) {
