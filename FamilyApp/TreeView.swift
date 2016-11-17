@@ -20,8 +20,8 @@ class TreeView: UIView {
         super.init(frame: frame)
         
         box.backgroundColor = UIColor.clear
-        box.layer.borderColor = UIColor.green.cgColor
-        box.layer.borderWidth = 1
+        box.layer.borderColor = UIColor(red:0.21, green:0.46, blue:0.83, alpha:1.0).cgColor
+        box.layer.borderWidth = 1.1
         addSubview(box)
     }
     
