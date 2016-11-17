@@ -63,6 +63,10 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
         self.view.addSubview(scrollView)
     }
     
+    func relationshipMap() {
+        print()
+    }
+    
     func drawFamilyMember(name: String, xCoor: Int, yCoor: Int) {
         let size:CGFloat = 60.0 // 35.0 chosen arbitrarily
         let countLabel = UILabel()
