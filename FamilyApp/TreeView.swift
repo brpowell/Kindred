@@ -22,8 +22,6 @@ class TreeView: UIView {
         box.backgroundColor = UIColor.clear
         box.layer.borderColor = UIColor.green.cgColor
         box.layer.borderWidth = 1
-        
-        
         addSubview(box)
     }
     
@@ -41,6 +39,4 @@ class TreeView: UIView {
         addSubview(label)
     }
 
-    
-    
 }

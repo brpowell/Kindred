@@ -197,10 +197,10 @@
 				9328F3711DA9CE5300F16E36 /* LaunchScreen.storyboard */,
 				9328F3691DA9CE5300F16E36 /* Main.storyboard */,
 				938903021DC6E0C0000BD9CC /* PlaceholderUITextView.xib */,
+				210125C01DDB93C10078AE44 /* TreeView.swift */,
 				93F22B111DB1867D00911478 /* FeedView.swift */,
 				93595C231DB48553003BB505 /* LeftDrawerView.swift */,
 				CAA355DE1DB87ED9003EA66F /* SuggestionTableViewCell.swift */,
-				210125C01DDB93C10078AE44 /* TreeView.swift */,
 				9393D1251DC95B39004A8D44 /* FATextField.swift */,
 			);
 			name = Views;

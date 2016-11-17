@@ -16,25 +16,33 @@ class TreeViewController: FamilyController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var xCoord = 100
+        var yCoord = 100
+        
+        //Add the current user to the tree
         let box = TreeView()
-        box.center = CGPoint(x: 100,y: 100)
-        box.proPicURL = FIRAuth.auth()?.currentUser?.photoURL
+        box.center = CGPoint(x: xCoord,y: yCoord)
         box.setup(name: Database.user.firstName)
         self.view.addSubview(box)
         
         
-        
-        
-
         var ref: FIRDatabaseReference!
         ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for person in snapshot.children {
+                xCoord += 60
+                
                 let snap = person as! FIRDataSnapshot
                 let user = Contact(snapshot: snap)
-                print(user)
+                
+                let new = TreeView()
+                new.center = CGPoint(x: xCoord, y: yCoord)
+                new.setup(name: user.name)
+                self.view.addSubview(new)
             }
         })
+        
+        
     }
     
     func drawFamilyMember(name: String, xCoor: Int, yCoor: Int) {
