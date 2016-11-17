@@ -11,10 +11,20 @@ import CoreGraphics
 import SpriteKit
 import Firebase
 
-class TreeViewController: FamilyController {
+class TreeViewController: FamilyController, UIScrollViewDelegate {
     
+    var scrollView: UIScrollView!
+    var containerView: UIView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        containerView = UIView()
+        scrollView = UIScrollView(frame: view.bounds)
+        scrollView.backgroundColor = UIColor.white
+        scrollView.contentSize = CGSize(width: 1000, height: 1000)
+        scrollView.delegate = self
+        
         
         var xCoord = 100
         var yCoord = 100
@@ -23,14 +33,14 @@ class TreeViewController: FamilyController {
         let box = TreeView()
         box.center = CGPoint(x: xCoord,y: yCoord)
         box.setup(name: Database.user.firstName)
-        self.view.addSubview(box)
+        containerView.addSubview(box)
         
         
         var ref: FIRDatabaseReference!
         ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for person in snapshot.children {
-                xCoord += 60
+                xCoord += 600
                 
                 let snap = person as! FIRDataSnapshot
                 let user = Contact(snapshot: snap)
@@ -38,11 +48,22 @@ class TreeViewController: FamilyController {
                 let new = TreeView()
                 new.center = CGPoint(x: xCoord, y: yCoord)
                 new.setup(name: user.name)
-                self.view.addSubview(new)
+                self.containerView.addSubview(new)
             }
         })
         
         
+        
+        scrollView.addSubview(containerView)
+        view.addSubview(scrollView)
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        scrollView.frame = view.bounds
+        containerView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
     }
     
     func drawFamilyMember(name: String, xCoor: Int, yCoor: Int) {
