@@ -23,6 +23,16 @@ class TreeView: UIView {
         box.layer.borderColor = UIColor(red:0.21, green:0.46, blue:0.83, alpha:1.0).cgColor
         box.layer.borderWidth = 1.1
         addSubview(box)
+        
+        
+        
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: 25, y: 30), radius: CGFloat(20), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = UIColor(red:0.21, green:0.46, blue:0.83, alpha:1.0).cgColor
+        shapeLayer.lineWidth = 1.1
+        layer.addSublayer(shapeLayer)
     }
     
     required init?(coder aDecoder: NSCoder) {
