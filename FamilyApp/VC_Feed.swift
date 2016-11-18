@@ -42,30 +42,50 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         NVActivityIndicatorView.DEFAULT_TYPE = .ballTrianglePath
         NVActivityIndicatorView.DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME = 1000
         self.startAnimating()
-
-        // Feed listener to get posts from Firebase
-        postsRef.observe(.value, with: { snapshot in
-            var newPosts: [Post] = []
-            var profilesToDownload: [String] = []
-            
-            for post in snapshot.children {
-                let post = Post(snapshot: post as! FIRDataSnapshot)
-                let uid = post.uid
-                
-                if let profileImage = self.profileCache[uid!] {
-                    post.profile = profileImage
+        
+        collectionView!.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+//        self.collectionView?.contentInset =
+        
+        let ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
+        let ownName = Database.user.firstName + " " + Database.user.lastName
+        var contacts: [String] = [ownName]
+        ref.observe(.value, with: { (snapshot) in
+            for snap in snapshot.children {
+                let snapshot = snap as! FIRDataSnapshot
+                let snapshotValue = snapshot.value as! [String: AnyObject]
+                if let name = snapshotValue["name"] as? String {
+                    contacts.append(name)
                 }
-                else {
-                    profilesToDownload.append(uid!)
-                }
-                
-                newPosts.append(post)
             }
-            
-            self.posts = newPosts.reversed()
-            self.collectionView?.reloadData()
-            self.stopAnimating()
+            // Feed listener to get posts from Firebase
+            self.postsRef.observe(.value, with: { snapshot in
+                var newPosts: [Post] = []
+                var profilesToDownload: [String] = []
+                
+                for post in snapshot.children {
+                    let post = Post(snapshot: post as! FIRDataSnapshot)
+                    if !contacts.contains(post.name!) {
+                        continue
+                    }
+                    let uid = post.uid
+                    
+                    if let profileImage = self.profileCache[uid!] {
+                        post.profile = profileImage
+                    }
+                    else {
+                        profilesToDownload.append(uid!)
+                    }
+                    
+                    newPosts.append(post)
+                }
+                
+                self.posts = newPosts.reversed()
+                self.collectionView?.reloadData()
+                self.stopAnimating()
+            })
+
         })
+
         
         collectionView?.alwaysBounceVertical = true
         collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
