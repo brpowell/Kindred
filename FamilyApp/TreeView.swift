@@ -19,13 +19,13 @@ class TreeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        //Draw the box that has the name and profile picture
         box.backgroundColor = UIColor.clear
         box.layer.borderColor = UIColor(red:0.21, green:0.46, blue:0.83, alpha:1.0).cgColor
         box.layer.borderWidth = 1.1
         addSubview(box)
         
-        
-        
+        //Draw the circle for the profile picture inside the box
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: 25, y: 30), radius: CGFloat(20), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = circlePath.cgPath

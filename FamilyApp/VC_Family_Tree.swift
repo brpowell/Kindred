@@ -14,7 +14,8 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
     
     var scrollView: UIScrollView!
     var containerView: UIView!
-    var relationships = [String : Int]()
+    var generationMap = [String : Int]()
+    var xCoordMap = [Int : Int]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,7 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
                 
                 let contact = Contact(snapshot: snap as! FIRDataSnapshot)
                 let person = TreeView()
-                let generation = self.relationships[contact.relationship]!
+                let generation = self.generationMap[contact.relationship]!
                 
                 var newY = yCoord
                 newY += generation*120
@@ -67,20 +68,20 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
             "Paternal Aunt",  "Paternal Uncle", "Paternal Cousin", "Paternal Niece", "Paternal Nephew"
         ]
     
-        relationships["Mother"] = -1
-        relationships["Father"] = -1
-        relationships["Sister"] = 0
-        relationships["Brother"] = 0
-        relationships["Maternal Grandmother"] = -2
-        relationships["Paternal Grandmother"] = -2
-        relationships["Maternal Aunt"] = -1
-        relationships["Paternal Aunt"] = -1
-        relationships["Maternal Uncle"] = -1
-        relationships["Paternal Uncle"] = -1
-        relationships["Maternal Grandfather"] = -2
-        relationships["Paternal Grandfather"] = -2
-        relationships["Maternal Cousin"] = 0
-        relationships["Paternal Cousin"] = 0
+        generationMap["Mother"] = -1
+        generationMap["Father"] = -1
+        generationMap["Sister"] = 0
+        generationMap["Brother"] = 0
+        generationMap["Maternal Grandmother"] = -2
+        generationMap["Paternal Grandmother"] = -2
+        generationMap["Maternal Aunt"] = -1
+        generationMap["Paternal Aunt"] = -1
+        generationMap["Maternal Uncle"] = -1
+        generationMap["Paternal Uncle"] = -1
+        generationMap["Maternal Grandfather"] = -2
+        generationMap["Paternal Grandfather"] = -2
+        generationMap["Maternal Cousin"] = 0
+        generationMap["Paternal Cousin"] = 0
     }
     
     func drawFamilyMember(name: String, xCoor: Int, yCoor: Int) {
