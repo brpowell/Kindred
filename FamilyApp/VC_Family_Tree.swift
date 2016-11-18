@@ -25,6 +25,7 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
         scrollView.delegate = self
         containerView = UIView()
         containerView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
+        relationshipMap()   //add relationships to the map for generation
         var xCoord = 100
         var yCoord = 200
         
@@ -41,14 +42,13 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
                 
                 let contact = Contact(snapshot: snap as! FIRDataSnapshot)
                 let person = TreeView()
-
-                if (contact.relationship == "Sister" || contact.relationship == "Brother") {
-                    xCoord += 60
-                } else {
-                    yCoord += 120
-                }
+                let generation = self.relationships[contact.relationship]!
                 
-                person.center = CGPoint(x: xCoord, y: yCoord)
+                var newY = yCoord
+                newY += generation*120
+                xCoord += 60
+                
+                person.center = CGPoint(x: xCoord, y: newY)
                 person.setup(name: contact.name)
                 self.containerView.addSubview(person)
             }
@@ -67,18 +67,18 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
             "Paternal Aunt",  "Paternal Uncle", "Paternal Cousin", "Paternal Niece", "Paternal Nephew"
         ]
     
-        relationships["Mother"] = 1
-        relationships["Father"] = 1
+        relationships["Mother"] = -1
+        relationships["Father"] = -1
         relationships["Sister"] = 0
         relationships["Brother"] = 0
-        relationships["Maternal Grandmother"] = 2
-        relationships["Paternal Grandmother"] = 2
-        relationships["Maternal Aunt"] = 1
-        relationships["Paternal Aunt"] = 1
-        relationships["Maternal Uncle"] = 1
-        relationships["Paternal Uncle"] = 1
-        relationships["Maternal Grandfather"] = 2
-        relationships["Paternal Grandfather"] = 2
+        relationships["Maternal Grandmother"] = -2
+        relationships["Paternal Grandmother"] = -2
+        relationships["Maternal Aunt"] = -1
+        relationships["Paternal Aunt"] = -1
+        relationships["Maternal Uncle"] = -1
+        relationships["Paternal Uncle"] = -1
+        relationships["Maternal Grandfather"] = -2
+        relationships["Paternal Grandfather"] = -2
         relationships["Maternal Cousin"] = 0
         relationships["Paternal Cousin"] = 0
     }
