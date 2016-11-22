@@ -32,6 +32,9 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Image rotation listener
+//        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
 
         LoginViewController.listener = true
         self.slideMenuController()?.delegate = self
@@ -43,8 +46,8 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         NVActivityIndicatorView.DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME = 1000
         self.startAnimating()
         
+        // Add padding to edges
         collectionView!.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-//        self.collectionView?.contentInset =
         
         let ref = FIRDatabase.database().reference(withPath: "contacts").child(Database.user.uid)
         let ownName = Database.user.firstName + " " + Database.user.lastName
@@ -85,7 +88,6 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             })
 
         })
-
         
         collectionView?.alwaysBounceVertical = true
         collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
@@ -123,8 +125,9 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         feedCell.nameLabel.text = nil
         feedCell.profileImageView.image = nil
         
-        // Load cell content
+        // Load cell content and set feed controller
         feedCell.post = posts[indexPath.item]
+        feedCell.feedController = self
         
         return feedCell
     }
@@ -144,6 +147,88 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             return CGSize(width: view.frame.width - 20, height: rect.height + knownHeight + 36)
         }
         return CGSize(width: view.frame.width, height: 200)
+    }
+    
+    
+    // Image zooming
+    let blackBackgroundView = UIView()
+    var postImageView: UIImageView?
+    let zoomImageView = UIImageView()
+    let navBarCoverView = UIView()
+    var zoomEnabled = false
+    
+    func animateImageView(postImageView: UIImageView) {
+        self.postImageView = postImageView
+        if let startingFrame = postImageView.superview?.convert(postImageView.frame, to: nil) {
+            postImageView.alpha = 0
+            
+            blackBackgroundView.frame = self.view.frame
+            blackBackgroundView.backgroundColor = UIColor.black
+            blackBackgroundView.alpha = 0
+            view.addSubview(blackBackgroundView)
+            
+            navBarCoverView.frame = CGRect(x: 0, y: 0, width: 1000, height: 20 + 44)
+            navBarCoverView.backgroundColor = UIColor.black
+            navBarCoverView.alpha = 0
+            
+            if let keyWindow = UIApplication.shared.keyWindow {
+                keyWindow.addSubview(navBarCoverView)
+            }
+            
+            zoomImageView.backgroundColor = UIColor.red
+            zoomImageView.frame = startingFrame
+            zoomImageView.isUserInteractionEnabled = true
+            zoomImageView.image = postImageView.image
+            zoomImageView.contentMode = .scaleAspectFill
+            zoomImageView.clipsToBounds = true
+            view.addSubview(zoomImageView)
+            
+            zoomEnabled = true
+            
+            blackBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(zoomOut)))
+            
+            UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .curveEaseIn, animations: {
+                let height = (self.view.frame.width / startingFrame.width) * startingFrame.height
+                
+                let y = self.view.frame.height / 2 - height / 2
+                
+                self.zoomImageView.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: height)
+                
+                self.blackBackgroundView.alpha = 1
+                
+                self.navBarCoverView.alpha = 1
+            }, completion: nil)
+
+        }
+    }
+    
+    func zoomOut() {
+        if let startingFrame = postImageView!.superview?.convert(postImageView!.frame, to: nil) {
+
+            UIView.animate(withDuration: 0.25, animations: {
+                self.zoomImageView.frame = startingFrame
+                self.blackBackgroundView.alpha = 0
+                self.navBarCoverView.alpha = 0
+            }, completion: { (didComplete) -> Void in
+                self.zoomImageView.removeFromSuperview()
+                self.blackBackgroundView.removeFromSuperview()
+                self.postImageView?.alpha = 1
+                self.navBarCoverView.removeFromSuperview()
+                self.zoomEnabled = false
+            })
+        }
+    }
+    
+    // Landscape/portrait handler when zoomed on image
+    func rotated() {
+        if UIDevice.current.orientation.isLandscape && zoomEnabled {
+            print("Rotate")
+            UIView.animate(withDuration: 0.25, animations: {
+                self.zoomImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI/2))
+            })
+        } else {
+            // Portrait
+        }
     }
     
     @IBAction func unwindToFeed(segue: UIStoryboardSegue) {}

@@ -12,7 +12,11 @@ import Firebase
 class FeedCell: UICollectionViewCell {
     
     static var postImageCache = NSCache<NSString, UIImage>()
+    var feedController: FeedViewController?
     
+    func animate() {
+        feedController?.animateImageView(postImageView: postImageView)
+    }
     
     var post: Post? {
         didSet {
@@ -67,9 +71,6 @@ class FeedCell: UICollectionViewCell {
                 })
             }
             
-            
-            
-            
             // Load post image if one exists
             if (post?.hasImage)! {
                 if let image = FeedCell.postImageCache.object(forKey: NSString(string: (self.post?.key)!)) {
@@ -79,7 +80,7 @@ class FeedCell: UICollectionViewCell {
                     let postImageRef = Database.postImagesRef.child((post?.key)!)
                     postImageRef.data(withMaxSize: 1024*1024) { data, error in
                         if error != nil {
-                            print(error)
+                            print(error!)
                         }
                         else {
                             DispatchQueue.main.async {
@@ -93,63 +94,19 @@ class FeedCell: UICollectionViewCell {
                 }
             }
             
-//            // Load the profile image
-//            if let image = Database.profileImageCache.object(forKey: NSString(string: uid)) {
-//                profileImageView.image = image
-//            }
-//            else {
-//                let profileImageRef = Database.profileImagesRef.child(uid)
-//                profileImageRef.data(withMaxSize: 1024*1024) { data, error in
-//                    if error != nil {
-//                        print(error)
-//                    }
-//                    else {
-//                        DispatchQueue.main.async {
-//                            let image = UIImage(data: data!)
-//                            let key: NSString = NSString(string: uid)
-//                            Database.profileImageCache.setObject(image!, forKey: key)
-//                            self.profileImageView.image = image
-//                        }
-//                    }
-//                }
-//            }
-//            
-//            // Load post image if one exists
-//            if (post?.hasImage)! {
-//                if let image = FeedCell.postImageCache.object(forKey: NSString(string: (self.post?.key)!)) {
-//                    postImageView.image = image
-//                }
-//                else {
-//                    let postImageRef = Database.postImagesRef.child((post?.key)!)
-//                    postImageRef.data(withMaxSize: 1024*1024) { data, error in
-//                        if error != nil {
-//                            print(error)
-//                        }
-//                        else {
-//                            DispatchQueue.main.async {
-//                                let image = UIImage(data: data!)
-//                                let key: NSString = NSString(string: (self.post?.key)!)
-//                                FeedCell.postImageCache.setObject(image!, forKey: key)
-//                                self.postImageView.image = image
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-            
             setupViews()
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setupViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
     
+    // Timestamp refresher
     func loadNameLabel() {
         let attributedText = NSMutableAttributedString(string: (self.post?.name!)!, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
         
@@ -177,14 +134,9 @@ class FeedCell: UICollectionViewCell {
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        
         imageView.backgroundColor = UIColor.black
-        
         imageView.layer.cornerRadius = 22
-//        imageView.layer.borderColor = UIColor.lightGray.cgColor
-//        imageView.layer.borderWidth = 1.0
         imageView.clipsToBounds = true
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -203,25 +155,25 @@ class FeedCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
+    
+
     
     func setupViews() {
         backgroundColor = UIColor.white
         
-//        self.contentView.layer.shadowColor = UIColor.black.cgColor
-//        self.contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        self.contentView.layer.shadowOpacity = 0.8
-//        self.contentView.layer.shadowRadius = 2.0
-//        self.contentView.clipsToBounds = true
-//        self.contentView.layer.masksToBounds = true
-        
+        // Rounded corner effect
         self.contentView.layer.cornerRadius = 2.0
         self.contentView.layer.borderWidth = 1.0
         self.contentView.layer.borderColor = UIColor.clear.cgColor
         self.contentView.layer.masksToBounds = true;
         
+        bodyTextView.layer.cornerRadius = 6.0
+        postImageView.layer.cornerRadius = 6.0
+        
+        // Shadow effect
         self.layer.cornerRadius = 6.0
         self.layer.shadowColor = UIColor.lightGray.cgColor
         self.layer.shadowOffset = CGSize(width:0,height: 2.0)
@@ -230,9 +182,9 @@ class FeedCell: UICollectionViewCell {
         self.layer.masksToBounds = false;
         self.layer.shadowPath = UIBezierPath(roundedRect:self.bounds, cornerRadius:self.contentView.layer.cornerRadius).cgPath
         
-        bodyTextView.layer.cornerRadius = 6.0
-        postImageView.layer.cornerRadius = 6.0
-
+        postImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
+        
+        // Add subviews and constraints
         addSubview(nameLabel)
         addSubview(profileImageView)
         addSubview(bodyTextView)
