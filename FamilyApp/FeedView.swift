@@ -18,6 +18,33 @@ class FeedCell: UICollectionViewCell {
         feedController?.animateImageView(postImageView: postImageView)
     }
     
+    func viewProfile() {
+        if let uid = self.post?.uid {
+            Database.usersRef.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                let u = User(snapshot: snapshot)
+                let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + u.uid)
+                
+                if let image = Database.profileImageCache.object(forKey: NSString(string: u.uid)) {
+                    u.photo = image
+                    OtherProfileViewController.user = u
+                    self.feedController?.performSegue(withIdentifier: "profileSegue", sender: self)
+                }
+                else {
+                    profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
+                        if error != nil {
+                            print(error!)
+                        }
+                        else {
+                            u.photo = UIImage(data: data!)
+                            OtherProfileViewController.user = u
+                            self.feedController?.performSegue(withIdentifier: "profileSegue", sender: self)
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
     var post: Post? {
         didSet {
             if ((post?.name) != nil) {
@@ -128,7 +155,7 @@ class FeedCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
-        
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -138,6 +165,7 @@ class FeedCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 22
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -160,7 +188,6 @@ class FeedCell: UICollectionViewCell {
     }()
     
 
-    
     func setupViews() {
         backgroundColor = UIColor.white
         
@@ -183,6 +210,8 @@ class FeedCell: UICollectionViewCell {
         self.layer.shadowPath = UIBezierPath(roundedRect:self.bounds, cornerRadius:self.contentView.layer.cornerRadius).cgPath
         
         postImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
+        profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewProfile)))
+        nameLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewProfile)))
         
         // Add subviews and constraints
         addSubview(nameLabel)

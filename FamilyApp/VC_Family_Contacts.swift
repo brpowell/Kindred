@@ -65,7 +65,7 @@ class ContactsViewController: FamilyController, UITableViewDataSource, UITableVi
             else {
                 profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
                     if error != nil {
-                        print(error)
+                        print(error!)
                     }
                     else {
                         u.photo = UIImage(data: data!)
