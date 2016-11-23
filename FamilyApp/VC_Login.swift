@@ -25,9 +25,7 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
     override func viewWillAppear(_ animated: Bool) {
         // self.emailField.textField.text = ""
         self.passwordField.textField.text = ""
-        if !animate {
-            self.logo.center.y = 40
-        }
+        
     }
     
     override func viewDidLoad() {
@@ -69,7 +67,9 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
                 }
             }
             else {
-                self.loginAnimation()
+                if self.animate {
+                    self.loginAnimation()
+                }
                 self.stopAnimating()
             }
             
@@ -88,7 +88,7 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
                 self.passwordField.alpha = 1
                 self.loginButton.alpha = 1
                 self.registerButton.alpha = 1
-                self.animate = true
+                self.animate = false
                 self.subtitleLabel.alpha = 1
             })
         })
