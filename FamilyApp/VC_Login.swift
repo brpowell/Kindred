@@ -14,18 +14,32 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
     
     @IBOutlet weak var emailField: FATextField!
     @IBOutlet weak var passwordField: FATextField!
+    @IBOutlet weak var logo: UIImageView!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var loginButton: DrawerButton!
+    @IBOutlet weak var registerButton: DrawerButton!
     
     static var listener: Bool = true
+    var animate = true
 
     override func viewWillAppear(_ animated: Bool) {
         // self.emailField.textField.text = ""
         self.passwordField.textField.text = ""
+        if !animate {
+            self.logo.center.y = 129
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         LoginViewController.listener = true
+        
+        subtitleLabel.alpha = 0
+        emailField.alpha = 0
+        passwordField.alpha = 0
+        loginButton.alpha = 0
+        registerButton.alpha = 0
         
         // Activity loader
         NVActivityIndicatorView.DEFAULT_TYPE = .ballTrianglePath
@@ -55,6 +69,27 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
                 }
             }
             else {
+                UIView.animate(withDuration: 0.75, animations: {
+                   self.logo.center.y -= 150
+                    self.logo.center.x -= 25
+                    self.logo.frame.size.width += 50
+                    self.logo.frame.size.height += 50
+                }, completion: { (didComplete) -> Void in
+                    print(self.logo.center.y)
+                    
+                    UIView.animate(withDuration: 0.5, animations: {
+//                        self.subtitleLabel.alpha = 1
+                        self.emailField.alpha = 1
+                        self.passwordField.alpha = 1
+                        self.loginButton.alpha = 1
+                        self.registerButton.alpha = 1
+                        self.animate = true
+                    })
+                   
+                })
+                UIView.animate(withDuration: 0.5, delay: 0.25,animations: {
+                    self.subtitleLabel.alpha = 1
+                })
                 self.stopAnimating()
             }
             

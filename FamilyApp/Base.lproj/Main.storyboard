@@ -103,7 +103,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tree" translatesAutoresizingMaskIntoConstraints="NO" id="3Po-aL-8bc">
-                                <rect key="frame" x="108" y="54" width="158" height="148"/>
+                                <rect key="frame" x="133" y="205" width="108" height="98"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -116,7 +116,11 @@
                     </view>
                     <connections>
                         <outlet property="emailField" destination="MUM-dz-LGn" id="AVo-bn-ajT"/>
+                        <outlet property="loginButton" destination="0md-J9-RAX" id="j5e-IU-pOd"/>
+                        <outlet property="logo" destination="3Po-aL-8bc" id="7SX-nH-ipL"/>
                         <outlet property="passwordField" destination="B0u-j7-Y51" id="gCf-B0-60O"/>
+                        <outlet property="registerButton" destination="qJ2-Z9-1hS" id="0Mb-RJ-pGm"/>
+                        <outlet property="subtitleLabel" destination="sWX-Gg-aCv" id="TGF-hz-gkB"/>
                         <segue destination="SX1-gX-jdo" kind="show" identifier="loginHomeSegue" id="4jI-j3-2Ab"/>
                         <segue destination="LNi-2f-cUL" kind="show" identifier="registerSegue" id="6Vz-IB-AIC"/>
                     </connections>
