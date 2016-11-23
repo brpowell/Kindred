@@ -26,7 +26,7 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
         // self.emailField.textField.text = ""
         self.passwordField.textField.text = ""
         if !animate {
-            self.logo.center.y = 129
+            self.logo.center.y = 40
         }
     }
     
@@ -69,31 +69,32 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
                 }
             }
             else {
-                UIView.animate(withDuration: 0.75, animations: {
-                   self.logo.center.y -= 150
-                    self.logo.center.x -= 25
-                    self.logo.frame.size.width += 50
-                    self.logo.frame.size.height += 50
-                }, completion: { (didComplete) -> Void in
-                    print(self.logo.center.y)
-                    
-                    UIView.animate(withDuration: 0.5, animations: {
-//                        self.subtitleLabel.alpha = 1
-                        self.emailField.alpha = 1
-                        self.passwordField.alpha = 1
-                        self.loginButton.alpha = 1
-                        self.registerButton.alpha = 1
-                        self.animate = true
-                    })
-                   
-                })
-                UIView.animate(withDuration: 0.5, delay: 0.25,animations: {
-                    self.subtitleLabel.alpha = 1
-                })
+                self.loginAnimation()
                 self.stopAnimating()
             }
             
         }
+    }
+    
+    func loginAnimation() {
+        UIView.animate(withDuration: 0.75, animations: {
+            self.logo.center.y -= 165
+            self.logo.center.x -= 25
+            self.logo.frame.size.width += 50
+            self.logo.frame.size.height += 50
+        }, completion: { (didComplete) -> Void in
+            UIView.animate(withDuration: 0.5, animations: {
+                self.emailField.alpha = 1
+                self.passwordField.alpha = 1
+                self.loginButton.alpha = 1
+                self.registerButton.alpha = 1
+                self.animate = true
+                self.subtitleLabel.alpha = 1
+            })
+        })
+        UIView.animate(withDuration: 0.5, delay: 0.25 ,animations: {
+//            self.subtitleLabel.alpha = 1
+        })
     }
 
     override func didReceiveMemoryWarning() {
