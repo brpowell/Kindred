@@ -36,6 +36,9 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.blackBackgroundView.minimumZoomScale = 1.0
+        self.blackBackgroundView.maximumZoomScale = 6.0
+        blackBackgroundView.delegate = self
         
         // Image rotation listener
 //        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
@@ -155,11 +158,16 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     
     // Image zooming
-    let blackBackgroundView = UIView()
+    let blackBackgroundView = UIScrollView()
     var postImageView: UIImageView?
     let zoomImageView = UIImageView()
     let navBarCoverView = UIView()
     var zoomEnabled = false
+//    let scrollView = UIScrollView()
+    
+    override func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.zoomImageView
+    }
     
     func animateImageView(postImageView: UIImageView) {
         self.postImageView = postImageView
@@ -169,34 +177,28 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             blackBackgroundView.frame = self.view.frame
             blackBackgroundView.backgroundColor = UIColor.black
             blackBackgroundView.alpha = 0
-            view.addSubview(blackBackgroundView)
             
-            navBarCoverView.frame = CGRect(x: 0, y: 0, width: 1000, height: 20 + 44)
-            navBarCoverView.backgroundColor = UIColor.black
-            navBarCoverView.alpha = 0
-            
-            if let keyWindow = UIApplication.shared.keyWindow {
-                keyWindow.addSubview(navBarCoverView)
-            }
-            
-            zoomImageView.backgroundColor = UIColor.red
-            zoomImageView.frame = startingFrame
+            zoomImageView.backgroundColor = UIColor.black
+            zoomImageView.frame = blackBackgroundView.frame
             zoomImageView.isUserInteractionEnabled = true
             zoomImageView.image = postImageView.image
-            zoomImageView.contentMode = .scaleAspectFill
+            zoomImageView.contentMode = .scaleAspectFit
             zoomImageView.clipsToBounds = true
-            view.addSubview(zoomImageView)
+            
+            blackBackgroundView.addSubview(zoomImageView)
+
+            if let keyWindow = UIApplication.shared.keyWindow {
+                keyWindow.addSubview(blackBackgroundView)
+            }
             
             zoomEnabled = true
             
             blackBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(zoomOut)))
-            
+        
             UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .curveEaseIn, animations: {
                 let height = (self.view.frame.width / startingFrame.width) * startingFrame.height
                 
                 let y = self.view.frame.height / 2 - height / 2
-                
-                self.zoomImageView.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: height)
                 
                 self.blackBackgroundView.alpha = 1
                 

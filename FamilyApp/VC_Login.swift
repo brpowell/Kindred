@@ -59,8 +59,13 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
                     else {
                         User.activeUserImage = UIImage(data: data!)
                         Database.usersRef.child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-                            Database.user = User(snapshot: snapshot)
-                            self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
+                            if snapshot.value is NSNull {
+                                print("user does not exist anymore")
+                            }
+                            else {
+                                Database.user = User(snapshot: snapshot)
+                                self.performSegue(withIdentifier: "loginHomeSegue", sender: nil)
+                            }
                         })
                         
                     }
@@ -77,6 +82,7 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
     }
     
     func loginAnimation() {
+        self.animate = false
         UIView.animate(withDuration: 0.75, animations: {
             self.logo.center.y -= 165
             self.logo.center.x -= 25
@@ -88,7 +94,6 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
                 self.passwordField.alpha = 1
                 self.loginButton.alpha = 1
                 self.registerButton.alpha = 1
-                self.animate = false
                 self.subtitleLabel.alpha = 1
             })
         })
