@@ -30,6 +30,10 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         return .lightContent
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.slideMenuController()?.removeRightGestures()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

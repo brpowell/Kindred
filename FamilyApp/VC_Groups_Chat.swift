@@ -41,7 +41,21 @@ final class ChatViewController: JSQMessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.slideMenuController()?.addRightGestures()
         self.senderDisplayName = Database.user.firstName
+        
+        if let gid = group?.groupId {
+            let ref = FIRDatabase.database().reference(withPath: "groups").child(gid).child("members")
+            ref.observeSingleEvent(of: .value, with: { snapshot in
+                for member in snapshot.children {
+                    let snap = member as! FIRDataSnapshot
+                    if let user = Database.userCache.object(forKey: snap.key as NSString) {
+                        MembersViewController.members.append(user)
+                    }
+                }
+            })
+        }
+        
         finishReceivingMessage()
     }
 
@@ -155,11 +169,5 @@ final class ChatViewController: JSQMessagesViewController {
             }
         })
     }
-
-    
-    
-    
-    
-
 
 }

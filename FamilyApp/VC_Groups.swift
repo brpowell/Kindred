@@ -16,6 +16,11 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     var ref: FIRDatabaseReference!
     var groups = [Group]()
     let textCellIdentifier = "groupCell"
+
+    override func viewDidAppear(_ animated: Bool) {
+        self.slideMenuController()?.removeRightGestures()
+        MembersViewController.members.removeAll()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +69,32 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         {
             let group = groups[index]
             destination.group = group
+            
+            let ref = FIRDatabase.database().reference(withPath: "groups").child(group.groupId).child("members")
+            
+            ref.observeSingleEvent(of: .value, with: { snapshot in
+                for member in snapshot.children {
+                    let snap = member as! FIRDataSnapshot
+//                    if let user = Database.userCache.object(forKey: snap.key as NSString) {
+//                        MembersViewController.members.append(user)
+//                    }
+//                    else {
+                        print(snap.key)
+                        let uref = FIRDatabase.database().reference(withPath: "users").child(snap.key)
+                        uref.observeSingleEvent(of: .value, with: { snapshot in
+                            
+                            if let snap = snapshot.value as? [String: NSDictionary] {
+                                let u = User(snapshot: snap)
+                                MembersViewController.members.append(u)
+                            }
+                            
+                        })
+                    
+//                    }
+                }
+            })
         }
+        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

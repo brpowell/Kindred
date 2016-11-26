@@ -104,6 +104,7 @@ class RegisterViewController: InputViewController, UIImagePickerControllerDelega
                                 print(error)
                             } else {
                                 // Profile updated
+                                Database.user = u
                                 self.performSegue(withIdentifier: "registerHomeSegue", sender: nil)
                             }
                             self.stopAnimating()

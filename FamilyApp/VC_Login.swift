@@ -45,8 +45,8 @@ class LoginViewController: InputViewController, NVActivityIndicatorViewable, UIT
         
         // Listen for auth state change. listener flag to prevent double fire
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            self.startAnimating()
             if user != nil && LoginViewController.listener{
+                self.startAnimating()
                 LoginViewController.listener = false
                 let uid = FIRAuth.auth()?.currentUser?.uid
                 let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + uid!)

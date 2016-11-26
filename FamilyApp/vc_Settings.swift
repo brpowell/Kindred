@@ -41,12 +41,12 @@ class SettingsViewController: UIViewController {
         
         
         
-//        if (UserDefaults.standard.object(forKey: "settingOne") != nil) {
-//            self.switchOne.isOn = UserDefaults.standard.bool(forKey: "settingOne")
-//        } else {
-//            self.switchOne.isOn = true
-//        }
-//        UserDefaults.standard.set(false, forKey: "settingThree")
+        if (UserDefaults.standard.object(forKey: "settingOne") != nil) {
+            self.switchOne.isOn = UserDefaults.standard.bool(forKey: "settingOne")
+        } else {
+            self.switchOne.isOn = true
+        }
+        UserDefaults.standard.set(false, forKey: "settingThree")
 
     }
 

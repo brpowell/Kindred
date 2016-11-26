@@ -37,10 +37,7 @@ class ProfileContactsViewController: UIViewController, UITableViewDataSource, UI
             }
             self.myContacts = myNewContacts
         })
-        
-        print(myContacts)
-        print ("WHATS UP")
-        
+                
         userContactsRef.observe(.value, with: { snapshot in
             var newContacts: [Contact] = []
             
