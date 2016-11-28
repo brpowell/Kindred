@@ -975,7 +975,7 @@
                                 <action selector="onMenuButton:" destination="uWY-Wu-OzQ" id="2zb-Oq-Ccg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2o5-c7-zzu">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="2o5-c7-zzu">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="onComposeButton:" destination="Ba8-Jd-81b" id="coU-Lo-Fzb"/>
@@ -1356,8 +1356,8 @@
                                 <rect key="frame" x="0.0" y="257" width="375" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9da-Zr-MRJ">
-                                        <rect key="frame" x="45" y="10" width="42" height="41"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9da-Zr-MRJ" userLabel="activityButton">
+                                        <rect key="frame" x="38" y="10" width="42" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button" image="activity"/>
                                         <state key="selected" image="selectedActivity"/>
@@ -1365,8 +1365,17 @@
                                             <action selector="didPressTab:" destination="SPg-oa-X3p" eventType="touchUpInside" id="Tge-zA-MCh"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWC-E3-vKG">
-                                        <rect key="frame" x="305" y="10" width="41" height="41"/>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMJ-B5-cDT" userLabel="contactsButton">
+                                        <rect key="frame" x="203" y="5" width="51" height="51"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button" image="contacts"/>
+                                        <state key="selected" image="selectedContacts"/>
+                                        <connections>
+                                            <action selector="didPressTab:" destination="SPg-oa-X3p" eventType="touchUpInside" id="44B-nB-DmX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWC-E3-vKG" userLabel="infoButton">
+                                        <rect key="frame" x="298" y="10" width="41" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button" image="info"/>
                                         <state key="selected" image="selectedInfo"/>
@@ -1374,13 +1383,13 @@
                                             <action selector="didPressTab:" destination="SPg-oa-X3p" eventType="touchUpInside" id="EDP-SF-EE7"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMJ-B5-cDT">
-                                        <rect key="frame" x="162" y="5" width="51" height="51"/>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILQ-oL-Kge" userLabel="photosButton">
+                                        <rect key="frame" x="120" y="10" width="48" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button" image="contacts"/>
-                                        <state key="selected" image="selectedContacts"/>
+                                        <state key="normal" title="Button" image="photosUnselected"/>
+                                        <state key="selected" image="photosSelected"/>
                                         <connections>
-                                            <action selector="didPressTab:" destination="SPg-oa-X3p" eventType="touchUpInside" id="44B-nB-DmX"/>
+                                            <action selector="didPressTab:" destination="SPg-oa-X3p" eventType="touchUpInside" id="Qw8-dk-fCt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1407,9 +1416,10 @@
                         <outlet property="contentView" destination="bbe-DR-Boo" id="avb-Au-o0r"/>
                         <outlet property="nameLabel" destination="rKO-fd-GA1" id="Xry-Xt-0YP"/>
                         <outlet property="userProfileImage" destination="gp1-HO-fCE" id="9OA-DH-JnX"/>
-                        <outletCollection property="buttons" destination="9da-Zr-MRJ" collectionClass="NSMutableArray" id="zMD-mn-ICJ"/>
-                        <outletCollection property="buttons" destination="YMJ-B5-cDT" collectionClass="NSMutableArray" id="dUj-Th-Zds"/>
-                        <outletCollection property="buttons" destination="RWC-E3-vKG" collectionClass="NSMutableArray" id="Xbo-Ce-uum"/>
+                        <outletCollection property="buttons" destination="9da-Zr-MRJ" collectionClass="NSMutableArray" id="2QT-ZP-aIW"/>
+                        <outletCollection property="buttons" destination="ILQ-oL-Kge" collectionClass="NSMutableArray" id="RsB-gg-Uoc"/>
+                        <outletCollection property="buttons" destination="YMJ-B5-cDT" collectionClass="NSMutableArray" id="kkf-QZ-Qku"/>
+                        <outletCollection property="buttons" destination="RWC-E3-vKG" collectionClass="NSMutableArray" id="qq7-AF-e6l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dLu-vg-Fiq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1532,6 +1542,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hvS-We-OrT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8199" y="1026"/>
+        </scene>
+        <!--Profile Photos-->
+        <scene sceneID="pne-iH-Moa">
+            <objects>
+                <viewController storyboardIdentifier="ProfilePhotos" id="Ybb-BK-Nof" userLabel="Profile Photos" customClass="ProfilePhotosViewController" customModule="FamilyApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="slj-va-sTF"/>
+                        <viewControllerLayoutGuide type="bottom" id="A23-3s-yLa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="X2u-Bg-UhY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YaC-fu-fQr">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="byC-h0-gLi">
+                                    <size key="itemSize" width="118" height="118"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="photoCell" id="ISU-Av-D1e" customClass="PhotoCell" customModule="FamilyApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="118" height="118"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="118" height="118"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aHt-aP-bgc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="118" height="118"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" red="0.61960784310000006" green="0.75686274509999996" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="aHt-aP-bgc" id="PXy-a5-kbh"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="375" height="350"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="350"/>
+                    <connections>
+                        <outlet property="photosCollectionView" destination="YaC-fu-fQr" id="nhI-lm-PHQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="puX-BG-Qtz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8029.6000000000004" y="1401.4992503748126"/>
         </scene>
         <!--Profile Activity View Controller-->
         <scene sceneID="xku-h0-SPA">
@@ -1725,6 +1792,8 @@
         <image name="groupIcon" width="50" height="50"/>
         <image name="info" width="255" height="256"/>
         <image name="logo" width="159" height="159"/>
+        <image name="photosSelected" width="100" height="100"/>
+        <image name="photosUnselected" width="100" height="100"/>
         <image name="profile" width="300" height="300"/>
         <image name="selectedActivity" width="161" height="184"/>
         <image name="selectedContacts" width="511" height="511"/>
@@ -1738,7 +1807,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gZ5-85-QMD"/>
-        <segue reference="fU8-gc-G0A"/>
+        <segue reference="yHC-1o-TE9"/>
         <segue reference="4jI-j3-2Ab"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class OtherProfileViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
@@ -22,9 +23,11 @@ class OtherProfileViewController: UIViewController, UIPopoverPresentationControl
     
     @IBOutlet var buttons: [UIButton]!
     
+    
     var activityViewController: UIViewController!
     var contactsViewController: UIViewController!
     var infoViewController: UIViewController!
+    var photosViewController: UIViewController!
     
     var viewControllers: [UIViewController]!
     
@@ -52,8 +55,9 @@ class OtherProfileViewController: UIViewController, UIPopoverPresentationControl
         activityViewController = storyboard.instantiateViewController(withIdentifier: "ProfileActivityViewController")
         contactsViewController = storyboard.instantiateViewController(withIdentifier: "ProfileContactsViewController")
         infoViewController = storyboard.instantiateViewController(withIdentifier: "ProfileInfoViewController")
+        photosViewController = storyboard.instantiateViewController(withIdentifier: "ProfilePhotos")
         
-        viewControllers = [activityViewController, contactsViewController, infoViewController]
+        viewControllers = [activityViewController, photosViewController, contactsViewController, infoViewController]
         
         buttons[selectedIndex].isSelected = true
         didPressTab(buttons[selectedIndex])
@@ -91,5 +95,7 @@ class OtherProfileViewController: UIViewController, UIPopoverPresentationControl
     {
         return .none
     }
+    
+    
     
 }
