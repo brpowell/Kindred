@@ -29,12 +29,12 @@ final class ChatViewController: JSQMessagesViewController {
         var image = UIImage(named: "groupIcon")!
         image = image.resize(targetSize: CGSize(width: 22, height: 22))
         self.addRightBarButtonWithImage(image)
-        
-    
+
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
 //        self.collectionView.backgroundColor = FAColor.blueLight
+        
         
         observeMessages()
     }
@@ -137,6 +137,10 @@ final class ChatViewController: JSQMessagesViewController {
         if let message = JSQMessage(senderId: id, displayName: name, text: text) {
             messages.append(message)
         }
+    }
+    
+    override func didPressAccessoryButton(_ sender: UIButton!) {
+        return
     }
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
