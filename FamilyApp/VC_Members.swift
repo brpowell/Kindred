@@ -9,46 +9,40 @@
 import UIKit
 import Firebase
 
-class MembersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SlideMenuControllerDelegate {
+class MemberCell: UICollectionViewCell {
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var label: UILabel!
+}
+
+class MembersViewController: UIViewController, SlideMenuControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var membersTableView: UITableView!
+    @IBOutlet weak var membersCollectionView: UICollectionView!
+    @IBOutlet weak var nameLabel: UILabel!
     
     var members: [User] = []
     
     override func viewDidLoad() {
         self.slideMenuController()?.delegate = self
-        membersTableView.dataSource = self
-        membersTableView.delegate = self
+        membersCollectionView.dataSource = self
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-
-    }
-    
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                                 numberOfItemsInSection section: Int) -> Int {
         return members.count
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-    }
-    
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath)
-        
-        let row = indexPath.row
-        cell.textLabel?.text = members[row].firstName
-        
+    func collectionView(_ collectionView: UICollectionView,
+                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memberCell",
+                                                      for: indexPath) as! MemberCell
+        cell.imageView.image = members[indexPath.item].photo
+        cell.imageView.makeProfileFormat()
+        cell.label.text = members[indexPath.item].firstName
         return cell
     }
     
@@ -66,7 +60,7 @@ class MembersViewController: UIViewController, UITableViewDataSource, UITableVie
                     else {
                         u.photo = UIImage(data: data!)
                         self.members.append(u)
-                        self.membersTableView.reloadData()
+                        self.membersCollectionView.reloadData()
                     }
                 }
             })

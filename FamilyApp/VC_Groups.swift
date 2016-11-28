@@ -67,18 +67,10 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
             for member in snapshot.children {
                 let snap = member as! FIRDataSnapshot
                 members.append(snap.key)
-//                let uref = FIRDatabase.database().reference(withPath: "users").child(snap.key)
-//                uref.observeSingleEvent(of: .value, with: { snapshot in
-//                    
-//                    if let snap = snapshot.value as? [String: NSDictionary] {
-//                        let u = User(snapshot: snap)
-//                        MembersViewController.members.append(u)
-//                    }
-//                    
-//                })
             }
             let vc = self.slideMenuController()?.rightViewController as? MembersViewController
             vc?.populateMembers(uids: members)
+            vc?.nameLabel.text = group.name + " (\(members.count))"
             self.performSegue(withIdentifier: "chatSegue", sender: self)
             tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         })

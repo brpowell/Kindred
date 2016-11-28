@@ -223,6 +223,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
                 self.zoomEnabled = false
             })
         }
+        self.blackBackgroundView.setZoomScale(0, animated: true)
     }
     
     // Landscape/portrait handler when zoomed on image

@@ -24,7 +24,6 @@ final class ChatViewController: JSQMessagesViewController {
         super.viewDidLoad()
         self.senderDisplayName = Database.user.firstName
         self.senderId = FIRAuth.auth()?.currentUser?.uid
-        self.title = group!.name
         
         var image = UIImage(named: "groupIcon")!
         image = image.resize(targetSize: CGSize(width: 22, height: 22))
@@ -43,18 +42,6 @@ final class ChatViewController: JSQMessagesViewController {
         super.viewDidAppear(animated)
         self.slideMenuController()?.addRightGestures()
         self.senderDisplayName = Database.user.firstName
-        
-//        if let gid = group?.groupId {
-//            let ref = FIRDatabase.database().reference(withPath: "groups").child(gid).child("members")
-//            ref.observeSingleEvent(of: .value, with: { snapshot in
-//                for member in snapshot.children {
-//                    let snap = member as! FIRDataSnapshot
-//                    if let user = Database.userCache.object(forKey: snap.key as NSString) {
-//                        MembersViewController.members.append(user)
-//                    }
-//                }
-//            })
-//        }
         
         finishReceivingMessage()
     }
