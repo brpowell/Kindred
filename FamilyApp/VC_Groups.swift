@@ -19,7 +19,6 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func viewDidAppear(_ animated: Bool) {
         self.slideMenuController()?.removeRightGestures()
-        MembersViewController.members.removeAll()
     }
     
     override func viewDidLoad() {
@@ -59,40 +58,40 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        let group = groups[indexPath.item]
+        let ref = FIRDatabase.database().reference(withPath: "groups").child(group.groupId).child("members")
+        
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            var members = [String]()
+            for member in snapshot.children {
+                let snap = member as! FIRDataSnapshot
+                members.append(snap.key)
+//                let uref = FIRDatabase.database().reference(withPath: "users").child(snap.key)
+//                uref.observeSingleEvent(of: .value, with: { snapshot in
+//                    
+//                    if let snap = snapshot.value as? [String: NSDictionary] {
+//                        let u = User(snapshot: snap)
+//                        MembersViewController.members.append(u)
+//                    }
+//                    
+//                })
+            }
+            let vc = self.slideMenuController()?.rightViewController as? MembersViewController
+            vc?.populateMembers(uids: members)
+            self.performSegue(withIdentifier: "chatSegue", sender: self)
+            tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        })
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == "chatSegue",
+        if segue.identifier == "chatSegue",
             let destination = segue.destination as? ChatViewController,
             let index = tableView.indexPathForSelectedRow?.row
         {
             let group = groups[index]
             destination.group = group
-            
-            let ref = FIRDatabase.database().reference(withPath: "groups").child(group.groupId).child("members")
-            
-            ref.observeSingleEvent(of: .value, with: { snapshot in
-                for member in snapshot.children {
-                    let snap = member as! FIRDataSnapshot
-//                    if let user = Database.userCache.object(forKey: snap.key as NSString) {
-//                        MembersViewController.members.append(user)
-//                    }
-//                    else {
-                        print(snap.key)
-                        let uref = FIRDatabase.database().reference(withPath: "users").child(snap.key)
-                        uref.observeSingleEvent(of: .value, with: { snapshot in
-                            
-                            if let snap = snapshot.value as? [String: NSDictionary] {
-                                let u = User(snapshot: snap)
-                                MembersViewController.members.append(u)
-                            }
-                            
-                        })
-                    
-//                    }
-                }
-            })
         }
         
     }

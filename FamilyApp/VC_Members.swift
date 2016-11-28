@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class MembersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SlideMenuControllerDelegate {
     
     @IBOutlet weak var membersTableView: UITableView!
     
-    static var members: [User] = []
     var members: [User] = []
     
     override func viewDidLoad() {
@@ -21,23 +21,13 @@ class MembersViewController: UIViewController, UITableViewDataSource, UITableVie
         membersTableView.delegate = self
     }
     
-//    func rightWillOpen() {
-//        members = MembersViewController.members
-//        print("Members: " + String(members.count))
-//        print("Static Members: " + String(MembersViewController.members.count))
-//    }
-    
     override func viewWillDisappear(_ animated: Bool) {
-        members.removeAll()
-        MembersViewController.members.removeAll()
+
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("Members: " + String(members.count))
-        print("Static Members: " + String(MembersViewController.members.count))
-        members = MembersViewController.members
-        membersTableView.reloadData()
+
     }
     
     
@@ -60,6 +50,27 @@ class MembersViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.textLabel?.text = members[row].firstName
         
         return cell
+    }
+    
+    func populateMembers(uids: [String]) {
+        self.members.removeAll()
+        
+        for uid in uids {
+            Database.usersRef.child(uid).observeSingleEvent(of: .value, with: { snapshot in
+                let u = User(snapshot: snapshot)
+                let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + u.uid)
+                profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
+                    if error != nil {
+                        print(error!)
+                    }
+                    else {
+                        u.photo = UIImage(data: data!)
+                        self.members.append(u)
+                        self.membersTableView.reloadData()
+                    }
+                }
+            })
+        }
     }
     
 }

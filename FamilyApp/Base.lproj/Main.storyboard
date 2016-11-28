@@ -530,9 +530,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="O8e-hk-hCv" kind="show" identifier="chatSegue" id="Els-nK-JOz"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -563,6 +560,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="HbX-gA-duP" id="FAC-kM-M32"/>
+                        <segue destination="O8e-hk-hCv" kind="show" identifier="chatSegue" id="gZ5-85-QMD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KiX-AZ-zeN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -640,7 +638,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Name (Optional)"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Group Name"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="icon" value="groupIcon"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="barColor">
                                         <color key="value" red="0.74485331769999996" green="0.93240028620000004" blue="0.38448241350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1706,7 +1704,7 @@
         <image name="uncheckedIcon" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uob-Ck-G8p"/>
+        <segue reference="gZ5-85-QMD"/>
         <segue reference="fU8-gc-G0A"/>
         <segue reference="4jI-j3-2Ab"/>
     </inferredMetricsTieBreakers>
