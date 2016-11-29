@@ -194,7 +194,10 @@ class FeedCell: UICollectionViewCell {
         self.layer.masksToBounds = false;
         self.layer.shadowPath = UIBezierPath(roundedRect:self.bounds, cornerRadius:self.contentView.layer.cornerRadius).cgPath
         
-        postImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
+        if (post?.hasImage) != nil {
+            postImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
+        }
+        
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewProfile)))
         nameLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewProfile)))
         
