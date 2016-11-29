@@ -24,7 +24,7 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         let userContactsRef = Database.contactsRef.child((FIRAuth.auth()?.currentUser?.uid)!)
         var contacts: [Contact] = []
         
-        userContactsRef.observeSingleEvent(of: .value, with: { snapshot in
+        userContactsRef.observe(.value, with: { snapshot in
             var newContacts: [Contact] = []
             
             for contact in snapshot.children {
@@ -64,6 +64,7 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
     
     
     func getSuggestedRelationship(contactRelationshipToMe: String, otherRelationshipToContact: String) -> String {
+        var gender = ProfileViewController.user?.gender
         if (contactRelationshipToMe == "Brother") {
             if (otherRelationshipToContact == "Son") {
                 return "Nephew (Brother)"
@@ -108,14 +109,87 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
             if (otherRelationshipToContact == "Niece (Sister)" || otherRelationshipToContact == "Nephew (Sister)" || otherRelationshipToContact == "Niece (Brother)" || otherRelationshipToContact == "Nephew (Brother)") {
                 return "Maternal Cousin"
             }
+
+        }
+        if (contactRelationshipToMe == "Father") {
+            if (otherRelationshipToContact == "Mother") {
+                return "Paternal Grandmother"
+            }
+            if (otherRelationshipToContact == "Father") {
+                return "Paternal Grandfather"
+            }
+            if (otherRelationshipToContact == "Sister") {
+                return "Paternal Aunt"
+            }
+            if (otherRelationshipToContact == "Brother") {
+                return "Paternal Uncle"
+            }
+            if (otherRelationshipToContact == "Niece (Sister)" || otherRelationshipToContact == "Nephew (Sister)" || otherRelationshipToContact == "Niece (Brother)" || otherRelationshipToContact == "Nephew (Brother)") {
+                return "Paternal Cousin"
+            }
+            
+        }
+        if (contactRelationshipToMe == "Mother" || contactRelationshipToMe == "Father") {
             if (otherRelationshipToContact == "Son") {
                 return "Brother"
             }
             if (otherRelationshipToContact == "Daughter") {
                 return "Sister"
             }
+            if (otherRelationshipToContact == "Wife") {
+                return "Mother"
+            }
+            if (otherRelationshipToContact == "Husband") {
+                return "Father"
+            }
         }
-        
+        if (contactRelationshipToMe == "Wife" || contactRelationshipToMe == "Husband") {
+            if (otherRelationshipToContact == "Daughter" || otherRelationshipToContact == "Son") {
+                return otherRelationshipToContact
+            }
+        }
+        if (contactRelationshipToMe == "Son" || contactRelationshipToMe == "Daughter") {
+            if (otherRelationshipToContact == "Brother") {
+                return "Son"
+            }
+            if (otherRelationshipToContact == "Sister") {
+                return "Daughter"
+            }
+            if (otherRelationshipToContact == "Mother") {
+                return "Wife"
+            }
+            if (otherRelationshipToContact == "Father") {
+                return "Husband"
+            }
+            if (otherRelationshipToContact == "Paternal Uncle" && gender == "Male") {
+                return "Brother"
+            }
+            if (otherRelationshipToContact == "Maternal Uncle" && gender == "Female") {
+                return "Brother"
+            }
+            if (otherRelationshipToContact == "Paternal Aunt" && gender == "Male") {
+                return "Sister"
+            }
+            if (otherRelationshipToContact == "Maternal Aunt" && gender == "Female") {
+                return "Sister"
+            }
+        }
+        if (contactRelationshipToMe == "Son") {
+            if (otherRelationshipToContact == "Son") {
+                return "Grandson (Son)"
+            }
+            if (otherRelationshipToContact == "Daughter") {
+                return "Granddaughter (Son)"
+            }
+        }
+        if (contactRelationshipToMe == "Daughter") {
+            if (otherRelationshipToContact == "Son") {
+                return "Grandson (Daughter)"
+            }
+            if (otherRelationshipToContact == "Daughter") {
+                return "Granddaughter (Daughter)"
+            }
+        }
         
         return "Potential Relative"
         
@@ -168,8 +242,8 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
     
     func getReverseRelationship(relationship: String) -> String {
         var revRelationship: String
-        var gender = ProfileViewController.user?.gender
-        
+        var gender = Database.user.gender
+        print(gender);
         if relationship == "Mother" || relationship == "Father" {
             if (gender == "Female") {
                 revRelationship = "Daughter"
@@ -302,7 +376,7 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
                 revRelationship = "Sibling"
             }
         }
-        else if relationship == "Maternal Cousin" || relationship == "Paternal Cousin"{
+        else if relationship == "Maternal Cousin" || relationship == "Paternal Cousin" || relationship == "Cousin"{
             revRelationship = "Cousin"
         }
         else {

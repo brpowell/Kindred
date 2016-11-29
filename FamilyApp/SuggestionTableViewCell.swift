@@ -21,6 +21,7 @@ class SuggestionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var relationshipLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addedLabel: UILabel!
     
     var index: Int = 0
     
@@ -39,6 +40,8 @@ class SuggestionTableViewCell: UITableViewCell {
     
     @IBAction func pressAdd(_ sender: Any) {
         addButton.isEnabled = false;
+        addButton.isHidden = true;
+        addedLabel.isHidden = false;
         delegate?.addNewContact(conIndex: index, suggestedRelationship: relationshipLabel.text!)
     }
     
