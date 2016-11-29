@@ -43,11 +43,17 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
                 
                 let contact = Contact(snapshot: snap as! FIRDataSnapshot)
                 let person = TreeView()
-                let generation = self.generationMap[contact.relationship]!
+                let generation = self.generationMap[contact.relationship]
                 
                 var newY = yCoord
-                newY += generation*120
-                xCoord += 60
+                
+                if (generation != nil) {
+                    newY += generation!*120
+                    xCoord += 60
+                } else {
+                    newY += -120
+                    xCoord += 60
+                }
                 
                 person.center = CGPoint(x: xCoord, y: newY)
                 person.setup(name: contact.name)
