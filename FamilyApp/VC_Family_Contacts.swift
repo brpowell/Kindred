@@ -15,6 +15,7 @@ class ContactsViewController: FamilyController, UITableViewDataSource, UITableVi
 //    @IBOutlet weak var tabBar: UITabBar!
     
     var contacts = [Contact]()
+    var profileImages = [String : UIImage]()
     
     let textCellIdentifier = "TextCell"
     
@@ -30,6 +31,18 @@ class ContactsViewController: FamilyController, UITableViewDataSource, UITableVi
             
             for contact in snapshot.children {
                 let contact = Contact(snapshot: contact as! FIRDataSnapshot)
+                let uid = contact.uid
+                let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + uid)
+                profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
+                    if error != nil {
+                        print(error!)
+                    }
+                    else {
+                        let image = UIImage(data: data!)
+                        self.profileImages[uid] = image
+                        self.tableView.reloadData()
+                    }
+                }
                 newContacts.append(contact)
             }
             
@@ -55,35 +68,40 @@ class ContactsViewController: FamilyController, UITableViewDataSource, UITableVi
         let contact = contacts[indexPath.row]
         Database.usersRef.child(contact.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             let u = User(snapshot: snapshot)
-            let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + u.uid)
-            
-            if let image = Database.profileImageCache.object(forKey: NSString(string: u.uid)) {
-                u.photo = image
-                OtherProfileViewController.user = u
-                self.performSegue(withIdentifier: "profileSegue", sender: self)
-            }
-            else {
-                profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
-                    if error != nil {
-                        print(error!)
-                    }
-                    else {
-                        u.photo = UIImage(data: data!)
-                        OtherProfileViewController.user = u
-                        self.performSegue(withIdentifier: "profileSegue", sender: self)
-                    }
-                }
-            }
+            let cell = tableView.cellForRow(at: indexPath) as! ContactTableViewCell
+            u.photo = cell.profilePic.image
+            OtherProfileViewController.user = u
+            self.performSegue(withIdentifier: "profileSegue", sender: self)
+//            let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + u.uid)
+//            
+//            if let image = Database.profileImageCache.object(forKey: NSString(string: u.uid)) {
+//                u.photo = image
+//                OtherProfileViewController.user = u
+//                self.performSegue(withIdentifier: "profileSegue", sender: self)
+//            }
+//            else {
+//                profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
+//                    if error != nil {
+//                        print(error!)
+//                    }
+//                    else {
+//                        u.photo = UIImage(data: data!)
+//                        
+//                    }
+//                }
+//            }
         
         })
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath as IndexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath as IndexPath) as! ContactTableViewCell
         
         let row = indexPath.row
-        cell.textLabel?.text = contacts[row].name
-        cell.detailTextLabel?.text = contacts[row].relationship
+        cell.nameLabel.text = contacts[row].name
+        cell.relationshipLabel.text = contacts[row].relationship
+        cell.profilePic.image = profileImages[contacts[row].uid]
+        cell.profilePic.makeProfileFormat(width: 1)
         
         return cell
     }
