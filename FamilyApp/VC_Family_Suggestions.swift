@@ -36,7 +36,7 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
             
             for con in contacts {
                 let userRef = Database.contactsRef.child((con.uid))
-                userRef.observeSingleEvent(of: .value, with: {
+                userRef.observe( .value, with: {
                     snapshot in
                     var newSuggestions: [Suggestion] = []
                     for contact in snapshot.children {
@@ -70,7 +70,7 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
                 })
             }
         })
-        
+        self.tableView.reloadData()
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -237,6 +237,9 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         cell.delegate = self
         cell.profilePic.image = profileImages[suggestions[row].uid]
         cell.profilePic.makeProfileFormat(width: 0)
+        cell.addButton.isHidden = false;
+        cell.addButton.isEnabled = true;
+        cell.addedLabel.isHidden = true;
         
         return cell
     }
@@ -256,6 +259,7 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         newContactRef.setValue(newContact.toAnyObject())
         selfContactRef.setValue(selfContact.toAnyObject())
         suggestions.remove(at: conIndex)
+        self.tableView.reloadData()
         print("Contact added!")
     }
     
