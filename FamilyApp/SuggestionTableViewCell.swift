@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddContactDelegate {
-    func addNewContact(conIndex: Int)
+    func addNewContact(conIndex: Int, suggestedRelationship: String)
 }
 
 class SuggestionTableViewCell: UITableViewCell {
@@ -39,7 +39,7 @@ class SuggestionTableViewCell: UITableViewCell {
     
     @IBAction func pressAdd(_ sender: Any) {
         addButton.isEnabled = false;
-        delegate?.addNewContact(conIndex: index)
+        delegate?.addNewContact(conIndex: index, suggestedRelationship: relationshipLabel.text!)
     }
     
     

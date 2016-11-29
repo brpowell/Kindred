@@ -137,7 +137,7 @@ class User {
         }
         else if relationship == "Maternal Grandmother" || relationship == "Maternal Grandfather" {
             if (gender == "Female") {
-                revRelationship = "Grandaughter (Daughter)"
+                revRelationship = "Granddaughter (Daughter)"
             }
             else if (gender == "Male") {
                 revRelationship = "Grandson (Daughter)"
@@ -148,7 +148,7 @@ class User {
         }
         else if relationship == "Paternal Grandmother" || relationship == "Paternal Grandfather" {
             if (gender == "Female") {
-                revRelationship = "Grandaughter (Son)"
+                revRelationship = "Granddaughter (Son)"
             }
             else if (gender == "Male") {
                 revRelationship = "Grandson (Son)"
@@ -157,7 +157,7 @@ class User {
                 revRelationship = "Grandchild"
             }
         }
-        else if relationship == "Grandaughter (Daughter)" || relationship == "Grandson (Daughter)" {
+        else if relationship == "Granddaughter (Daughter)" || relationship == "Grandson (Daughter)" {
             if (gender == "Female") {
                 revRelationship = "Maternal Grandmother"
             }
@@ -168,7 +168,7 @@ class User {
                 revRelationship = "Grandparent"
             }
         }
-        else if relationship == "Grandaughter (Son)" || relationship == "Grandson (Son)" {
+        else if relationship == "Granddaughter (Son)" || relationship == "Grandson (Son)" {
             if (gender == "Female") {
                 revRelationship = "Paternal Grandmother"
             }

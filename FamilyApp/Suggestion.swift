@@ -25,4 +25,5 @@ class Suggestion: Equatable {
     static func == (lhs: Suggestion, rhs: Suggestion) -> Bool {
         return lhs.uid == rhs.uid
     }
+    
 }
