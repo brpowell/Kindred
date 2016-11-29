@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileInfoViewController: UIViewController {
 
@@ -19,32 +20,34 @@ class ProfileInfoViewController: UIViewController {
         super.viewDidLoad()
         
         let user = OtherProfileViewController.user
+
+        let ref = FIRDatabase.database().reference(withPath: "settings").child(user!.uid)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            if (snapshot.exists()) {
+                let settings = Settings(snapshot: snapshot)
+                let one = settings.settingOne!
+                let two = settings.settingTwo!
+                let three = settings.settingThree!
+                
+                if (two == false) {
+                    self.birthdayLabel.isHidden = true
+                }
+                if (three == false) {
+                    self.emailLabel.isHidden = true
+                }
+            }
+        })
         
         if let birthday = user?.birthday {
             birthdayLabel.text = birthday
         }
-        
         if let email = user?.email {
             emailLabel.text = email
         }
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

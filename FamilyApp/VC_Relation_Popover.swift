@@ -19,7 +19,6 @@ class RelationPopoverViewController: UIViewController, UITableViewDataSource, UI
         "Paternal Grandmother",  "Paternal Grandfather",
         "Grandaughter (Daughter)", "Grandson (Daughter)",
         "Paternal Aunt",  "Paternal Uncle", "Paternal Cousin", "Niece (Brother)", "Nephew (Brother)"
-        
     ]
     
     let textCellIdentifier = "RelationCell"
