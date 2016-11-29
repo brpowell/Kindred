@@ -36,14 +36,15 @@ class ProfileInfoViewController: UIViewController {
                     self.emailLabel.isHidden = true
                 }
             }
+            
+            if let birthday = user?.birthday {
+                self.birthdayLabel.text = birthday
+            }
+            if let email = user?.email {
+                self.emailLabel.text = email
+            }
         })
         
-        if let birthday = user?.birthday {
-            birthdayLabel.text = birthday
-        }
-        if let email = user?.email {
-            emailLabel.text = email
-        }
     }
 
     override func didReceiveMemoryWarning() {
