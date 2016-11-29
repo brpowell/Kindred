@@ -72,24 +72,6 @@ class ContactsViewController: FamilyController, UITableViewDataSource, UITableVi
             u.photo = cell.profilePic.image
             OtherProfileViewController.user = u
             self.performSegue(withIdentifier: "profileSegue", sender: self)
-//            let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + u.uid)
-//            
-//            if let image = Database.profileImageCache.object(forKey: NSString(string: u.uid)) {
-//                u.photo = image
-//                OtherProfileViewController.user = u
-//                self.performSegue(withIdentifier: "profileSegue", sender: self)
-//            }
-//            else {
-//                profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
-//                    if error != nil {
-//                        print(error!)
-//                    }
-//                    else {
-//                        u.photo = UIImage(data: data!)
-//                        
-//                    }
-//                }
-//            }
         
         })
     }
@@ -101,7 +83,7 @@ class ContactsViewController: FamilyController, UITableViewDataSource, UITableVi
         cell.nameLabel.text = contacts[row].name
         cell.relationshipLabel.text = contacts[row].relationship
         cell.profilePic.image = profileImages[contacts[row].uid]
-        cell.profilePic.makeProfileFormat(width: 1)
+        cell.profilePic.makeProfileFormat(width: 0)
         
         return cell
     }

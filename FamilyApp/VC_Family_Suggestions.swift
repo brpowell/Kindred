@@ -236,7 +236,7 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         cell.index = row
         cell.delegate = self
         cell.profilePic.image = profileImages[suggestions[row].uid]
-        cell.profilePic.makeProfileFormat(width: 1)
+        cell.profilePic.makeProfileFormat(width: 0)
         
         return cell
     }
