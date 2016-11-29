@@ -14,6 +14,7 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
     @IBOutlet weak var tableView: UITableView!
 
     var suggestions = [Suggestion]()
+    var profileImages = [String: UIImage]()
     
 
     override func viewDidLoad() {
@@ -51,9 +52,21 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
                     for suggest in newSuggestions {
                         if !(self.suggestions.contains(suggest)) {
                             self.suggestions.append(suggest)
+                            let uid = suggest.uid
+                            let profileImageRef = FIRStorage.storage().reference(forURL: "gs://familyapp-e0bae.appspot.com/profileImages/" + suggest.uid)
+                            profileImageRef.data(withMaxSize: 1024*1024) { (data, error) in
+                                if error != nil {
+                                    print(error!)
+                                }
+                                else {
+                                    let image = UIImage(data: data!)
+                                    self.profileImages[uid] = image
+                                    self.tableView.reloadData()
+                                }
+                            }
                         }
                     }
-                    self.tableView.reloadData()
+                    
                 })
             }
         })
@@ -200,11 +213,17 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         return suggestions.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
-        print(suggestions[row])
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        let uid = suggestions[row].uid
+        Database.usersRef.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let u = User(snapshot: snapshot)
+            let cell = tableView.cellForRow(at: indexPath) as! SuggestionTableViewCell
+            u.photo = cell.profilePic.image
+            OtherProfileViewController.user = u
+            self.performSegue(withIdentifier: "profileSegue", sender: self)
+        })
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -216,8 +235,8 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         cell.relationshipLabel.text = suggestions[row].relationship
         cell.index = row
         cell.delegate = self
-        
-
+        cell.profilePic.image = profileImages[suggestions[row].uid]
+        cell.profilePic.makeProfileFormat(width: 1)
         
         return cell
     }

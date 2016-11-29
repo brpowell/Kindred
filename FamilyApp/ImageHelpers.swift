@@ -17,6 +17,13 @@ extension UIImageView {
         self.layer.borderWidth = 3.0
         self.layer.borderColor = UIColor.white.cgColor
     }
+    
+    func makeProfileFormat(width: CGFloat) {
+        self.layer.cornerRadius = self.frame.size.width / 2
+        self.clipsToBounds = true
+        self.layer.borderWidth = width
+        self.layer.borderColor = UIColor.white.cgColor
+    }
 }
 
 extension UIImage {
