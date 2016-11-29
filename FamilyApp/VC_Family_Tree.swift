@@ -63,9 +63,11 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
         let define = [
             "Mother", "Father", "Sister", "Brother",
             "Maternal Grandmother", "Maternal Grandfather",
-            "Maternal Aunt", "Maternal Uncle", "Maternal Cousin", "Maternal Niece", "Maternal Nephew",
+            "Grandaughter (Daughter)", "Grandson (Daughter)",
+            "Maternal Aunt", "Maternal Uncle", "Maternal Cousin", "Niece (Sister)", "Nephew (Sister)",
             "Paternal Grandmother",  "Paternal Grandfather",
-            "Paternal Aunt",  "Paternal Uncle", "Paternal Cousin", "Paternal Niece", "Paternal Nephew",
+            "Grandaughter (Daughter)", "Grandson (Daughter)",
+            "Paternal Aunt",  "Paternal Uncle", "Paternal Cousin", "Niece (Brother)", "Nephew (Brother)",
             
             "Son", "Daughter", "Wife", "Husband"
         ]
@@ -86,6 +88,15 @@ class TreeViewController: FamilyController, UIScrollViewDelegate {
         generationMap["Paternal Cousin"] = 0
         generationMap["Son"] = 1
         generationMap["Daughter"] = 1
+        generationMap["Niece (Sister)"] = 1
+        generationMap["Nephew (Sister)"] = 1
+        generationMap["Niece (Brother)"] = 1
+        generationMap["Nephew (Brother)"] = 1
+        generationMap["Grandaughter (Daughter)"] = 2
+        generationMap["Grandaughter (Son)"] = 2
+        generationMap["Grandson (Daughter)"] = 2
+        generationMap["Grandson (Son)"] = 2
+        
         generationMap["Wife"] = 0
         generationMap["Husband"] = 0
         

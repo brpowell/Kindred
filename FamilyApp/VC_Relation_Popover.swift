@@ -12,10 +12,14 @@ class RelationPopoverViewController: UIViewController, UITableViewDataSource, UI
 
     let relationships = [
         "Mother", "Father", "Sister", "Brother",
+        "Son", "Daughter", "Wife", "Husband",
         "Maternal Grandmother", "Maternal Grandfather",
-        "Maternal Aunt", "Maternal Uncle", "Maternal Cousin", "Maternal Niece", "Maternal Nephew",
+        "Grandaughter (Daughter)", "Grandson (Daughter)",
+        "Maternal Aunt", "Maternal Uncle", "Maternal Cousin", "Niece (Sister)", "Nephew (Sister)",
         "Paternal Grandmother",  "Paternal Grandfather",
-        "Paternal Aunt",  "Paternal Uncle", "Paternal Cousin", "Paternal Niece", "Paternal Nephew"
+        "Grandaughter (Daughter)", "Grandson (Daughter)",
+        "Paternal Aunt",  "Paternal Uncle", "Paternal Cousin", "Niece (Brother)", "Nephew (Brother)"
+        
     ]
     
     let textCellIdentifier = "RelationCell"

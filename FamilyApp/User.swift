@@ -113,37 +113,114 @@ class User {
                 revRelationship = "Child"
             }
         }
-        else if relationship == "Grandmother" || relationship == "Grandfather" {
+        else if relationship == "Daughter" || relationship == "Son" {
             if (gender == "Female") {
-                revRelationship = "Grandaughter"
+                revRelationship = "Mother"
             }
             else if (gender == "Male") {
-                revRelationship = "Grandson"
+                revRelationship = "Father"
+            }
+            else {
+                revRelationship = "Parent"
+            }
+        }
+        else if relationship == "Wife" || relationship == "Husband" {
+            if (gender == "Female") {
+                revRelationship = "Wife"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Husband"
+            }
+            else {
+                revRelationship = "Partner"
+            }
+        }
+        else if relationship == "Maternal Grandmother" || relationship == "Maternal Grandfather" {
+            if (gender == "Female") {
+                revRelationship = "Grandaughter (Daughter)"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Grandson (Daughter)"
             }
             else {
                 revRelationship = "Grandchild"
             }
         }
-        else if relationship == "Aunt" || relationship == "Uncle" {
+        else if relationship == "Paternal Grandmother" || relationship == "Paternal Grandfather" {
             if (gender == "Female") {
-                revRelationship = "Neice"
+                revRelationship = "Grandaughter (Son)"
             }
             else if (gender == "Male") {
-                revRelationship = "Nephew"
+                revRelationship = "Grandson (Son)"
             }
             else {
-                revRelationship = "Neice or Nephew"
+                revRelationship = "Grandchild"
             }
         }
-        else if relationship == "Nephew" || relationship == "Niece" {
+        else if relationship == "Grandaughter (Daughter)" || relationship == "Grandson (Daughter)" {
             if (gender == "Female") {
-                revRelationship = "Aunt"
+                revRelationship = "Maternal Grandmother"
             }
             else if (gender == "Male") {
-                revRelationship = "Uncle"
+                revRelationship = "Maternal Grandfather"
             }
             else {
-                revRelationship = "Aunt or Uncle"
+                revRelationship = "Grandparent"
+            }
+        }
+        else if relationship == "Grandaughter (Son)" || relationship == "Grandson (Son)" {
+            if (gender == "Female") {
+                revRelationship = "Paternal Grandmother"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Paternal Grandfather"
+            }
+            else {
+                revRelationship = "Grandparent"
+            }
+        }
+        else if relationship == "Maternal Aunt" || relationship == "Maternal Uncle" {
+            if (gender == "Female") {
+                revRelationship = "Neice (Sister)"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Nephew (Sister)"
+            }
+            else {
+                revRelationship = "Neice/Nephew"
+            }
+        }
+        else if relationship == "Paternal Aunt" || relationship == "Paternal Uncle" {
+            if (gender == "Female") {
+                revRelationship = "Neice (Brother)"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Nephew (Brother)"
+            }
+            else {
+                revRelationship = "Neice/Nephew"
+            }
+        }
+        else if relationship == "Nephew (Sister)" || relationship == "Niece (Sister)" {
+            if (gender == "Female") {
+                revRelationship = "Maternal Aunt"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Maternal Uncle"
+            }
+            else {
+                revRelationship = "Aunt/Uncle"
+            }
+        }
+        else if relationship == "Nephew (Brother)" || relationship == "Niece (Brother)" {
+            if (gender == "Female") {
+                revRelationship = "Paternal Aunt"
+            }
+            else if (gender == "Male") {
+                revRelationship = "Paternal Uncle"
+            }
+            else {
+                revRelationship = "Aunt/Uncle"
             }
         }
         else if relationship == "Sister" || relationship == "Brother"{
@@ -156,6 +233,9 @@ class User {
             else {
                 revRelationship = "Sibling"
             }
+        }
+        else if relationship == "Maternal Cousin" || relationship == "Paternal Cousin"{
+                revRelationship = "Cousin"
         }
         else {
             revRelationship = relationship
