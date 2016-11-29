@@ -346,24 +346,24 @@ class SuggestionsViewController: FamilyController, UITableViewDataSource, UITabl
         }
         else if relationship == "Maternal Aunt" || relationship == "Maternal Uncle" {
             if (gender == "Female") {
-                revRelationship = "Neice (Sister)"
+                revRelationship = "Niece (Sister)"
             }
             else if (gender == "Male") {
                 revRelationship = "Nephew (Sister)"
             }
             else {
-                revRelationship = "Neice/Nephew"
+                revRelationship = "Niece/Nephew"
             }
         }
         else if relationship == "Paternal Aunt" || relationship == "Paternal Uncle" {
             if (gender == "Female") {
-                revRelationship = "Neice (Brother)"
+                revRelationship = "Niece (Brother)"
             }
             else if (gender == "Male") {
                 revRelationship = "Nephew (Brother)"
             }
             else {
-                revRelationship = "Neice/Nephew"
+                revRelationship = "Niece/Nephew"
             }
         }
         else if relationship == "Nephew (Sister)" || relationship == "Niece (Sister)" {
