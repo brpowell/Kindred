@@ -1,4 +1,6 @@
-# Kindred - Family App
+# Kindred - Family Social App
+
+![Kindred](https://raw.githubusercontent.com/brpowell/Kindred/master/appdemo.png)
 
 This project has dependencies that can be installed from Cocoapods. If you don't have the package manager installed, follow the guide here https://cocoapods.org/
 
